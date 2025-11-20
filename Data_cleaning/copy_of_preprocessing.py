@@ -7,16 +7,7 @@ Original file is located at
     https://colab.research.google.com/drive/1khHuv-pzxm0_I9lXDMIYEJwkSY9lQ_tT
 """
 
-# importing file named DOS_Wednesday-no-metadata.parquet
-from google.colab import files
-uploaded = files.upload()
 
-# importing file named Benign-Monday-no-metadata.parquet
-from google.colab import files
-normal_day = files.upload()
-
-# necessary installation
-!pip install pyarrow
 
 # Get Monday and Wednesday parquet values as monday_df and wednesday_df respectively
 import pandas as pd
