@@ -12,8 +12,8 @@ Original file is located at
 # Get Monday and Wednesday parquet values as monday_df and wednesday_df respectively
 import pandas as pd
 
-monday_df = pd.read_parquet("/content/Benign-Monday-no-metadata.parquet")
-wednesday_df = pd.read_parquet("/content/DoS-Wednesday-no-metadata.parquet")
+monday_df = pd.read_parquet("../DataSet/Benign-Monday-no-metadata.parquet")
+wednesday_df = pd.read_parquet("../DataSet/DoS-Wednesday-no-metadata.parquet")
 
 # Get first 100K values
 monday_df.head(100000)
@@ -119,5 +119,5 @@ df_combined.info()
 # checking for the null values
 df_combined.isna().sum()
 
-df_combined.to_csv('/content/combined_200k.csv', index=False)
+df_combined.to_csv('../DataSet/combined_200k.csv', index=False)
 
