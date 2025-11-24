@@ -539,18 +539,6 @@ df_balanced.dropna(inplace=True)
 # Calculate activity (active/idle period) ratio for each flow
 df_balanced['activity_period_ratio'] = (df_balanced['active_mean'] + eps) / (df_balanced['idle_mean'] + eps)
 
-# Compute skewness using mean, std, min, max; normalized difference between fwd and bwd
-def iat_skewness(mean, std, minval, maxval, eps=1e-5):
-    return ((mean - minval) / (std + eps)), ((mean - maxval) / (std + eps))
-
-df_balanced['fwd_iat_skew'] = (df_balanced['fwd_iat_mean'] - df_balanced['fwd_iat_min']) / (df_balanced['fwd_iat_std'] + 1e-5)
-df_balanced['bwd_iat_skew'] = (df_balanced['bwd_iat_mean'] - df_balanced['bwd_iat_min']) / (df_balanced['bwd_iat_std'] + 1e-5)
-
-# Optionally, relative difference/ratio:
-df_balanced['normalized_iat_skewness'] = df_balanced['fwd_iat_skew'] / (np.abs(df_balanced['bwd_iat_skew']) + 1e-5)
-
-df_balanced.head(5)
-
 # Use existing proto_* columns and flow duration to normalize flag count per protocol
 proto_cols = [col for col in df_balanced.columns if col.startswith('proto_')]
 for proto in proto_cols:
@@ -576,17 +564,6 @@ df_balanced['exp_packet_size_std'] = df_balanced['bytes_per_packet'].expanding()
 df_balanced['exp_fwd_iat_mean'] = df_balanced['fwd_iat_mean'].expanding().mean()
 df_balanced['exp_fwd_iat_std'] = df_balanced['fwd_iat_mean'].expanding().std()
 
-has_nans = df_balanced.isnull().values.any()
-print(f"Are there any NaN values? {has_nans}")
-
-total_nans = df_balanced.isnull().sum().sum()
-print(f"Total NaN values: {total_nans}")
-
-nan_per_column = df_balanced.isnull().sum()
-print(nan_per_column[nan_per_column > 0])
-
-df_balanced = df_balanced.replace([np.inf, -np.inf], np.nan)
-df_balanced.dropna(inplace=True)
 
 # before feature selction or extraction do split and scale it so there is no imbalance.
 X = df_balanced.drop(['label', 'label_encoded'], axis=1)
