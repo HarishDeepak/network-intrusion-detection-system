@@ -447,21 +447,7 @@ df_balanced['packet_entropy'] = df_balanced[['fwd_packet_length_std', 'bwd_packe
     axis=1
 )
 
-# before feature selction or extraction do split and scale it so there is no imbalance.
-X = df_balanced.drop(['label', 'label_encoded'], axis=1)
-y = df_balanced['label_encoded']
 
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42, stratify=y
-)
-
-
-scaler = StandardScaler()
-
-X_train_scaled = scaler.fit_transform(X_train)
-X_test_scaled = scaler.transform(X_test)
-
-X_train_scaled[:1]
 # Attack traffic often has unusual flag patterns SYN floods, FIN scans
 # Total flags in the flow
 df_balanced['total_flag_count'] = df_balanced[['fin_flag_count','syn_flag_count','rst_flag_count',
@@ -601,3 +587,19 @@ print(nan_per_column[nan_per_column > 0])
 
 df_balanced = df_balanced.replace([np.inf, -np.inf], np.nan)
 df_balanced.dropna(inplace=True)
+
+# before feature selction or extraction do split and scale it so there is no imbalance.
+X = df_balanced.drop(['label', 'label_encoded'], axis=1)
+y = df_balanced['label_encoded']
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42, stratify=y
+)
+
+
+scaler = StandardScaler()
+
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+
+X_train_scaled[:1]
