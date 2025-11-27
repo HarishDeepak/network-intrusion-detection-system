@@ -7,7 +7,7 @@ This repository contains a **Network Intrusion Detection System (NIDS)** built u
 ## Project Structure
 
 * `DataSet/` - Folder containing `.parquet` files from CICIDS2017 dataset.
-* `notebooks/` - Jupyter notebooks containing code for data preprocessing, feature engineering, and feature selection.
+* `Data_Cleaning/` - Jupyter notebooks containing code for data preprocessing, feature engineering, and feature selection.
 * `README.md` - Project documentation.
 
 ---
@@ -48,7 +48,6 @@ This project follows the standard workflow for building an NIDS:
 * **ANOVA F-score:** Select top features based on variance with respect to labels.
 * **Mutual Information (MI):** Identify features with high predictive power.
 * **Random Forest Importance:** Rank features based on ensemble model importance.
-* **Recursive Feature Elimination (RFE):** Select features iteratively using Logistic Regression.
 * **Boruta Feature Selection:** Robust wrapper method using Random Forest.
 * **Final Feature Set:** Union of top features from ANOVA, MI, and RF.
 
@@ -74,8 +73,8 @@ This project follows the standard workflow for building an NIDS:
 
 ## How to Use
 
-1. Place `.parquet` files in the `data/` folder.
-2. Open the Jupyter notebook in `notebooks/`.
+1. Place `.parquet` files in the `DataSet/` folder.
+2. Open the Jupyter notebook in `Data_Cleaning/`.
 3. Run cells sequentially for:
 
    * Data ingestion and cleaning
