@@ -36,6 +36,8 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.preprocessing import MinMaxScaler
 from scipy.stats import entropy
 from scipy.stats import zscore
+#Siddharth_changes
+from imblearn.over_sampling import SMOTE
 
 
 
@@ -214,6 +216,7 @@ if 'fwd_packets/s' in df_balanced.columns and 'flow_packets/s' in df_balanced.co
 else:
     df_balanced['burst_ratio'] = 0
 
+
 # Packet Entropy
 # Malicious traffic often has different entropy patterns compared to normal traffic.
 df_balanced['packet_entropy'] = df_balanced[['fwd_packet_length_std', 'bwd_packet_length_std']].apply(
@@ -233,6 +236,7 @@ df_balanced['syn_fin_ratio'] = (df_balanced['syn_flag_count'] + 1e-5) / (df_bala
 # PSH/ACK ratio → bursty traffic indicator
 df_balanced['psh_ack_ratio'] = (df_balanced['psh_flag_count'] + 1e-5) / (df_balanced['ack_flag_count'] + 1e-5)
 
+
 # Attack traffic can have unusual segment size distributions.
 df_balanced['segment_ratio'] = (df_balanced['avg_fwd_segment_size'] + 1e-5) / (df_balanced['avg_bwd_segment_size'] + 1e-5)
 
@@ -240,9 +244,11 @@ df_balanced['segment_ratio'] = (df_balanced['avg_fwd_segment_size'] + 1e-5) / (d
 df_balanced['fwd_iat_cv'] = (df_balanced['fwd_iat_std'] + 1e-5) / (df_balanced['fwd_iat_mean'] + 1e-5)
 df_balanced['bwd_iat_cv'] = (df_balanced['bwd_iat_std'] + 1e-5) / (df_balanced['bwd_iat_mean'] + 1e-5)
 
+
 # Skewed packet length distributions are often attack indicators.
 df_balanced['fwd_packet_skew'] = (df_balanced['fwd_packet_length_mean'] - df_balanced['fwd_packet_length_min']) / (df_balanced['fwd_packet_length_std'] + 1e-5)
 df_balanced['bwd_packet_skew'] = (df_balanced['bwd_packet_length_mean'] - df_balanced['bwd_packet_length_min']) / (df_balanced['bwd_packet_length_std'] + 1e-5)
+
 
 df_balanced.info()
 
@@ -291,7 +297,8 @@ df_balanced['exp_packet_size_std'] = df_balanced['bytes_per_packet'].expanding()
 df_balanced['exp_fwd_iat_mean'] = df_balanced['fwd_iat_mean'].expanding().mean()
 df_balanced['exp_fwd_iat_std'] = df_balanced['fwd_iat_mean'].expanding().std()
 
-# before feature selction or extraction do split and scale it so there is no imbalance.
+
+# before feature selection or extraction do split and scale it so there is no imbalance.
 X = df_balanced.drop(['label', 'label_encoded'], axis=1)
 y = df_balanced['label_encoded']
 
@@ -320,7 +327,7 @@ feature_names = [f for f in feature_names if f not in to_drop_corr]
 X_train_corr = X_train[feature_names]
 X_test_corr = X_test[feature_names]
 
-# 2. IMPUTE AFTER CORRELATION DROP (NO DATA LEAKAGE)
+# 2.a) IMPUTE AFTER CORRELATION DROP (NO DATA LEAKAGE)
 imputer = SimpleImputer(strategy="median")
 
 X_train_imputed = imputer.fit_transform(X_train_corr)
@@ -329,15 +336,25 @@ X_test_imputed = imputer.transform(X_test_corr)
 # Update feature list
 feature_names = X_train_corr.columns.tolist()
 
+#2b. SMOTE on IMPUTED Train Only
+sm = SMOTE(random_state=42)
+X_train_smote, y_train_smote = sm.fit_resample(X_train_imputed, y_train)
+print("Before SMOTE:", X_train_imputed.shape, y_train.shape)
+print("After SMOTE :", X_train_smote.shape, y_train_smote.shape)
+print("New training class distribution:")
+print(pd.Series(y_train_smote).value_counts())
+
+
+
 # 3. SCALE ONLY FOR METHODS THAT REQUIRE IT (ANOVA)
 scaler_fs = StandardScaler()
 
-X_train_scaled_fs = scaler_fs.fit_transform(X_train_imputed)
+X_train_scaled_fs = scaler_fs.fit_transform(X_train_smote)
 X_test_scaled_fs = scaler_fs.transform(X_test_imputed)
 
 # 4. ANOVA F-TEST (scaled)
 selector_anova = SelectKBest(score_func=f_classif, k=30)
-selector_anova.fit(X_train_scaled_fs, y_train)
+selector_anova.fit(X_train_scaled_fs, y_train_smote)
 
 anova_scores = pd.DataFrame({
     "feature": feature_names,
@@ -346,7 +363,7 @@ anova_scores = pd.DataFrame({
 
 # 5. MUTUAL INFORMATION (NO SCALING)
 selector_mi = SelectKBest(score_func=mutual_info_classif, k=30)
-selector_mi.fit(X_train_imputed, y_train)
+selector_mi.fit(X_train_smote, y_train_smote)
 
 mi_scores = pd.DataFrame({
     "feature": feature_names,
@@ -355,7 +372,7 @@ mi_scores = pd.DataFrame({
 
 # 6. RANDOM FOREST IMPORTANCE (NO SCALING)
 rf = RandomForestClassifier(n_estimators=200, random_state=42, n_jobs=-1)
-rf.fit(X_train_imputed, y_train)
+rf.fit(X_train_smote, y_train_smote)
 
 rf_importance = pd.DataFrame({
     "feature": feature_names,
@@ -364,12 +381,12 @@ rf_importance = pd.DataFrame({
 
 # 7. FAST BORUTA (subset + fewer trees)
 subset_size = 100_000
-if X_train_imputed.shape[0] > subset_size:
-    X_boruta = X_train_imputed[:subset_size]
-    y_boruta = y_train.values[:subset_size]
+if X_train_smote.shape[0] > subset_size:
+    X_boruta = X_train_smote[:subset_size]
+    y_boruta = y_train_smote.values[:subset_size]
 else:
-    X_boruta = X_train_imputed
-    y_boruta = y_train.values
+    X_boruta = X_train_smote
+    y_boruta = y_train_smote.values
 
 rfc_fast = RandomForestClassifier(
     n_estimators=100,
@@ -420,9 +437,23 @@ print(final_features)
 print("Total selected:", len(final_features))
 
 # 10. FILTER TRAIN/TEST WITH SELECTED FEATURES
-X_train_selected = pd.DataFrame(X_train_imputed, columns=feature_names)[final_features]
+X_train_selected = pd.DataFrame(X_train_smote, columns=feature_names)[final_features]
 X_test_selected = pd.DataFrame(X_test_imputed, columns=feature_names)[final_features]
 
 print("Shape after selection:")
 print("Train:", X_train_selected.shape)
 print("Test:", X_test_selected.shape)
+
+import pickle
+
+# LabelEncoder (le)
+with open('labelencoder.pkl', 'wb') as f:
+    pickle.dump(le, f)
+print("Saved: labelencoder.pkl")
+
+#  StandardScaler (scaler)
+with open('scaler.pkl', 'wb') as f:
+    pickle.dump(scaler, f)
+print(" Saved: scaler.pkl")
+
+
