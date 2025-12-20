@@ -1,2 +1,9 @@
 *.csv
 Data_cleaning/.ipynb_checkpoints/
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# OS
+.DS_Store
