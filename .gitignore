@@ -7,3 +7,14 @@ __pycache__/
 
 # OS
 .DS_Store
+
+# Virtual environments
+backend/venv/
+frontend/venv/
+
+# Streamlit secrets
+frontend/.streamlit/secrets.toml
+
+# Python
+__pycache__/
+*.pyc
