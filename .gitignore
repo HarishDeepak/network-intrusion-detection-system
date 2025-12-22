@@ -1,2 +1,20 @@
 *.csv
 Data_cleaning/.ipynb_checkpoints/
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# OS
+.DS_Store
+
+# Virtual environments
+backend/venv/
+frontend/venv/
+
+# Streamlit secrets
+frontend/.streamlit/secrets.toml
+
+# Python
+__pycache__/
+*.pyc

@@ -77,7 +77,7 @@ label_mapping = {
     # Web-based attacks
     "Web Attack - XSS": "Web",
     "Web Attack - Sql Injection": "Web",
-    "Web Attack - SQL Injection": "Web",
+   # "Web Attack - SQL Injection": "Web",
 
     # Scanning / Recon
     "PortScan": "Scan",
