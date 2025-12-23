@@ -5,6 +5,12 @@ import time
 from models.packet import PacketData, PredictionResult, PacketWithPrediction
 from models.stats import StatsResponse
 from models.charts import AttackDistribution, TimeTrends
+from collections import deque
+from sqlalchemy.orm import Session
+from database.db_model import TrafficLog
+
+
+traffic_history = deque(maxlen=60)
 
 def get_basic_stats() -> StatsResponse:
     # Dummy aggregated stats (could be based on in-memory counters or random)
@@ -60,3 +66,35 @@ def generate_packets(count: int = 5):
         pred = predict_packet(pkt)
         packets.append(PacketWithPrediction(packet=pkt, prediction=pred))
     return packets
+
+def add_traffic_point(point: dict):
+    traffic_history.append(point)
+
+def get_traffic_history():
+    return list(traffic_history)
+
+def get_recent_zeek_traffic(db: Session, limit: int = 20):
+    """
+    Fetch recent Zeek-style traffic logs from PostgreSQL.
+    This does NOT affect existing dummy traffic logic.
+    """
+    logs = (
+        db.query(TrafficLog)
+        .order_by(TrafficLog.timestamp.desc())
+        .limit(limit)
+        .all()
+    )
+
+    return [
+        {
+            "timestamp": log.timestamp,
+            "src_ip": log.src_ip,
+            "dest_ip": log.dest_ip,
+            "protocol": log.protocol,
+            "bytes": log.bytes,
+            "packets": log.packets,
+        }
+        for log in logs
+    ]
+
+
