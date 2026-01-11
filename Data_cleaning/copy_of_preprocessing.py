@@ -13,7 +13,7 @@ import seaborn as sns
 import numpy as np
 import pickle
 
-# !pip install boruta
+!pip install boruta
 
 from boruta import BorutaPy
 from sklearn.ensemble import RandomForestClassifier
@@ -28,10 +28,6 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.preprocessing import MinMaxScaler
 from scipy.stats import entropy
 from scipy.stats import zscore
-#Siddharth_changes
-# from imblearn.over_sampling import SMOTE
-
-
 
 files = glob("../DataSet/*.parquet")
 
@@ -39,14 +35,9 @@ dfs = []
 for f in files:
     df = pd.read_parquet(f)  # read one file at a time
 
-    # # Optional: you can downcast floats to save memory
-    # for col in df.select_dtypes('float64').columns:
-    #     df[col] = pd.to_numeric(df[col], downcast='float')
-
     dfs.append(df)  # add to list
 
 df_all = pd.concat(dfs, ignore_index=True)
-
 # Convert them to all lowercase letters
 # Replace spaces with underscores
 
@@ -58,6 +49,11 @@ df_all["label"] = df_all["label"].str.replace("�", "-", regex=False)
 df_all["label"] = df_all["label"].str.replace("–", "-", regex=False)
 
 print(sorted(df_all["label"].unique()))
+
+#siddharth changes s
+attack_data = df_all['label'].value_counts()
+print(attack_data)
+#siddharth changes e
 
 label_mapping = {
     "Benign": "Benign",
@@ -77,7 +73,6 @@ label_mapping = {
     # Web-based attacks
     "Web Attack - XSS": "Web",
     "Web Attack - Sql Injection": "Web",
-   # "Web Attack - SQL Injection": "Web",
 
     # Scanning / Recon
     "PortScan": "Scan",
@@ -238,15 +233,12 @@ df_balanced['flow_duration'] = df_balanced['flow_duration'].clip(lower=eps)
 df_balanced['total_packets'] = df_balanced['total_fwd_packets'] + df_balanced['total_backward_packets'] + eps
 df_balanced['total_bytes'] = df_balanced['fwd_packets_length_total'] + df_balanced['bwd_packets_length_total'] + eps
 
-
 # packet_rate → packets per second (flow_duration is in microseconds, divide by 1e6).
 # bytes_per_packet → average size of a packet.
 # High packet rate or unusual bytes per packet are often indicators of attacks (DoS, scanning, bursty flows).
 
 df_balanced['packet_rate'] = df_balanced['total_packets'] / (df_balanced['flow_duration'] / 1e6)
 df_balanced['bytes_per_packet'] = df_balanced['total_bytes'] / df_balanced['total_packets']
-
-
 
 # Coefficient of Variation (CV) features
 #CV = standard deviation / mean → measures relative variability.
@@ -286,7 +278,6 @@ df_balanced['packet_entropy'] = df_balanced[['fwd_packet_length_std', 'bwd_packe
     axis=1
 )
 
-
 # Attack traffic often has unusual flag patterns SYN floods, FIN scans
 # Total flags in the flow
 df_balanced['total_flag_count'] = df_balanced[['fin_flag_count','syn_flag_count','rst_flag_count',
@@ -303,16 +294,13 @@ df_balanced['psh_ack_ratio'] = (df_balanced['psh_flag_count'] + 1e-5) / (df_bala
 # Attack traffic can have unusual segment size distributions.
 df_balanced['segment_ratio'] = (df_balanced['avg_fwd_segment_size'] + 1e-5) / (df_balanced['avg_bwd_segment_size'] + 1e-5)
 
-
 # Captures variability of packet timing. Bursty attacks often have high CV.
 df_balanced['fwd_iat_cv'] = (df_balanced['fwd_iat_std'] + 1e-5) / (df_balanced['fwd_iat_mean'] + 1e-5)
 df_balanced['bwd_iat_cv'] = (df_balanced['bwd_iat_std'] + 1e-5) / (df_balanced['bwd_iat_mean'] + 1e-5)
 
-
 # Skewed packet length distributions are often attack indicators.
 df_balanced['fwd_packet_skew'] = (df_balanced['fwd_packet_length_mean'] - df_balanced['fwd_packet_length_min']) / (df_balanced['fwd_packet_length_std'] + 1e-5)
 df_balanced['bwd_packet_skew'] = (df_balanced['bwd_packet_length_mean'] - df_balanced['bwd_packet_length_min']) / (df_balanced['bwd_packet_length_std'] + 1e-5)
-
 
 df_balanced.info()
 
@@ -353,15 +341,6 @@ df_balanced['flow_anomaly_index'] = df_balanced[[c + "_scaled" for c in anomaly_
 df_balanced = df_balanced.drop(['burst_ratio_scaled', 'active_cv_scaled','flag_change_rate_scaled'], axis=1)
 df_balanced.head(5)
 
-# # For each flow, using cumulative expanding mean/std for packet size or IAT, entire DataFrame:
-# df_balanced['exp_packet_size_mean'] = df_balanced['bytes_per_packet'].expanding().mean()
-# df_balanced['exp_packet_size_std'] = df_balanced['bytes_per_packet'].expanding().std()
-
-# # For IAT (forward direction)
-# df_balanced['exp_fwd_iat_mean'] = df_balanced['fwd_iat_mean'].expanding().mean()
-# df_balanced['exp_fwd_iat_std'] = df_balanced['fwd_iat_mean'].expanding().std()
-
-
 # before feature selection or extraction do split and scale it so there is no imbalance.
 X = df_balanced.drop(['label', 'label_encoded'], axis=1)
 y = df_balanced['label_encoded']
@@ -371,15 +350,6 @@ X_train, X_test, y_train, y_test = train_test_split(
 )
 
 
-
-
-scaler = StandardScaler()
-
-X_train_scaled = scaler.fit_transform(X_train)
-X_test_scaled = scaler.transform(X_test)
-
-
-X_train_scaled[:1]
 
 # FEATURE SELECTION
 # 1. REMOVE HIGHLY CORRELATED FEATURES (from UN-SCALED data)
@@ -464,7 +434,7 @@ rf_importance = pd.DataFrame({
 }).sort_values(by="importance", ascending=False)
 
 # 7. FAST BORUTA (subset + fewer trees)
-subset_size = 50_000
+subset_size = 100_000
 if X_train_imputed.shape[0] > subset_size:
     # Stratified sampling to keep all classes
     stratify_df = pd.DataFrame(X_train_imputed, columns=feature_names)
@@ -514,9 +484,8 @@ print("Total selected:", len(final_features))
 #9. REMOVE NON-REAL-TIME FEATURES AT THE END
 
 non_realtime_features = [
-'active_mean', 'active_std', 'active_min', 'active_max',
-'idle_mean', 'idle_std', 'idle_min', 'idle_max',
-'fwd_avg_bytes/bulk', 'fwd_avg_packets/bulk', 'fwd_avg_bulk_rate',
+'active_mean', 'active_std', 'active_min', 'active_max','idle_mean','idle_min','idle_max',
+ 'idle_std', 'fwd_avg_packets/bulk','fwd_avg_bytes/bulk',  'fwd_avg_bulk_rate',
 'bwd_avg_bytes/bulk', 'bwd_avg_packets/bulk', 'bwd_avg_bulk_rate',
 'flow_anomaly_index']
 
@@ -527,6 +496,7 @@ print(final_features)
 print("Total selected:", len(final_features))
 
 # Ensure proto_0 and proto_6 are always included
+#mandatory_proto = ['proto_0', 'proto_6', 'proto_17']
 mandatory_proto = ['proto_0', 'proto_6']
 final_features = list(set(final_features) | set(mandatory_proto))
 
@@ -536,11 +506,30 @@ final_features = list(set(final_features) | set(mandatory_proto))
 X_train_selected = pd.DataFrame(X_train_imputed, columns=feature_names)[final_features]
 X_test_selected = pd.DataFrame(X_test_imputed, columns=feature_names)[final_features]
 
+####################################################
+# Scale after Final Feature Selection 
+####################################################
+
+scaler = StandardScaler()
+
+X_train_selected_scaled = scaler.fit_transform(X_train_selected)
+X_test_selected_scaled = scaler.transform(X_test_selected)
+
+# Convert back to DataFrame to preserve column names
+X_train_selected = pd.DataFrame(
+    X_train_selected_scaled,
+    columns=final_features
+)
+
+X_test_selected = pd.DataFrame(
+    X_test_selected_scaled,
+    columns=final_features
+)
+
+
 print("Shape after selection:")
 print("Train:", X_train_selected.shape)
 print("Test:", X_test_selected.shape)
-
-
 
 # 1. Selected feature list
 with open("final_features.pkl", "wb") as f:
@@ -552,13 +541,16 @@ with open("imputer.pkl", "wb") as f:
 
 # 3. Feature-selection scaler (ANOVA scaler)
 with open("scaler.pkl", "wb") as f:
-    pickle.dump(scaler_fs, f)
+    pickle.dump(scaler, f)
+
+#with open("scaler.pkl", "wb") as f:
+#    pickle.dump(scaler_fs, f)
 
 # 4. LabelEncoder
 with open("labelencoder.pkl", "wb") as f:
     pickle.dump(le, f)
 
-# 5. Train/Test splits
+# 5. Train/Test splits 
 X_train_selected.to_parquet("X_train_selected.parquet")
 X_test_selected.to_parquet("X_test_selected.parquet")
 
@@ -566,6 +558,5 @@ y_train.to_frame("label").to_parquet("y_train.parquet")
 y_test.to_frame("label").to_parquet("y_test.parquet")
 
 print("✅ All preprocessing artifacts saved")
-
 
 
