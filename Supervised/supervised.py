@@ -6,8 +6,6 @@ from sklearn.metrics import classification_report, confusion_matrix, f1_score
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-import numpy as np
-
 # Load datasets
 X_train_selected = pd.read_parquet("../Data_cleaning/X_train_selected.parquet")
 X_test_selected = pd.read_parquet("../Data_cleaning/X_test_selected.parquet")
@@ -146,11 +144,10 @@ print(classification_report(y_test, y_pred_rf))
 
 from xgboost import XGBClassifier
 
-#siddharth_changes_s
 from sklearn.utils.class_weight import compute_class_weight
 import numpy as np
 from sklearn.metrics import classification_report
-#siddharth_change_e
+
 
 # ------------------------------
 # CLASS WEIGHT BOOSTING
@@ -177,7 +174,7 @@ xgb = XGBClassifier(
     learning_rate=0.1,
     subsample=0.8,
     colsample_bytree=0.8,
-    objective="multi:softmax", # better class decision
+    objective="multi:softprob", # better class decision
     num_class=len(le_xgb.classes_),
     eval_metric="merror",
     tree_method="hist",
@@ -207,9 +204,50 @@ print(classification_report(y_test_xgb,
                             target_names= class_names_no_rare
 ))
 
+# ==============================
+# Precision–Recall Curve + Precision Floor
+# ==============================
+
+from sklearn.metrics import precision_recall_curve
+from sklearn.preprocessing import label_binarize
+
+# Binarize labels for multi-class PR curve
+y_test_bin = label_binarize(
+    y_test_xgb,
+    classes=np.arange(len(le_xgb.classes_))
+)
+
+# Get prediction probabilities (REQUIRED for PR curve)
+y_score = xgb.predict_proba(X_test_selected)
+
+precision_floor = 0.90  # as per NAD requirement
+
+print("\nPrecision Floor Analysis (>= 0.90):")
+
+for i, class_name in enumerate(le_xgb.classes_):
+    precision, recall, thresholds = precision_recall_curve(
+        y_test_bin[:, i],
+        y_score[:, i]
+    )
+
+    # Find first threshold where precision >= floor
+    valid_idx = np.where(precision >= precision_floor)[0]
+
+    if len(valid_idx) > 0:
+        idx = valid_idx[0]
+        print(
+            f"Class: {str(class_name):12s} | "
+            f"Threshold: {thresholds[idx-1]:.4f} | "
+            f"Precision: {precision[idx]:.3f} | "
+            f"Recall: {recall[idx]:.3f}"
+        )
+    else:
+        print(
+            f"Class: {str(class_name):12s} | "
+            f"No threshold meets precision floor"
+        )
+
 #printing false positive rate(FPR)
-
-
 cm = confusion_matrix(y_test_xgb, y_pred_xgb)
 class_names = le_xgb.classes_
 
@@ -231,6 +269,7 @@ for cls, fpr in fpr_per_class.items():
 
 overall_fpr = np.mean(list(fpr_per_class.values()))
 print(f"\nOverall False Positive Rate (macro): {overall_fpr:.4f}")
+
 
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -298,6 +337,4 @@ with open("final_model.pkl", "wb") as f:
     pickle.dump(best_model, f)
 
 print(f"Final model saved: {best_model_name}")
-
-
 
