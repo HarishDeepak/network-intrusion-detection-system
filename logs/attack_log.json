@@ -1,0 +1,12 @@
+[
+  {
+    "timestamp": "2026-01-12T20:44:05.288539",
+    "attack_type": "DDoS",
+    "src_ip": "192.168.1.100",
+    "dest_ip": "10.0.0.1",
+    "protocol": "TCP",
+    "packet_length": 1200,
+    "confidence": 0.95,
+    "severity": "HIGH"
+  }
+]

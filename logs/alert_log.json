@@ -1,0 +1,15 @@
+[
+  {
+    "timestamp": "2026-01-12T20:44:05.503330",
+    "alert_type": "EMAIL_ALERT",
+    "recipients": [
+      "admin@company.com"
+    ],
+    "status": "FAILED",
+    "attack_type": "DDoS",
+    "severity": "HIGH",
+    "src_ip": "192.168.1.100",
+    "dest_ip": "10.0.0.1",
+    "error": "(535, b'5.7.8 Username and Password not accepted. For more information, go to\\n5.7.8  https://support.google.com/mail/?p=BadCredentials a640c23a62f3a-b842a5187afsm1955503466b.58 - gsmtp')"
+  }
+]
