@@ -506,8 +506,18 @@ final_features = list(set(final_features) | set(mandatory_proto))
 X_train_selected = pd.DataFrame(X_train_imputed, columns=feature_names)[final_features]
 X_test_selected = pd.DataFrame(X_test_imputed, columns=feature_names)[final_features]
 
+# ===============================
+# FINAL IMPUTER (Aligned with selected features)
+# ===============================
+imputer_final = SimpleImputer(strategy="median")
+
+# Fit only on selected features
+imputer_final.fit(X_train_selected)
+
+print("New imputer trained on", imputer_final.statistics_.shape[0], "features")
+
 ####################################################
-# Scale after Final Feature Selection 
+# Scale after Final Feature Selection
 ####################################################
 
 scaler = StandardScaler()
@@ -526,37 +536,47 @@ X_test_selected = pd.DataFrame(
     columns=final_features
 )
 
-
 print("Shape after selection:")
 print("Train:", X_train_selected.shape)
 print("Test:", X_test_selected.shape)
+
+# Number of features scaler expects
+print("Scaler expects", scaler.n_features_in_, "features")
+
+# ===============================
+# SAVE ALL ARTIFACTS
+# ===============================
 
 # 1. Selected feature list
 with open("final_features.pkl", "wb") as f:
     pickle.dump(final_features, f)
 
-# 2. Imputer
+# 2. Original imputer (before selection)
 with open("imputer.pkl", "wb") as f:
     pickle.dump(imputer, f)
 
-# 3. Feature-selection scaler (ANOVA scaler)
+# 3. Final scaler (after selection)
 with open("scaler.pkl", "wb") as f:
     pickle.dump(scaler, f)
-
-#with open("scaler.pkl", "wb") as f:
-#    pickle.dump(scaler_fs, f)
 
 # 4. LabelEncoder
 with open("labelencoder.pkl", "wb") as f:
     pickle.dump(le, f)
 
-# 5. Train/Test splits 
+# 5. Final imputer aligned with selected features
+with open("imputer_final.pkl", "wb") as f:
+    pickle.dump(imputer_final, f)
+
+print("✅ imputer_final.pkl saved (aligned with selected features)")
+
+# ===============================
+# SAVE TRAIN / TEST DATA
+# ===============================
 X_train_selected.to_parquet("X_train_selected.parquet")
 X_test_selected.to_parquet("X_test_selected.parquet")
 
 y_train.to_frame("label").to_parquet("y_train.parquet")
 y_test.to_frame("label").to_parquet("y_test.parquet")
 
-print("✅ All preprocessing artifacts saved")
-
+print("✅ All preprocessing artifacts saved successfully")
 
