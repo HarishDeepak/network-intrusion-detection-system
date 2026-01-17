@@ -352,6 +352,19 @@ print(f"Using {len(available_features)} existing features, "
       f"{len(missing_features)} added as zeros.")
 print("X_raw shape:", X_raw.shape)
 
+# print("\n===== IMPUTER FEATURES (FIT ORDER) =====")
+# for i, f in enumerate(imputer.feature_names_in_, 1):
+#     print(f"{i:02d}. {f}")
+# print("Total imputer features:", len(imputer.feature_names_in_))
+#
+# print("\n===== X_raw FEATURES (CURRENT ORDER) =====")
+# for i, f in enumerate(X_raw.columns, 1):
+#     print(f"{i:02d}. {f}")
+# print("Total X_raw features:", X_raw.shape[1])
+
+X_raw = X_raw[imputer.feature_names_in_]
+
+
 # -----------------------------------------
 # 6. Impute → scale
 # -----------------------------------------
