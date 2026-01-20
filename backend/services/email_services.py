@@ -35,14 +35,23 @@ class EmailAlertSystem:
                 with open(log_path, 'w') as f:
                     json.dump([], f, indent=2)
 
-    def _get_severity_level(self, attack_type: str, confidence: float) -> str:
-        """Determine severity level based on attack type and confidence"""
+    def _get_severity_level(self, attack_type: str, confidence: float, provided_severity: Optional[str] = None) -> str:
+        """Determine severity: prefer provided severity from fusion; otherwise infer from type+confidence."""
+        if provided_severity:
+            # Normalize decision engine format (High/Medium/Low/None -> HIGH/MEDIUM/LOW/NONE)
+            return provided_severity.upper() if provided_severity != "None" else "LOW"
+
+        # fallback inference map (keeps behavior but covers actual labels)
         severity_map = {
             "DDoS": "HIGH" if confidence > 0.8 else "MEDIUM",
+            "DoS": "HIGH" if confidence > 0.8 else "MEDIUM",
             "PortScan": "MEDIUM" if confidence > 0.7 else "LOW",
+            "Scan": "MEDIUM" if confidence > 0.7 else "LOW",
             "Malware": "CRITICAL" if confidence > 0.9 else "HIGH",
             "BruteForce": "HIGH" if confidence > 0.8 else "MEDIUM",
-            "SQLInjection": "CRITICAL" if confidence > 0.85 else "HIGH"
+            "SQLInjection": "CRITICAL" if confidence > 0.85 else "HIGH",
+            "Web": "MEDIUM",
+            "Benign": "LOW"
         }
         return severity_map.get(attack_type, "MEDIUM")
 
@@ -50,27 +59,33 @@ class EmailAlertSystem:
         """Get explanation summary for different attack types"""
         explanations = {
             "DDoS": "Distributed Denial of Service attack detected. Multiple packets flooding the target IP, potentially causing service disruption.",
+            "DoS": "Denial of Service behavior detected. High resource usage or abnormal traffic to a host.",
             "PortScan": "Port scanning activity detected. Attacker is probing multiple ports to identify open services and vulnerabilities.",
+            "Scan": "Port scanning / discovery activity detected. Attacker is probing services and ports.",
             "Malware": "Malicious traffic pattern detected. Potential malware communication or command and control activity.",
             "BruteForce": "Brute force attack detected. Multiple authentication attempts from the same source IP.",
-            "SQLInjection": "SQL injection attempt detected. Malicious SQL code injection in network traffic."
+            "SQLInjection": "SQL injection attempt detected. Malicious SQL code injection in network traffic.",
+            "Web": "Suspicious web traffic detected. Potential web application abuse or exploitation attempts."
         }
         return explanations.get(attack_type, "Suspicious network activity detected requiring immediate attention.")
 
-    def log_attack(self, packet_data: PacketWithPrediction) -> Dict:
+    def log_attack(self, packet_data: PacketWithPrediction, provided_severity: Optional[str] = None) -> Dict:
         """Log attack information to attack_log.json"""
+        severity = self._get_severity_level(
+            packet_data.prediction.attack_type,
+            packet_data.prediction.confidence,
+            provided_severity,
+        )
+
         attack_entry = {
             "timestamp": datetime.now().isoformat(),
             "attack_type": packet_data.prediction.attack_type,
-            "src_ip": packet_data.packet.src_ip,
-            "dest_ip": packet_data.packet.dest_ip,
-            "protocol": packet_data.packet.protocol,
-            "packet_length": packet_data.packet.length,
+            "src_ip": getattr(packet_data.packet, 'src_ip', 'unknown'),
+            "dest_ip": getattr(packet_data.packet, 'dest_ip', 'unknown'),
+            "protocol": getattr(packet_data.packet, 'protocol', 'unknown'),
+            "packet_length": getattr(packet_data.packet, 'length', 0),
             "confidence": packet_data.prediction.confidence,
-            "severity": self._get_severity_level(
-                packet_data.prediction.attack_type,
-                packet_data.prediction.confidence
-            )
+            "severity": severity
         }
 
         # Read existing attacks
@@ -109,51 +124,55 @@ class EmailAlertSystem:
 
         return alert_entry
 
-    def send_alert_email(self, packet_data: PacketWithPrediction) -> bool:
-        """Send alert email for detected attack"""
+    def send_alert_email(self, packet_data: PacketWithPrediction, provided_severity: Optional[str] = None, use_email: bool = True) -> bool:
+        """Send alert email for detected attack, or write to stdout/file if use_email=False (for testing)"""
+        # Calculate severity first (for exception handling too)
+        severity = self._get_severity_level(
+            packet_data.prediction.attack_type,
+            packet_data.prediction.confidence,
+            provided_severity,
+        )
+        
         try:
-            # Create message
-            msg = MIMEMultipart()
-            msg['From'] = self.sender_email
-            msg['To'] = ", ".join(self.recipient_emails)
-            msg['Subject'] = f"🚨 SECURITY ALERT: {packet_data.prediction.attack_type} Attack Detected"
-
-            # Log the attack first
-            attack_info = self.log_attack(packet_data)
-
-            # Create email body
-            severity = self._get_severity_level(
-                packet_data.prediction.attack_type,
-                packet_data.prediction.confidence
-            )
             explanation = self._get_attack_explanation(packet_data.prediction.attack_type)
+
+            # Try to format detection time: accept epoch float or ISO string
+            try:
+                ts = float(packet_data.packet.timestamp)
+                detected_time = datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
+            except Exception:
+                try:
+                    detected_time = datetime.fromisoformat(str(packet_data.packet.timestamp))
+                    detected_time = detected_time.strftime('%Y-%m-%d %H:%M:%S')
+                except Exception:
+                    detected_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
             body = f"""
 SECURITY ALERT - Network Anomaly Detection System
 
-🚨 ATTACK DETECTED 🚨
+[!] ATTACK DETECTED [!]
 
 Attack Details:
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-• Attack Type: {packet_data.prediction.attack_type}
-• Severity: {severity}
-• Source IP: {packet_data.packet.src_ip}
-• Destination IP: {packet_data.packet.dest_ip}
-• Protocol: {packet_data.packet.protocol}
-• Packet Size: {packet_data.packet.length} bytes
-• Detection Time: {datetime.fromtimestamp(packet_data.packet.timestamp).strftime('%Y-%m-%d %H:%M:%S')}
-• Confidence: {packet_data.prediction.confidence:.2%}
+--------------------------------------------------
+Attack Type: {packet_data.prediction.attack_type}
+Severity: {severity}
+Source IP: {getattr(packet_data.packet, 'src_ip', 'unknown')}
+Destination IP: {getattr(packet_data.packet, 'dest_ip', 'unknown')}
+Protocol: {getattr(packet_data.packet, 'protocol', 'unknown')}
+Packet Size: {getattr(packet_data.packet, 'length', 0)} bytes
+Detection Time: {detected_time}
+Confidence: {packet_data.prediction.confidence:.2%}
 
 Explanation:
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+--------------------------------------------------
 {explanation}
 
 Recommended Actions:
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-• Review firewall rules
-• Monitor affected systems
-• Check for additional indicators of compromise
-• Consider blocking the source IP if appropriate
+--------------------------------------------------
+- Review firewall rules
+- Monitor affected systems
+- Check for additional indicators of compromise
+- Consider blocking the source IP if appropriate
 
 This alert has been logged and is available in the attack_log.json file.
 
@@ -161,25 +180,46 @@ Network Security Team
 Automated Alert System
 """
 
-            msg.attach(MIMEText(body, 'plain'))
+            # LOG THE ATTACK FIRST
+            attack_info = self.log_attack(packet_data, provided_severity)
 
-            # Send email
-            server = smtplib.SMTP(self.smtp_server, self.smtp_port)
-            server.starttls()
-            server.login(self.sender_email, self.sender_password)
-            text = msg.as_string()
-            server.sendmail(self.sender_email, self.recipient_emails, text)
-            server.quit()
+            if use_email:
+                # Send via email (original behavior)
+                msg = MIMEMultipart()
+                msg['From'] = self.sender_email
+                msg['To'] = ", ".join(self.recipient_emails)
+                msg['Subject'] = f"🚨 SECURITY ALERT: {packet_data.prediction.attack_type} Attack Detected"
+                msg.attach(MIMEText(body, 'plain'))
 
-            # Log successful alert
-            self.log_alert({
-                "attack_type": packet_data.prediction.attack_type,
-                "severity": severity,
-                "src_ip": packet_data.packet.src_ip,
-                "dest_ip": packet_data.packet.dest_ip,
-                "status": "SENT",
-                "email_subject": msg['Subject']
-            })
+                server = smtplib.SMTP(self.smtp_server, self.smtp_port)
+                server.starttls()
+                server.login(self.sender_email, self.sender_password)
+                text = msg.as_string()
+                server.sendmail(self.sender_email, self.recipient_emails, text)
+                server.quit()
+
+                # Log successful alert
+                self.log_alert({
+                    "attack_type": packet_data.prediction.attack_type,
+                    "severity": severity,
+                    "src_ip": getattr(packet_data.packet, 'src_ip', 'unknown'),
+                    "dest_ip": getattr(packet_data.packet, 'dest_ip', 'unknown'),
+                    "status": "SENT",
+                    "method": "EMAIL"
+                })
+            else:
+                # Write to stdout + file (testing mode)
+                print(body)
+                
+                # Append to alert_log.json with method=STDOUT
+                self.log_alert({
+                    "attack_type": packet_data.prediction.attack_type,
+                    "severity": severity,
+                    "src_ip": getattr(packet_data.packet, 'src_ip', 'unknown'),
+                    "dest_ip": getattr(packet_data.packet, 'dest_ip', 'unknown'),
+                    "status": "LOGGED",
+                    "method": "STDOUT"
+                })
 
             return True
 
@@ -187,13 +227,11 @@ Automated Alert System
             # Log failed alert
             self.log_alert({
                 "attack_type": packet_data.prediction.attack_type,
-                "severity": self._get_severity_level(
-                    packet_data.prediction.attack_type,
-                    packet_data.prediction.confidence
-                ),
-                "src_ip": packet_data.packet.src_ip,
-                "dest_ip": packet_data.packet.dest_ip,
+                "severity": severity,
+                "src_ip": getattr(packet_data.packet, 'src_ip', 'unknown'),
+                "dest_ip": getattr(packet_data.packet, 'dest_ip', 'unknown'),
                 "status": "FAILED",
+                "method": "EMAIL" if use_email else "STDOUT",
                 "error": str(e)
             })
             return False
@@ -219,9 +257,9 @@ Automated Alert System
 # Global instance
 alert_system = EmailAlertSystem()
 
-def send_attack_alert(packet_data: PacketWithPrediction) -> bool:
-    """Convenience function to send attack alert"""
-    return alert_system.send_alert_email(packet_data)
+def send_attack_alert(packet_data: PacketWithPrediction, provided_severity: Optional[str] = None, use_email: bool = True) -> bool:
+    """Convenience function to send attack alert (defaults to stdout for testing)"""
+    return alert_system.send_alert_email(packet_data, provided_severity=provided_severity, use_email=use_email)
 
 def get_attack_logs(limit: int = 100) -> List[Dict]:
     """Convenience function to get attack logs"""
