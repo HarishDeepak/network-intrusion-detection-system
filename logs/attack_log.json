@@ -8,5 +8,65 @@
     "packet_length": 1200,
     "confidence": 0.95,
     "severity": "HIGH"
+  },
+  {
+    "timestamp": "2026-01-18T20:54:36.183617",
+    "attack_type": "DDoS",
+    "src_ip": "192.168.1.100",
+    "dest_ip": "10.0.0.1",
+    "protocol": "TCP",
+    "packet_length": 1200,
+    "confidence": 0.95,
+    "severity": "HIGH"
+  },
+  {
+    "timestamp": "2026-01-18T20:56:56.085512",
+    "attack_type": "DDoS",
+    "src_ip": "192.168.1.100",
+    "dest_ip": "10.0.0.1",
+    "protocol": "TCP",
+    "packet_length": 1200,
+    "confidence": 0.95,
+    "severity": "HIGH"
+  },
+  {
+    "timestamp": "2026-01-18T21:00:03.854366",
+    "attack_type": "DDoS",
+    "src_ip": "192.168.1.100",
+    "dest_ip": "10.0.0.1",
+    "protocol": "TCP",
+    "packet_length": 1200,
+    "confidence": 0.95,
+    "severity": "HIGH"
+  },
+  {
+    "timestamp": "2026-01-18T21:02:48.088146",
+    "attack_type": "DDoS",
+    "src_ip": "192.168.1.100",
+    "dest_ip": "10.0.0.1",
+    "protocol": "TCP",
+    "packet_length": 1200,
+    "confidence": 0.95,
+    "severity": "HIGH"
+  },
+  {
+    "timestamp": "2026-01-18T21:16:04.594047",
+    "attack_type": "DDoS",
+    "src_ip": "192.168.1.100",
+    "dest_ip": "10.0.0.1",
+    "protocol": "TCP",
+    "packet_length": 1200,
+    "confidence": 0.95,
+    "severity": "HIGH"
+  },
+  {
+    "timestamp": "2026-01-19T14:15:25.729624",
+    "attack_type": "DDoS",
+    "src_ip": "192.168.1.100",
+    "dest_ip": "10.0.0.1",
+    "protocol": "TCP",
+    "packet_length": 1200,
+    "confidence": 0.95,
+    "severity": "HIGH"
   }
 ]

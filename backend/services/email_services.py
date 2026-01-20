@@ -13,9 +13,9 @@ class EmailAlertSystem:
     def __init__(self, smtp_server: str = "smtp.gmail.com", smtp_port: int = 587):
         self.smtp_server = smtp_server
         self.smtp_port = smtp_port
-        self.sender_email = os.getenv("ALERT_EMAIL", "alerts@networksecurity.com")
-        self.sender_password = os.getenv("ALERT_EMAIL_PASSWORD", "")
-        self.recipient_emails = os.getenv("ALERT_RECIPIENTS", "admin@company.com").split(",")
+        self.sender_email = os.getenv("ALERT_EMAIL", "nidsteamsharp@gmail.com")
+        self.sender_password = os.getenv("ALERT_EMAIL_PASSWORD", "ergu amfi flxc vony")
+        self.recipient_emails = os.getenv("ALERT_RECIPIENTS", "romiyaraju98@gmail.com").split(",")
 
         # Create logs directory if it doesn't exist
         self.logs_dir = os.path.join(os.path.dirname(__file__), "..", "..", "logs")
