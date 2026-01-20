@@ -11,7 +11,7 @@ from sklearn.preprocessing import MinMaxScaler
 # -----------------------------
 # 1. Load models & preprocessors
 # -----------------------------
-BASE_DIR = r"C:\ds2projectnad\Team_Sharp_DS2"
+BASE_DIR = r"E:\Romiya\ICE\WS - 25\DS2\Team_Sharp_DS2"
 BACKEND_DIR = os.path.join(BASE_DIR, "backend")
 with open(os.path.join(BASE_DIR, r"Supervised\final_model.pkl"), "rb") as f:
     supervised_model = pickle.load(f)

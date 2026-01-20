@@ -115,6 +115,9 @@ streamlit==1.28.1
 pandas==2.0.3
 plotly==5.18.0
 requests==2.31.0
+python-multipart==0.0.6
+smtplib
+email-validator==2.1.0
 
 
 
