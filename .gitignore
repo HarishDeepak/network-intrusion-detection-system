@@ -17,3 +17,9 @@ frontend/.streamlit/secrets.toml
 # Python
 __pycache__/
 *.pyc
+
+# Ignore prediction/fusion output CSVs
+backend/attack_predictions.csv
+backend/fusion_results.csv
+backend/*.csv
+backend/*.json  # optional if logs are generated dynamically
