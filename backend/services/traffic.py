@@ -5,6 +5,7 @@ import time
 from models.packet import PacketData, PredictionResult, PacketWithPrediction
 from models.stats import StatsResponse
 from models.charts import AttackDistribution, TimeTrends
+from services.email_services import send_attack_alert
 
 def get_basic_stats() -> StatsResponse:
     # Dummy aggregated stats (could be based on in-memory counters or random)
@@ -40,9 +41,20 @@ def get_time_trends(intervals: int = 10) -> TimeTrends:
 def predict_packet(packet: PacketData) -> PredictionResult:
     # Dummy "ML model" logic: classify based on packet size
     if packet.length > 1000:
-        return PredictionResult(label="attack", confidence=0.9, attack_type="DDoS")
+        result = PredictionResult(label="attack", confidence=0.9, attack_type="DDoS")
     else:
-        return PredictionResult(label="normal", confidence=0.9, attack_type=None)
+        result = PredictionResult(label="normal", confidence=0.9, attack_type=None)
+
+    # Trigger alert for attacks
+    if result.label == "attack":
+        packet_with_prediction = PacketWithPrediction(packet=packet, prediction=result)
+        # Send alert asynchronously (in a real system, this would be queued)
+        try:
+            send_attack_alert(packet_with_prediction)
+        except Exception as e:
+            print(f"Failed to send alert: {e}")  # In production, use proper logging
+
+    return result
 
 def generate_packets(count: int = 5):
     # Create a list of packets with random attributes and dummy predictions
