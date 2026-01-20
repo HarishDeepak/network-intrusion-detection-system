@@ -28,7 +28,7 @@ with open(os.path.join(BASE_DIR, r"Data_cleaning\final_features.pkl"), "rb") as 
 with open(os.path.join(BASE_DIR, r"Data_cleaning\imputer_final.pkl"), "rb") as f:
     imputer = pickle.load(f)
 
-with open(os.path.join(BASE_DIR, r"Data_cleaning\labelencoder.pkl"), "rb") as f:
+with open(os.path.join(BASE_DIR, r"Supervised\labelencoder_xgb.pkl"), "rb") as f:
     label_encoder = pickle.load(f)
 
 print("LabelEncoder loaded with classes:", label_encoder.classes_)
@@ -394,6 +394,17 @@ supervised_proba = supervised_model.predict_proba(X_scaled)  # Get probabilities
 
 # Convert encoded predictions back to original labels
 supervised_labels = label_encoder.inverse_transform(supervised_predictions)
+
+label_counts = pd.Series(supervised_labels).value_counts()
+label_percent = 100 * label_counts / len(supervised_labels)
+
+print("\n===== Unique Predicted Labels =====")
+print("Label counts:")
+print(label_counts)
+print("\nLabel percentages:")
+print(label_percent)
+
+print("\nUnique labels predicted:", list(label_counts.index))
 
 # Use probability of positive class (index 1) as attack score
 attack_score_supervised = supervised_proba[:, 1] if supervised_proba.shape[1] > 1 else supervised_predictions.astype(float)
