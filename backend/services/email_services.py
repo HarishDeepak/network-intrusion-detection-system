@@ -8,6 +8,7 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from typing import Dict, List, Optional
 from models.packet import PacketWithPrediction
+from models.database import SessionLocal, AttackLog, AlertLog
 
 class EmailAlertSystem:
     def __init__(self, smtp_server: str = "smtp.gmail.com", smtp_port: int = 587):
@@ -70,7 +71,7 @@ class EmailAlertSystem:
         return explanations.get(attack_type, "Suspicious network activity detected requiring immediate attention.")
 
     def log_attack(self, packet_data: PacketWithPrediction, provided_severity: Optional[str] = None) -> Dict:
-        """Log attack information to attack_log.json"""
+        """Log attack information to both JSON file and database"""
         severity = self._get_severity_level(
             packet_data.prediction.attack_type,
             packet_data.prediction.confidence,
@@ -88,21 +89,39 @@ class EmailAlertSystem:
             "severity": severity
         }
 
-        # Read existing attacks
-        with open(self.attack_log_path, 'r') as f:
-            attacks = json.load(f)
+        # Log to JSON file (backward compatibility)
+        try:
+            with open(self.attack_log_path, 'r') as f:
+                attacks = json.load(f)
+            attacks.append(attack_entry)
+            with open(self.attack_log_path, 'w') as f:
+                json.dump(attacks, f, indent=2)
+        except Exception as e:
+            print(f"[Warning] Failed to log to JSON: {e}")
 
-        # Add new attack
-        attacks.append(attack_entry)
-
-        # Write back to file
-        with open(self.attack_log_path, 'w') as f:
-            json.dump(attacks, f, indent=2)
+        # Log to database
+        try:
+            db = SessionLocal()
+            attack_log = AttackLog(
+                timestamp=datetime.now(),
+                attack_type=attack_entry["attack_type"],
+                src_ip=attack_entry["src_ip"],
+                dest_ip=attack_entry["dest_ip"],
+                protocol=attack_entry["protocol"],
+                packet_length=attack_entry["packet_length"],
+                confidence=attack_entry["confidence"],
+                severity=attack_entry["severity"]
+            )
+            db.add(attack_log)
+            db.commit()
+            db.close()
+        except Exception as e:
+            print(f"[Warning] Failed to log to database: {e}")
 
         return attack_entry
 
     def log_alert(self, alert_data: Dict) -> Dict:
-        """Log alert information to alert_log.json"""
+        """Log alert information to both JSON file and database"""
         alert_entry = {
             "timestamp": datetime.now().isoformat(),
             "alert_type": "EMAIL_ALERT",
@@ -111,16 +130,35 @@ class EmailAlertSystem:
             **alert_data
         }
 
-        # Read existing alerts
-        with open(self.alert_log_path, 'r') as f:
-            alerts = json.load(f)
+        # Log to JSON file (backward compatibility)
+        try:
+            with open(self.alert_log_path, 'r') as f:
+                alerts = json.load(f)
+            alerts.append(alert_entry)
+            with open(self.alert_log_path, 'w') as f:
+                json.dump(alerts, f, indent=2)
+        except Exception as e:
+            print(f"[Warning] Failed to log alert to JSON: {e}")
 
-        # Add new alert
-        alerts.append(alert_entry)
-
-        # Write back to file
-        with open(self.alert_log_path, 'w') as f:
-            json.dump(alerts, f, indent=2)
+        # Log to database
+        try:
+            db = SessionLocal()
+            alert_log = AlertLog(
+                timestamp=datetime.now(),
+                attack_type=alert_data.get("attack_type", "UNKNOWN"),
+                severity=alert_data.get("severity", "UNKNOWN"),
+                status=alert_data.get("status", "SENT"),
+                method=alert_data.get("method", "UNKNOWN"),
+                src_ip=alert_data.get("src_ip", "unknown"),
+                dest_ip=alert_data.get("dest_ip", "unknown"),
+                recipients=",".join(self.recipient_emails) if self.recipient_emails else "",
+                error=alert_data.get("error")
+            )
+            db.add(alert_log)
+            db.commit()
+            db.close()
+        except Exception as e:
+            print(f"[Warning] Failed to log alert to database: {e}")
 
         return alert_entry
 
