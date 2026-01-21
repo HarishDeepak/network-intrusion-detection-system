@@ -5,12 +5,16 @@ import time
 from models.packet import PacketData, PredictionResult, PacketWithPrediction
 from models.stats import StatsResponse
 from models.charts import AttackDistribution, TimeTrends
+<<<<<<< HEAD
 from collections import deque
 from sqlalchemy.orm import Session
 from database.db_model import TrafficLog
 
 
 traffic_history = deque(maxlen=60)
+=======
+from services.email_services import send_attack_alert
+>>>>>>> 221224046a2833c846780777254efd5d58ade7b6
 
 def get_basic_stats() -> StatsResponse:
     # Dummy aggregated stats (could be based on in-memory counters or random)
@@ -46,9 +50,20 @@ def get_time_trends(intervals: int = 10) -> TimeTrends:
 def predict_packet(packet: PacketData) -> PredictionResult:
     # Dummy "ML model" logic: classify based on packet size
     if packet.length > 1000:
-        return PredictionResult(label="attack", confidence=0.9, attack_type="DDoS")
+        result = PredictionResult(label="attack", confidence=0.9, attack_type="DDoS")
     else:
-        return PredictionResult(label="normal", confidence=0.9, attack_type=None)
+        result = PredictionResult(label="normal", confidence=0.9, attack_type=None)
+
+    # Trigger alert for attacks
+    if result.label == "attack":
+        packet_with_prediction = PacketWithPrediction(packet=packet, prediction=result)
+        # Send alert asynchronously (in a real system, this would be queued)
+        try:
+            send_attack_alert(packet_with_prediction)
+        except Exception as e:
+            print(f"Failed to send alert: {e}")  # In production, use proper logging
+
+    return result
 
 def generate_packets(count: int = 5):
     # Create a list of packets with random attributes and dummy predictions
