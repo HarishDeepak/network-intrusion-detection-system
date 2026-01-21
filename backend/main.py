@@ -7,6 +7,7 @@ from api.stats import router as stats_router
 from api.analytics import router as analytics_router
 from api.packets import router as packets_router
 from api.alerts import router as alerts_router
+from api.db_endpoints import router as db_router
 from stream.traffic import router as stream_router
 
 app = FastAPI(title="Network Anomaly Detection API")
@@ -25,5 +26,10 @@ app.include_router(stats_router, prefix="/api")
 app.include_router(analytics_router, prefix="/api")
 app.include_router(packets_router, prefix="/api")
 app.include_router(alerts_router, prefix="/api")
+app.include_router(db_router, prefix="/api")  # Database query endpoints
 app.include_router(stream_router)  # SSE endpoints under /stream
 
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)
