@@ -3,15 +3,18 @@ import glob
 import pickle
 import numpy as np
 import pandas as pd
+import json
 
 from pathlib import Path
 from scipy.stats import entropy, zscore
 from sklearn.preprocessing import MinMaxScaler
+from services.explainability import ExplainabilityService
+explainer = ExplainabilityService()
 
 # -----------------------------
 # 1. Load models & preprocessors
 # -----------------------------
-BASE_DIR = r"E:\Romiya\ICE\WS - 25\DS2\Team_Sharp_DS2"
+BASE_DIR = r"C:\Users\erram\Desktop\Project\Team_Sharp_DS2"
 BACKEND_DIR = os.path.join(BASE_DIR, "backend")
 with open(os.path.join(BASE_DIR, r"Supervised\final_model.pkl"), "rb") as f:
     supervised_model = pickle.load(f)
@@ -447,6 +450,17 @@ results = pd.DataFrame({
     "attack_score_unsupervised": attack_score_unsupervised,
     "combined_score": combined_score,
 })
+
+# -----------------------------------------
+# 10. Explainability: call SHAP / AE explainer
+# -----------------------------------------
+results["explanation"] = None
+for i in range(X_raw.shape[0]):
+    sample_df = X_raw.iloc[i:i+1]
+    attack_label = supervised_labels[i]
+    explanation = explainer.explain(sample_df, attack_label)
+    # Store as JSON string for CSV friendliness
+    results.at[i, "explanation"] = json.dumps(explanation)
 
 print(results.head())
 
