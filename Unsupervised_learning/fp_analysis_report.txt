@@ -10,4 +10,4 @@ Overall: 992/49604 false positives (2.00%)
 Verdict: PASS
 
 Interpretation: 2.00% of legitimate traffic would be flagged as attacks.
-Acceptable if < 5%. Current threshold (0.071066) is ready for production.
+Acceptable if < 5%. Current threshold (0.073801) is ready for production.

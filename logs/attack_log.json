@@ -1,0 +1,272 @@
+[
+  {
+    "timestamp": "2026-01-21T01:04:57.388746",
+    "attack_type": "Scan",
+    "src_ip": "unknown",
+    "dest_ip": "unknown",
+    "protocol": "unknown",
+    "packet_length": 0,
+    "confidence": 0.0023614503153261877,
+    "severity": "MEDIUM"
+  },
+  {
+    "timestamp": "2026-01-21T01:04:58.337282",
+    "attack_type": "Scan",
+    "src_ip": "unknown",
+    "dest_ip": "unknown",
+    "protocol": "unknown",
+    "packet_length": 0,
+    "confidence": 5.921162950287314e-05,
+    "severity": "MEDIUM"
+  },
+  {
+    "timestamp": "2026-01-21T01:04:59.560643",
+    "attack_type": "Scan",
+    "src_ip": "unknown",
+    "dest_ip": "unknown",
+    "protocol": "unknown",
+    "packet_length": 0,
+    "confidence": 5.7753484956660164e-05,
+    "severity": "MEDIUM"
+  },
+  {
+    "timestamp": "2026-01-21T01:05:00.529942",
+    "attack_type": "Scan",
+    "src_ip": "unknown",
+    "dest_ip": "unknown",
+    "protocol": "unknown",
+    "packet_length": 0,
+    "confidence": 0.001054548967079178,
+    "severity": "MEDIUM"
+  },
+  {
+    "timestamp": "2026-01-21T01:05:01.724288",
+    "attack_type": "Scan",
+    "src_ip": "unknown",
+    "dest_ip": "unknown",
+    "protocol": "unknown",
+    "packet_length": 0,
+    "confidence": 0.01430319043167227,
+    "severity": "MEDIUM"
+  },
+  {
+    "timestamp": "2026-01-21T01:05:02.763579",
+    "attack_type": "Scan",
+    "src_ip": "unknown",
+    "dest_ip": "unknown",
+    "protocol": "unknown",
+    "packet_length": 0,
+    "confidence": 0.000750108408122263,
+    "severity": "MEDIUM"
+  },
+  {
+    "timestamp": "2026-01-21T01:05:03.485981",
+    "attack_type": "Scan",
+    "src_ip": "unknown",
+    "dest_ip": "unknown",
+    "protocol": "unknown",
+    "packet_length": 0,
+    "confidence": 5.58590680647397e-05,
+    "severity": "MEDIUM"
+  },
+  {
+    "timestamp": "2026-01-21T01:05:04.587010",
+    "attack_type": "Scan",
+    "src_ip": "unknown",
+    "dest_ip": "unknown",
+    "protocol": "unknown",
+    "packet_length": 0,
+    "confidence": 0.000750108408122263,
+    "severity": "MEDIUM"
+  },
+  {
+    "timestamp": "2026-01-21T01:05:05.443029",
+    "attack_type": "BruteForce",
+    "src_ip": "unknown",
+    "dest_ip": "unknown",
+    "protocol": "unknown",
+    "packet_length": 0,
+    "confidence": 1.0,
+    "severity": "HIGH"
+  },
+  {
+    "timestamp": "2026-01-21T01:05:06.408738",
+    "attack_type": "Scan",
+    "src_ip": "unknown",
+    "dest_ip": "unknown",
+    "protocol": "unknown",
+    "packet_length": 0,
+    "confidence": 0.0007809501063809911,
+    "severity": "MEDIUM"
+  },
+  {
+    "timestamp": "2026-01-21T01:05:07.222966",
+    "attack_type": "Scan",
+    "src_ip": "unknown",
+    "dest_ip": "unknown",
+    "protocol": "unknown",
+    "packet_length": 0,
+    "confidence": 0.0004114601394020648,
+    "severity": "MEDIUM"
+  },
+  {
+    "timestamp": "2026-01-21T01:05:07.946244",
+    "attack_type": "Scan",
+    "src_ip": "unknown",
+    "dest_ip": "unknown",
+    "protocol": "unknown",
+    "packet_length": 0,
+    "confidence": 0.008715456862594364,
+    "severity": "MEDIUM"
+  },
+  {
+    "timestamp": "2026-01-21T01:05:08.935371",
+    "attack_type": "Scan",
+    "src_ip": "unknown",
+    "dest_ip": "unknown",
+    "protocol": "unknown",
+    "packet_length": 0,
+    "confidence": 0.0008001043323555366,
+    "severity": "MEDIUM"
+  },
+  {
+    "timestamp": "2026-01-21T01:05:09.718685",
+    "attack_type": "Scan",
+    "src_ip": "unknown",
+    "dest_ip": "unknown",
+    "protocol": "unknown",
+    "packet_length": 0,
+    "confidence": 6.116199201415681e-05,
+    "severity": "MEDIUM"
+  },
+  {
+    "timestamp": "2026-01-21T01:05:10.474874",
+    "attack_type": "Scan",
+    "src_ip": "unknown",
+    "dest_ip": "unknown",
+    "protocol": "unknown",
+    "packet_length": 0,
+    "confidence": 0.008352621728254598,
+    "severity": "MEDIUM"
+  },
+  {
+    "timestamp": "2026-01-21T01:05:11.519612",
+    "attack_type": "Scan",
+    "src_ip": "unknown",
+    "dest_ip": "unknown",
+    "protocol": "unknown",
+    "packet_length": 0,
+    "confidence": 0.0010570112823886486,
+    "severity": "MEDIUM"
+  },
+  {
+    "timestamp": "2026-01-21T01:05:12.222518",
+    "attack_type": "Scan",
+    "src_ip": "unknown",
+    "dest_ip": "unknown",
+    "protocol": "unknown",
+    "packet_length": 0,
+    "confidence": 0.0005751707470808953,
+    "severity": "MEDIUM"
+  },
+  {
+    "timestamp": "2026-01-21T01:05:13.206398",
+    "attack_type": "Scan",
+    "src_ip": "unknown",
+    "dest_ip": "unknown",
+    "protocol": "unknown",
+    "packet_length": 0,
+    "confidence": 0.01106332890048821,
+    "severity": "MEDIUM"
+  },
+  {
+    "timestamp": "2026-01-21T01:05:13.927097",
+    "attack_type": "Scan",
+    "src_ip": "unknown",
+    "dest_ip": "unknown",
+    "protocol": "unknown",
+    "packet_length": 0,
+    "confidence": 0.00042762282248173073,
+    "severity": "MEDIUM"
+  },
+  {
+    "timestamp": "2026-01-21T01:05:14.889103",
+    "attack_type": "Scan",
+    "src_ip": "unknown",
+    "dest_ip": "unknown",
+    "protocol": "unknown",
+    "packet_length": 0,
+    "confidence": 0.006302959298018137,
+    "severity": "MEDIUM"
+  },
+  {
+    "timestamp": "2026-01-21T01:05:15.702650",
+    "attack_type": "Scan",
+    "src_ip": "unknown",
+    "dest_ip": "unknown",
+    "protocol": "unknown",
+    "packet_length": 0,
+    "confidence": 0.0008077758477994988,
+    "severity": "MEDIUM"
+  },
+  {
+    "timestamp": "2026-01-21T01:05:16.368402",
+    "attack_type": "Scan",
+    "src_ip": "unknown",
+    "dest_ip": "unknown",
+    "protocol": "unknown",
+    "packet_length": 0,
+    "confidence": 0.12343151469820676,
+    "severity": "MEDIUM"
+  },
+  {
+    "timestamp": "2026-01-21T01:05:17.023846",
+    "attack_type": "Scan",
+    "src_ip": "unknown",
+    "dest_ip": "unknown",
+    "protocol": "unknown",
+    "packet_length": 0,
+    "confidence": 5.2375845812623756e-05,
+    "severity": "MEDIUM"
+  },
+  {
+    "timestamp": "2026-01-21T01:05:17.733148",
+    "attack_type": "Scan",
+    "src_ip": "unknown",
+    "dest_ip": "unknown",
+    "protocol": "unknown",
+    "packet_length": 0,
+    "confidence": 0.000750108408122263,
+    "severity": "MEDIUM"
+  },
+  {
+    "timestamp": "2026-01-21T01:05:18.511750",
+    "attack_type": "Scan",
+    "src_ip": "unknown",
+    "dest_ip": "unknown",
+    "protocol": "unknown",
+    "packet_length": 0,
+    "confidence": 0.0017227344991209601,
+    "severity": "MEDIUM"
+  },
+  {
+    "timestamp": "2026-01-21T01:05:19.546606",
+    "attack_type": "Scan",
+    "src_ip": "unknown",
+    "dest_ip": "unknown",
+    "protocol": "unknown",
+    "packet_length": 0,
+    "confidence": 0.0008192450628753596,
+    "severity": "MEDIUM"
+  },
+  {
+    "timestamp": "2026-01-21T01:05:20.706040",
+    "attack_type": "Scan",
+    "src_ip": "unknown",
+    "dest_ip": "unknown",
+    "protocol": "unknown",
+    "packet_length": 0,
+    "confidence": 0.0006503027878532229,
+    "severity": "MEDIUM"
+  }
+]

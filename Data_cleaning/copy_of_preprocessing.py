@@ -13,7 +13,7 @@ import seaborn as sns
 import numpy as np
 import pickle
 
-!pip install boruta
+# !pip install boruta
 
 from boruta import BorutaPy
 from sklearn.ensemble import RandomForestClassifier
@@ -145,7 +145,7 @@ null_counts = df_balanced.isnull().sum()
 print(f"Total null entries found: {null_counts.sum()}\n")
 
 # Drop rows with any null values
-df_balanced.dropna(inplace=True)
+# df_balanced.dropna(inplace=True)
 
 # Find and handle duplicates
 
@@ -184,7 +184,7 @@ df_balanced[numeric_cols] = df_balanced[numeric_cols].apply(pd.to_numeric, error
 
 # Remove invalid values
 df_balanced = df_balanced.replace([np.inf, -np.inf], np.nan)
-df_balanced.dropna(inplace=True)
+# df_balanced.dropna(inplace=True)
 
 attack_data = df_balanced['label'].value_counts()
 print(attack_data)
@@ -332,13 +332,15 @@ df_balanced.head(5)
 #df_balanced = df_balanced.drop(['proto_0_flag_rate_flag_rate', 'proto_6_flag_rate_flag_rate', 'proto_17_flag_rate_flag_rate'], axis=1)
 
 df_balanced['flag_change_rate'] = df_balanced['total_flag_count'] / ((df_balanced['flow_duration'] / 1e6) + eps)
-anomaly_feats = ['burst_ratio', 'active_cv', 'flag_change_rate']  # Check these really exist!
-for col in anomaly_feats:
-    df_balanced[col + "_scaled"] = MinMaxScaler().fit_transform(df_balanced[[col]])
-
-df_balanced['flow_anomaly_index'] = df_balanced[[c + "_scaled" for c in anomaly_feats]].sum(axis=1)
-# Step 4: Drop intermediate columns to keep only the binary flag
-df_balanced = df_balanced.drop(['burst_ratio_scaled', 'active_cv_scaled','flag_change_rate_scaled'], axis=1)
+# anomaly_feats = ['burst_ratio', 'active_cv', 'flag_change_rate']  # Check these really exist!
+# for col in anomaly_feats:
+#     df_balanced[col + "_scaled"] = MinMaxScaler().fit_transform(df_balanced[[col]])
+#
+# df_balanced['flow_anomaly_index'] = df_balanced[[c + "_scaled" for c in anomaly_feats]].sum(axis=1)
+# # Step 4: Drop intermediate columns to keep only the binary flag
+# df_balanced = df_balanced.drop(['burst_ratio_scaled', 'active_cv_scaled','flag_change_rate_scaled'], axis=1)
+anomaly_feats = ['burst_ratio', 'active_cv', 'flag_change_rate']  # Make sure these columns exist
+df_balanced['flow_anomaly_index'] = df_balanced[anomaly_feats].sum(axis=1)
 df_balanced.head(5)
 
 # before feature selection or extraction do split and scale it so there is no imbalance.
@@ -470,12 +472,21 @@ boruta_features_fast = pd.DataFrame({
 })
 
 # 8. FINAL FEATURE UNION
-final_features = list(
-    set(anova_scores.head(30)['feature']) |
-    set(mi_scores.head(30)['feature']) |
-    set(rf_importance.head(30)['feature']) |
-    set(boruta_features_fast[boruta_features_fast['selected'] == True]['feature'])
+# final_features = list(
+#     set(anova_scores.head(30)['feature']) |
+#     set(mi_scores.head(30)['feature']) |
+#     set(rf_importance.head(30)['feature']) |
+#     set(boruta_features_fast[boruta_features_fast['selected'] == True]['feature'])
+# )
+final_features = (
+    anova_scores.head(30)['feature'].tolist() +
+    mi_scores.head(30)['feature'].tolist() +
+    rf_importance.head(30)['feature'].tolist() +
+    boruta_features_fast[boruta_features_fast['selected']]['feature'].tolist()
 )
+
+final_features = list(dict.fromkeys(final_features))
+
 
 print("Final selected features:")
 print(final_features)
@@ -503,60 +514,80 @@ final_features = list(set(final_features) | set(mandatory_proto))
 
 
 # 10. FILTER TRAIN/TEST WITH SELECTED FEATURES
-X_train_selected = pd.DataFrame(X_train_imputed, columns=feature_names)[final_features]
-X_test_selected = pd.DataFrame(X_test_imputed, columns=feature_names)[final_features]
+# X_train_selected = pd.DataFrame(X_train_imputed, columns=feature_names)[final_features]
+# X_test_selected = pd.DataFrame(X_test_imputed, columns=feature_names)[final_features]
 
-####################################################
-# Scale after Final Feature Selection 
-####################################################
+# ===============================
+# FINAL IMPUTER (FOR LIVE DATA)
+# ===============================
+imputer_final = SimpleImputer(strategy="median")
 
+# IMPORTANT: use RAW (not pre-imputed) data
+X_train_selected_raw = X_train_corr[final_features]
+X_test_selected_raw  = X_test_corr[final_features]
+
+# Fit ONLY ON RAW TRAIN DATA
+imputer_final.fit(X_train_selected_raw)
+
+# Transform train and test
+X_train_selected = imputer_final.transform(X_train_selected_raw)
+X_test_selected  = imputer_final.transform(X_test_selected_raw)
+
+# Convert to DataFrame to preserve column order
+X_train_selected = pd.DataFrame(X_train_selected, columns=final_features)
+X_test_selected  = pd.DataFrame(X_test_selected, columns=final_features)
+
+# ===============================
+# SCALER (STANDARDIZATION)
+# ===============================
 scaler = StandardScaler()
 
 X_train_selected_scaled = scaler.fit_transform(X_train_selected)
 X_test_selected_scaled = scaler.transform(X_test_selected)
 
 # Convert back to DataFrame to preserve column names
-X_train_selected = pd.DataFrame(
-    X_train_selected_scaled,
-    columns=final_features
-)
-
-X_test_selected = pd.DataFrame(
-    X_test_selected_scaled,
-    columns=final_features
-)
-
-
+X_train_selected = pd.DataFrame(X_train_selected_scaled, columns=final_features)
+X_test_selected  = pd.DataFrame(X_test_selected_scaled, columns=final_features)
 print("Shape after selection:")
 print("Train:", X_train_selected.shape)
 print("Test:", X_test_selected.shape)
+
+# Number of features scaler expects
+print("Scaler expects", scaler.n_features_in_, "features")
+
+# ===============================
+# SAVE ALL ARTIFACTS
+# ===============================
 
 # 1. Selected feature list
 with open("final_features.pkl", "wb") as f:
     pickle.dump(final_features, f)
 
-# 2. Imputer
-with open("imputer.pkl", "wb") as f:
-    pickle.dump(imputer, f)
+# 2. Original imputer (before selection)
+# with open("imputer.pkl", "wb") as f:
+#     pickle.dump(imputer, f)
 
-# 3. Feature-selection scaler (ANOVA scaler)
+# 3. Final scaler (after selection)
 with open("scaler.pkl", "wb") as f:
     pickle.dump(scaler, f)
-
-#with open("scaler.pkl", "wb") as f:
-#    pickle.dump(scaler_fs, f)
 
 # 4. LabelEncoder
 with open("labelencoder.pkl", "wb") as f:
     pickle.dump(le, f)
 
-# 5. Train/Test splits 
+# 5. Final imputer aligned with selected features
+with open("imputer_final.pkl", "wb") as f:
+    pickle.dump(imputer_final, f)
+
+print("✅ imputer_final.pkl saved (aligned with selected features)")
+
+# ===============================
+# SAVE TRAIN / TEST DATA
+# ===============================
 X_train_selected.to_parquet("X_train_selected.parquet")
 X_test_selected.to_parquet("X_test_selected.parquet")
 
 y_train.to_frame("label").to_parquet("y_train.parquet")
 y_test.to_frame("label").to_parquet("y_test.parquet")
 
-print("✅ All preprocessing artifacts saved")
-
-
+print("✅ All preprocessing artifacts saved successfully")

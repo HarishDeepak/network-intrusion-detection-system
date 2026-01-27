@@ -73,6 +73,11 @@ le_xgb = LabelEncoder()
 y_train_xgb = le_xgb.fit_transform(y_train)
 y_test_xgb = le_xgb.transform(y_test)
 
+with open("labelencoder_xgb.pkl", "wb") as f:
+    pickle.dump(le_xgb, f)
+
+print("✅ XGB classes (no Rare):", le_xgb.classes_)
+
 
 print("After filtering Rare:")
 print("Train label distribution:\n", y_train.value_counts())
@@ -85,6 +90,7 @@ print("Test shape:", X_test_selected.shape)
 
 
 def evaluate_model(model, X_test, y_test, model_name):
+    classes = le_xgb.classes_
     y_pred = model.predict(X_test)
 
     print(f"\n===== {model_name} =====")
@@ -92,13 +98,13 @@ def evaluate_model(model, X_test, y_test, model_name):
     print("Weighted F1:", f1_score(y_test, y_pred, average="weighted"))
 
     print("\nClassification Report:")
-    print(classification_report(y_test, y_pred, target_names=le.classes_))
+    print(classification_report(y_test, y_pred, target_names=classes))
 
     cm = confusion_matrix(y_test, y_pred)
     plt.figure(figsize=(10, 7))
     sns.heatmap(cm, annot=False, cmap="Blues",
-                xticklabels=le.classes_,
-                yticklabels=le.classes_)
+                xticklabels=classes,
+                yticklabels=classes)
     plt.title(f"{model_name} Confusion Matrix")
     plt.xlabel("Predicted")
     plt.ylabel("Actual")
@@ -194,10 +200,10 @@ xgb.fit(
 y_pred_xgb = xgb.predict(X_test_selected)
 
 print("XGBoost Results(Rare removed)")
-class_names_no_rare = [
-    cls for cls in le.classes_ if cls != "Rare"
-]
-
+# class_names_no_rare = [
+#     cls for cls in le.classes_ if cls != "Rare"
+# ]
+class_names_no_rare = [str(cls) for cls in le_xgb.classes_]
 
 print(classification_report(y_test_xgb, 
                             y_pred_xgb,
