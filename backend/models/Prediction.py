@@ -5,40 +5,55 @@ import numpy as np
 import pandas as pd
 import json
 
-from pathlib import Path
 from scipy.stats import entropy, zscore
 from sklearn.preprocessing import MinMaxScaler
 from services.explainability import ExplainabilityService
-explainer = ExplainabilityService()
 
 # -----------------------------
 # 1. Load models & preprocessors
 # -----------------------------
-BASE_DIR = r"C:\Users\erram\Desktop\Project\Team_Sharp_DS2"
+BASE_DIR = r"/home/ramya/Team_Sharp_DS2"
 BACKEND_DIR = os.path.join(BASE_DIR, "backend")
-with open(os.path.join(BASE_DIR, r"Supervised\final_model.pkl"), "rb") as f:
+
+# Supervised model
+supervised_model_path = os.path.join(BASE_DIR, "Supervised", "final_model.pkl")
+with open(supervised_model_path, "rb") as f:
     supervised_model = pickle.load(f)
 
-with open(os.path.join(BASE_DIR, r"Unsupervised_learning\autoencoder_full.pkl"), "rb") as f:
+# Autoencoder artifacts
+autoencoder_path = os.path.join(BASE_DIR, "Unsupervised_learning", "autoencoder_full.pkl")
+with open(autoencoder_path, "rb") as f:
     autoencoder = pickle.load(f)
 
-with open(os.path.join(BASE_DIR, r"Data_cleaning\scaler.pkl"), "rb") as f:
+# Scaler
+scaler_path = os.path.join(BASE_DIR, "Data_cleaning", "scaler.pkl")
+with open(scaler_path, "rb") as f:
     scaler = pickle.load(f)
 
-with open(os.path.join(BASE_DIR, r"Data_cleaning\final_features.pkl"), "rb") as f:
+# Final features
+features_path = os.path.join(BASE_DIR, "Data_cleaning", "final_features.pkl")
+with open(features_path, "rb") as f:
     FEATURES = pickle.load(f)
 
-with open(os.path.join(BASE_DIR, r"Data_cleaning\imputer_final.pkl"), "rb") as f:
+# Imputer
+imputer_path = os.path.join(BASE_DIR, "Data_cleaning", "imputer_final.pkl")
+with open(imputer_path, "rb") as f:
     imputer = pickle.load(f)
 
-with open(os.path.join(BASE_DIR, r"Supervised\labelencoder_xgb.pkl"), "rb") as f:
+# Label encoder
+label_encoder_path = os.path.join(BASE_DIR, "Supervised", "labelencoder_xgb.pkl")
+with open(label_encoder_path, "rb") as f:
     label_encoder = pickle.load(f)
 
 print("LabelEncoder loaded with classes:", label_encoder.classes_)
-
 print(f"Loaded {len(FEATURES)} final features")
 print("Scaler expects:", scaler.n_features_in_)
 print("Imputer features:", imputer.statistics_.shape[0])
+
+# -----------------------------
+# Initialize ExplainabilityService
+# -----------------------------
+explainer = ExplainabilityService(supervised_model, autoencoder)
 
 # --------------------------------------------------
 # 2. Load and concatenate all 7 CSVs for prediction
@@ -452,15 +467,9 @@ results = pd.DataFrame({
 })
 
 # -----------------------------------------
-# 10. Explainability: call SHAP / AE explainer
+# 10. Explainability
 # -----------------------------------------
-results["explanation"] = None
-for i in range(X_raw.shape[0]):
-    sample_df = X_raw.iloc[i:i+1]
-    attack_label = supervised_labels[i]
-    explanation = explainer.explain(sample_df, attack_label)
-    # Store as JSON string for CSV friendliness
-    results.at[i, "explanation"] = json.dumps(explanation)
+results["explanation"] = explainer.explain_batch(X_raw, attack_labels=supervised_labels)
 
 print(results.head())
 
