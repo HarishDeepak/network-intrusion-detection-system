@@ -2,7 +2,6 @@
 run_fusion.py
 
 Wrapper to run the decision_engine on outputs from prediction.py
-with SHAP explainability integration.
 """
 
 import pandas as pd
@@ -17,12 +16,6 @@ from services.email_services import send_attack_alert
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 PREDICTION_CSV = os.path.join(SCRIPT_DIR, "attack_predictions.csv")
 OUTPUT_CSV = os.path.join(SCRIPT_DIR, "fusion_results.csv")
-
-# -----------------------------
-# Explainability integration
-# -----------------------------
-from services.explainability import ExplainabilityService
-explainer = ExplainabilityService()
 
 def decode_labels(label_encoded_series):
     """
@@ -70,26 +63,6 @@ def main():
             results["xgb_confidence"] = 0.5
     else:
         results["xgb_confidence"] = 0.5
-
-    # -----------------------------
-    # SHAP Explainability per row
-    # -----------------------------
-    results["explanation"] = None
-    for i in range(results.shape[0]):
-        # Use the original features from prediction.py for this row
-        # Assuming X_raw is saved in prediction CSV or can be reconstructed
-        try:
-            # Use all columns except metadata scores for explanation
-            feat_cols = [c for c in results.columns if c not in [
-                "attack_score_supervised", "ae_score", "combined_score",
-                "xgb_confidence", "xgb_label", "predicted_label_encoded"
-            ]]
-            sample_df = results.loc[i, feat_cols].to_frame().T
-            attack_label = results.loc[i, "xgb_label"]
-            explanation = explainer.explain(sample_df, attack_label)
-            results.at[i, "explanation"] = json.dumps(explanation)
-        except Exception:
-            results.at[i, "explanation"] = json.dumps({"error": "explainability failed"})
 
     # Run fusion / decision engine
     decision_df = run_decision_engine(results)
