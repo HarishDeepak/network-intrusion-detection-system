@@ -7,7 +7,7 @@ Stores attacks and alerts in SQLite database for querying and analysis.
 
 import os
 from datetime import datetime
-from sqlalchemy import create_engine, Column, Integer, String, Float, DateTime, Index
+from sqlalchemy import create_engine, Column, Integer, String, Float, DateTime, Index, Text
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
@@ -46,6 +46,8 @@ class AttackLog(Base):
     packet_length = Column(Integer)
     confidence = Column(Float)  # 0.0-1.0
     severity = Column(String(20), index=True)  # LOW, MEDIUM, HIGH, CRITICAL
+    explanation = Column(Text, nullable=True)  # NEW: explainability payload
+
     
     # Fusion pipeline details
     ae_score = Column(Float, nullable=True)  # Autoencoder reconstruction error
@@ -72,6 +74,7 @@ class AttackLog(Base):
             "ae_score": self.ae_score,
             "xgb_confidence": self.xgb_confidence,
             "fusion_score": self.fusion_score,
+            "explanation": self.explanation
         }
 
 

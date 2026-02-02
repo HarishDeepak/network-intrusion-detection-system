@@ -1,4 +1,7 @@
 import os
+import sys
+# Ensure 'backend' is in sys.path for direct execution
+sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 import glob
 import pickle
 import numpy as np
@@ -12,7 +15,7 @@ from services.explainability import ExplainabilityService
 # -----------------------------
 # 1. Load models & preprocessors
 # -----------------------------
-BASE_DIR = r"/home/ramya/Team_Sharp_DS2"
+BASE_DIR = r"E:\Romiya\ICE\WS - 25\DS2\Team_Sharp_DS2"
 BACKEND_DIR = os.path.join(BASE_DIR, "backend")
 
 # Supervised model
