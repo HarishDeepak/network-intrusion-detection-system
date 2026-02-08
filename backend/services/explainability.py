@@ -76,20 +76,12 @@ class ExplainabilityService:
             ae_features = ", ".join(top5_ae["feature"].values[:2])
             attack_label = attack_labels[i] if attack_labels is not None else "unknown"
 
-            if attack_label == "Benign":
-                explanation = (
-                    f"The network flow was classified as {attack_label} due to high influence "
-                    f"from features such as {shap_features}. "
-                    f"The analyzed features, including {ae_features}, remained within "
-                    f"normal behavioral patterns, indicating no significant anomalies."
-                )
-            else:
-                explanation = (
-                    f"The network flow was classified as {attack_label} due to high influence "
-                    f"from features such as {shap_features}. "
-                    f"Additionally, abnormal behavior was detected in "
-                    f"{ae_features}, which deviated significantly from normal traffic patterns."
-                )
+            explanation = (
+                f"The network flow was classified as {attack_label} due to high influence "
+                f"from features such as {shap_features}. "
+                f"Additionally, abnormal behavior was detected in "
+                f"{ae_features}, which deviated significantly from normal traffic patterns."
+            )
             explanations.append(explanation)
 
         return explanations
