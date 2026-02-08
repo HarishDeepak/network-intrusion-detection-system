@@ -268,5 +268,395 @@
     "packet_length": 0,
     "confidence": 0.0006503027878532229,
     "severity": "MEDIUM"
+  },
+  {
+    "timestamp": "2026-01-21T14:39:14.308993",
+    "attack_type": "DDoS",
+    "src_ip": "192.168.1.108",
+    "dest_ip": "10.0.0.91",
+    "protocol": "UDP",
+    "packet_length": 1390,
+    "confidence": 0.9,
+    "severity": "HIGH"
+  },
+  {
+    "timestamp": "2026-01-21T14:39:15.557420",
+    "attack_type": "DDoS",
+    "src_ip": "192.168.1.188",
+    "dest_ip": "10.0.0.31",
+    "protocol": "UDP",
+    "packet_length": 1373,
+    "confidence": 0.9,
+    "severity": "HIGH"
+  },
+  {
+    "timestamp": "2026-01-21T14:39:16.525524",
+    "attack_type": "DDoS",
+    "src_ip": "192.168.1.47",
+    "dest_ip": "10.0.0.99",
+    "protocol": "ICMP",
+    "packet_length": 1011,
+    "confidence": 0.9,
+    "severity": "HIGH"
+  },
+  {
+    "timestamp": "2026-01-21T14:39:17.514656",
+    "attack_type": "DDoS",
+    "src_ip": "192.168.1.6",
+    "dest_ip": "10.0.0.168",
+    "protocol": "UDP",
+    "packet_length": 1158,
+    "confidence": 0.9,
+    "severity": "HIGH"
+  },
+  {
+    "timestamp": "2026-01-21T14:41:25.362669",
+    "attack_type": "DDoS",
+    "src_ip": "192.168.1.57",
+    "dest_ip": "10.0.0.116",
+    "protocol": "ICMP",
+    "packet_length": 1403,
+    "confidence": 0.9,
+    "severity": "HIGH"
+  },
+  {
+    "timestamp": "2026-01-21T14:41:26.322887",
+    "attack_type": "DDoS",
+    "src_ip": "192.168.1.228",
+    "dest_ip": "10.0.0.192",
+    "protocol": "ICMP",
+    "packet_length": 1453,
+    "confidence": 0.9,
+    "severity": "HIGH"
+  },
+  {
+    "timestamp": "2026-01-21T14:41:27.248308",
+    "attack_type": "DDoS",
+    "src_ip": "192.168.1.239",
+    "dest_ip": "10.0.0.3",
+    "protocol": "ICMP",
+    "packet_length": 1198,
+    "confidence": 0.9,
+    "severity": "HIGH"
+  },
+  {
+    "timestamp": "2026-01-23T13:18:22.974361",
+    "attack_type": "DDoS",
+    "src_ip": "192.168.1.84",
+    "dest_ip": "10.0.0.12",
+    "protocol": "UDP",
+    "packet_length": 1367,
+    "confidence": 0.9,
+    "severity": "HIGH"
+  },
+  {
+    "timestamp": "2026-01-23T13:18:24.571121",
+    "attack_type": "DDoS",
+    "src_ip": "192.168.1.147",
+    "dest_ip": "10.0.0.79",
+    "protocol": "UDP",
+    "packet_length": 1390,
+    "confidence": 0.9,
+    "severity": "HIGH"
+  },
+  {
+    "timestamp": "2026-01-23T13:18:25.718058",
+    "attack_type": "DDoS",
+    "src_ip": "192.168.1.143",
+    "dest_ip": "10.0.0.221",
+    "protocol": "UDP",
+    "packet_length": 1319,
+    "confidence": 0.9,
+    "severity": "HIGH"
+  },
+  {
+    "timestamp": "2026-01-23T13:18:26.717577",
+    "attack_type": "DDoS",
+    "src_ip": "192.168.1.202",
+    "dest_ip": "10.0.0.204",
+    "protocol": "TCP",
+    "packet_length": 1366,
+    "confidence": 0.9,
+    "severity": "HIGH"
+  },
+  {
+    "timestamp": "2026-01-23T13:54:42.881981",
+    "attack_type": "DDoS",
+    "src_ip": "192.168.1.16",
+    "dest_ip": "10.0.0.8",
+    "protocol": "UDP",
+    "packet_length": 1148,
+    "confidence": 0.9,
+    "severity": "HIGH"
+  },
+  {
+    "timestamp": "2026-01-23T13:54:44.053848",
+    "attack_type": "DDoS",
+    "src_ip": "192.168.1.57",
+    "dest_ip": "10.0.0.56",
+    "protocol": "UDP",
+    "packet_length": 1175,
+    "confidence": 0.9,
+    "severity": "HIGH"
+  },
+  {
+    "timestamp": "2026-01-23T13:54:44.947692",
+    "attack_type": "DDoS",
+    "src_ip": "192.168.1.46",
+    "dest_ip": "10.0.0.129",
+    "protocol": "UDP",
+    "packet_length": 1048,
+    "confidence": 0.9,
+    "severity": "HIGH"
+  },
+  {
+    "timestamp": "2026-01-23T13:54:45.862215",
+    "attack_type": "DDoS",
+    "src_ip": "192.168.1.109",
+    "dest_ip": "10.0.0.198",
+    "protocol": "ICMP",
+    "packet_length": 1122,
+    "confidence": 0.9,
+    "severity": "HIGH"
+  },
+  {
+    "timestamp": "2026-01-23T13:54:46.798591",
+    "attack_type": "DDoS",
+    "src_ip": "192.168.1.241",
+    "dest_ip": "10.0.0.10",
+    "protocol": "TCP",
+    "packet_length": 1291,
+    "confidence": 0.9,
+    "severity": "HIGH"
+  },
+  {
+    "timestamp": "2026-01-29T20:20:59.512894",
+    "attack_type": "DDoS",
+    "src_ip": "192.168.1.230",
+    "dest_ip": "10.0.0.150",
+    "protocol": "ICMP",
+    "packet_length": 1060,
+    "confidence": 0.9,
+    "severity": "HIGH"
+  },
+  {
+    "timestamp": "2026-01-29T20:21:01.367119",
+    "attack_type": "DDoS",
+    "src_ip": "192.168.1.149",
+    "dest_ip": "10.0.0.186",
+    "protocol": "TCP",
+    "packet_length": 1173,
+    "confidence": 0.9,
+    "severity": "HIGH"
+  },
+  {
+    "timestamp": "2026-01-29T20:21:02.403777",
+    "attack_type": "DDoS",
+    "src_ip": "192.168.1.5",
+    "dest_ip": "10.0.0.243",
+    "protocol": "TCP",
+    "packet_length": 1215,
+    "confidence": 0.9,
+    "severity": "HIGH"
+  },
+  {
+    "timestamp": "2026-01-30T17:55:10.138622",
+    "attack_type": "DDoS",
+    "src_ip": "192.168.1.10",
+    "dest_ip": "10.0.0.215",
+    "protocol": "ICMP",
+    "packet_length": 1195,
+    "confidence": 0.9,
+    "severity": "HIGH"
+  },
+  {
+    "timestamp": "2026-01-30T17:55:11.501814",
+    "attack_type": "DDoS",
+    "src_ip": "192.168.1.93",
+    "dest_ip": "10.0.0.191",
+    "protocol": "TCP",
+    "packet_length": 1105,
+    "confidence": 0.9,
+    "severity": "HIGH"
+  },
+  {
+    "timestamp": "2026-01-30T17:55:12.570850",
+    "attack_type": "DDoS",
+    "src_ip": "192.168.1.117",
+    "dest_ip": "10.0.0.250",
+    "protocol": "ICMP",
+    "packet_length": 1013,
+    "confidence": 0.9,
+    "severity": "HIGH"
+  },
+  {
+    "timestamp": "2026-01-30T17:55:13.504645",
+    "attack_type": "DDoS",
+    "src_ip": "192.168.1.56",
+    "dest_ip": "10.0.0.124",
+    "protocol": "UDP",
+    "packet_length": 1009,
+    "confidence": 0.9,
+    "severity": "HIGH"
+  },
+  {
+    "timestamp": "2026-01-30T18:03:57.544310",
+    "attack_type": "DDoS",
+    "src_ip": "192.168.1.5",
+    "dest_ip": "10.0.0.151",
+    "protocol": "TCP",
+    "packet_length": 1096,
+    "confidence": 0.9,
+    "severity": "HIGH"
+  },
+  {
+    "timestamp": "2026-01-30T18:03:58.736343",
+    "attack_type": "DDoS",
+    "src_ip": "192.168.1.49",
+    "dest_ip": "10.0.0.176",
+    "protocol": "ICMP",
+    "packet_length": 1012,
+    "confidence": 0.9,
+    "severity": "HIGH"
+  },
+  {
+    "timestamp": "2026-01-30T18:03:59.852754",
+    "attack_type": "DDoS",
+    "src_ip": "192.168.1.227",
+    "dest_ip": "10.0.0.232",
+    "protocol": "ICMP",
+    "packet_length": 1347,
+    "confidence": 0.9,
+    "severity": "HIGH"
+  },
+  {
+    "timestamp": "2026-01-30T18:04:00.997603",
+    "attack_type": "DDoS",
+    "src_ip": "192.168.1.40",
+    "dest_ip": "10.0.0.82",
+    "protocol": "UDP",
+    "packet_length": 1110,
+    "confidence": 0.9,
+    "severity": "HIGH"
+  },
+  {
+    "timestamp": "2026-01-30T18:04:02.096182",
+    "attack_type": "DDoS",
+    "src_ip": "192.168.1.191",
+    "dest_ip": "10.0.0.108",
+    "protocol": "ICMP",
+    "packet_length": 1486,
+    "confidence": 0.9,
+    "severity": "HIGH"
+  },
+  {
+    "timestamp": "2026-01-30T18:04:03.176012",
+    "attack_type": "DDoS",
+    "src_ip": "192.168.1.207",
+    "dest_ip": "10.0.0.96",
+    "protocol": "TCP",
+    "packet_length": 1008,
+    "confidence": 0.9,
+    "severity": "HIGH"
+  },
+  {
+    "timestamp": "2026-01-30T18:04:04.269190",
+    "attack_type": "DDoS",
+    "src_ip": "192.168.1.205",
+    "dest_ip": "10.0.0.33",
+    "protocol": "ICMP",
+    "packet_length": 1366,
+    "confidence": 0.9,
+    "severity": "HIGH"
+  },
+  {
+    "timestamp": "2026-01-30T18:04:39.267723",
+    "attack_type": "DDoS",
+    "src_ip": "192.168.1.221",
+    "dest_ip": "10.0.0.128",
+    "protocol": "UDP",
+    "packet_length": 1467,
+    "confidence": 0.9,
+    "severity": "HIGH"
+  },
+  {
+    "timestamp": "2026-01-30T18:04:40.235878",
+    "attack_type": "DDoS",
+    "src_ip": "192.168.1.155",
+    "dest_ip": "10.0.0.84",
+    "protocol": "UDP",
+    "packet_length": 1368,
+    "confidence": 0.9,
+    "severity": "HIGH"
+  },
+  {
+    "timestamp": "2026-01-30T18:04:41.115579",
+    "attack_type": "DDoS",
+    "src_ip": "192.168.1.63",
+    "dest_ip": "10.0.0.195",
+    "protocol": "TCP",
+    "packet_length": 1395,
+    "confidence": 0.9,
+    "severity": "HIGH"
+  },
+  {
+    "timestamp": "2026-01-30T18:04:42.008517",
+    "attack_type": "DDoS",
+    "src_ip": "192.168.1.160",
+    "dest_ip": "10.0.0.2",
+    "protocol": "TCP",
+    "packet_length": 1346,
+    "confidence": 0.9,
+    "severity": "HIGH"
+  },
+  {
+    "timestamp": "2026-01-30T18:09:54.057162",
+    "attack_type": "DDoS",
+    "src_ip": "192.168.1.204",
+    "dest_ip": "10.0.0.238",
+    "protocol": "ICMP",
+    "packet_length": 1271,
+    "confidence": 0.9,
+    "severity": "HIGH"
+  },
+  {
+    "timestamp": "2026-01-30T18:09:54.994804",
+    "attack_type": "DDoS",
+    "src_ip": "192.168.1.74",
+    "dest_ip": "10.0.0.216",
+    "protocol": "TCP",
+    "packet_length": 1239,
+    "confidence": 0.9,
+    "severity": "HIGH"
+  },
+  {
+    "timestamp": "2026-01-30T18:09:55.852004",
+    "attack_type": "DDoS",
+    "src_ip": "192.168.1.110",
+    "dest_ip": "10.0.0.186",
+    "protocol": "ICMP",
+    "packet_length": 1019,
+    "confidence": 0.9,
+    "severity": "HIGH"
+  },
+  {
+    "timestamp": "2026-01-30T18:09:56.717961",
+    "attack_type": "DDoS",
+    "src_ip": "192.168.1.134",
+    "dest_ip": "10.0.0.46",
+    "protocol": "UDP",
+    "packet_length": 1370,
+    "confidence": 0.9,
+    "severity": "HIGH"
+  },
+  {
+    "timestamp": "2026-01-30T18:09:57.644292",
+    "attack_type": "DDoS",
+    "src_ip": "192.168.1.86",
+    "dest_ip": "10.0.0.58",
+    "protocol": "UDP",
+    "packet_length": 1139,
+    "confidence": 0.9,
+    "severity": "HIGH"
   }
 ]
