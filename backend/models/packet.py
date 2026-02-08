@@ -1,7 +1,7 @@
 # models/packet.py
 
 from pydantic import BaseModel
-from typing import List, Dict, Optional
+from typing import List, Dict, Optional, Any
 
 class PacketData(BaseModel):
     id: int
@@ -15,6 +15,7 @@ class PredictionResult(BaseModel):
     label: str           # e.g. "normal" or "attack"
     confidence: float    # e.g. 0.85
     attack_type: Optional[str] = None  # e.g. "DDoS", if label is "attack"
+    explanation: Optional[Dict[str, Any]] = None     # NEW: Explainability output (SHAP + AE + text)
 
 class PacketWithPrediction(BaseModel):
     packet: PacketData
