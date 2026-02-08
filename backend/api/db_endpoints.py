@@ -202,6 +202,9 @@ def get_dashboard_analytics(
     """
     attack_stats = get_attacks_statistics(db)
     alert_stats = get_alerts_statistics(db)
+    recent_attacks = db.query(AttackLog).order_by(desc(AttackLog.timestamp)).limit(10).all()
+    dashboard_recent_attacks = [a.to_dict() for a in recent_attacks]
+
     
     return {
         "attacks": attack_stats,
