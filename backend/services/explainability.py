@@ -1,95 +1,112 @@
-import os
-import pickle
 import numpy as np
 import pandas as pd
 import shap
-
-def decode_labels(label_encoded_series):
-    """
-    Decode numeric label indices to attack type names
-    Uses the label encoder from the training process
-    """
-    BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
-    # Load the XGB label encoder
-    with open(os.path.join(BASE_DIR, "Supervised/labelencoder_xgb.pkl"), "rb") as f:
-        xgb_le = pickle.load(f)
-
-    # Load the original label encoder
-    with open(os.path.join(BASE_DIR, "Data_cleaning/labelencoder.pkl"), "rb") as f:
-        original_le = pickle.load(f)
-
-    # Map numeric indices to attack names
-    original_labels = original_le.inverse_transform(xgb_le.classes_)
-    label_map = {i: original_labels[i] for i in range(len(original_labels))}
-
-    return label_encoded_series.map(label_map)
+import time
 
 
 class ExplainabilityService:
-    def __init__(self, supervised_model, autoencoder_artifacts, max_shap_samples=5000):
-        self.max_shap_samples = max_shap_samples
-        self.supervised_model = supervised_model
+
+    def __init__(self, supervised_model, autoencoder_artifacts, max_shap_samples=2000):
+
+        self.model = supervised_model
+
         self.autoencoder = autoencoder_artifacts["model"]
         self.scaler = autoencoder_artifacts["scaler"]
-        self.feature_columns = autoencoder_artifacts["feature_columns"]
-        self.shap_explainer = shap.TreeExplainer(self.supervised_model)
+        self.features = autoencoder_artifacts["feature_columns"]
 
-    def _explain_shap(self, sample_df):
-        X_shap = sample_df.sample(min(len(sample_df), self.max_shap_samples), random_state=42)
-        shap_values = self.shap_explainer.shap_values(X_shap)
-        mean_shap = np.abs(shap_values).mean(axis=(0, 2))
-        shap_importance = pd.DataFrame({
-            "feature": X_shap.columns,
-            "importance": mean_shap
-        }).sort_values(by="importance", ascending=False)
-        return shap_importance
+        self.max_shap_samples = max_shap_samples
 
-    def explain_batch(self, sample_df, attack_labels=None):
-        # ------------------------
-        # Autoencoder deviation
-        # ------------------------
-        sample_df_ordered = sample_df[self.scaler.feature_names_in_]
-        x_scaled = self.scaler.transform(sample_df_ordered)
-        x_reconstructed = self.autoencoder.predict(x_scaled, verbose=0)
-        deviations = np.abs(x_scaled - x_reconstructed)
+        # Init once
+        self.explainer = shap.TreeExplainer(self.model)
 
-        # ------------------------
-        # SHAP explanation
-        # ------------------------
-        shap_importance = self._explain_shap(sample_df)
+        self._shap_cache = None
 
-        # Decode attack labels if numeric
-        if attack_labels is not None and np.issubdtype(attack_labels.dtype, np.integer):
-            attack_labels = decode_labels(pd.Series(attack_labels)).values
 
+   
+    # Build SHAP background once    
+    def build_background(self, X):
+
+        if self._shap_cache is not None:
+            return
+
+
+        print("[Explainability] Building SHAP background...")
+
+        bg = X.sample(
+            min(len(X), self.max_shap_samples),
+            random_state=42
+        )
+
+        shap_vals = self.explainer.shap_values(bg)
+
+        mean_vals = np.abs(shap_vals).mean(axis=(0, 2))
+
+        self._shap_cache = pd.DataFrame({
+            "feature": bg.columns,
+            "importance": mean_vals
+        }).sort_values("importance", ascending=False)
+
+
+    # Batch explain (FAST, cached)
+    # --------------------------------------------------
+    def explain_attacks(self, X, labels, attack_idx):
+        # Build SHAP cache (once) 
+        self.build_background(X)
+      
+        # Autoencoder (run once)    
+        X_ord = X[self.scaler.feature_names_in_]
+        X_scaled = self.scaler.transform(X_ord)
+        X_recon = self.autoencoder.predict(X_scaled, verbose=0)
+        deviations = np.abs(X_scaled - X_recon)
         explanations = []
-        for i in range(len(sample_df)):
-            top5_shap = shap_importance.head(5)
-            top5_ae_idx = np.argsort(-deviations[i])[:5]
-            top5_ae = pd.DataFrame({
-                "feature": self.feature_columns,
-                "deviation": deviations[i]
-            }).iloc[top5_ae_idx]
 
-            shap_features = ", ".join(top5_shap["feature"].values[:2])
-            ae_features = ", ".join(top5_ae["feature"].values[:2])
-            attack_label = attack_labels[i] if attack_labels is not None else "unknown"
+        # Progress tracking
+        start = time.time()
+        total = len(attack_idx)
+        print(f"[Explainability] Generating {total} explanations...")
 
-            if attack_label == "Benign":
-                explanation = (
-                    f"The network flow was classified as {attack_label} due to high influence "
-                    f"from features such as {shap_features}. "
-                    f"The analyzed features, including {ae_features}, remained within "
-                    f"normal behavioral patterns, indicating no significant anomalies."
+           # Main loop
+        for count, i in enumerate(attack_idx, 1):
+
+            # SHAP
+            top_shap = self._shap_cache.head(5)
+            shap_feats = ", ".join(
+                top_shap["feature"].values[:2]
+            )
+
+
+            # Autoencoder
+            ae_idx = np.argsort(-deviations[i])[:5]
+
+            ae_feats = ", ".join(
+                self.features[j] for j in ae_idx[:2]
+            )
+
+
+            # Label
+            label = labels[i]
+
+            # Build explanation
+            text = (
+                f"The network flow was classified as {label} due to high influence "
+                f"from features such as {shap_feats}. "
+                f"Additionally, abnormal behavior was detected in "
+                f"{ae_feats}, which deviated significantly from normal traffic patterns."
+            )
+
+            explanations.append((i, text))
+
+            # Progress log
+            if count % 5 == 0 or count == total:
+
+                elapsed = time.time() - start
+                avg = elapsed / count
+                remaining = avg * (total - count)
+
+                print(
+                    f"[Explainability] {count}/{total} done "
+                    f"({count/total:.1%}) | "
+                    f"ETA: {int(remaining)}s"
                 )
-            else:
-                explanation = (
-                    f"The network flow was classified as {attack_label} due to high influence "
-                    f"from features such as {shap_features}. "
-                    f"Additionally, abnormal behavior was detected in "
-                    f"{ae_features}, which deviated significantly from normal traffic patterns."
-                )
-            explanations.append(explanation)
 
         return explanations

@@ -25,10 +25,10 @@ def decode_labels(label_encoded_series):
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     
     # Load the label encoders
-    with open(os.path.join(BASE_DIR, r"Supervised\labelencoder_xgb.pkl"), "rb") as f:
+    with open(os.path.join(BASE_DIR, "Supervised", "labelencoder_xgb.pkl"), "rb") as f:
         xgb_le = pickle.load(f)
     
-    with open(os.path.join(BASE_DIR, r"Data_cleaning\labelencoder.pkl"), "rb") as f:
+    with open(os.path.join(BASE_DIR, "Data_cleaning", "labelencoder.pkl"), "rb") as f:
         original_le = pickle.load(f)
     
     # Decode: first get the original numeric labels, then get their text names
@@ -38,86 +38,103 @@ def decode_labels(label_encoded_series):
     return decoded_labels
 
 def main():
-    # Load prediction outputs
+
+    # Load predictions
     results = pd.read_csv(PREDICTION_CSV)
     
-    # Decode numeric labels to attack type names
-    if "predicted_label_encoded" in results.columns:
-        results["xgb_label"] = decode_labels(results["predicted_label_encoded"])
-    else:
-        results["xgb_label"] = "Unknown"
-    
-    # Map columns to expected format by decision_engine
-    results.rename(columns={"attack_score_unsupervised": "ae_score"}, inplace=True)
-    if "ae_score" not in results.columns and "combined_score" in results.columns:
+    # Labels (already decoded earlier)    
+    if "xgb_label" not in results.columns:
+        if "predicted_label_encoded" in results.columns:
+            results["xgb_label"] = decode_labels(
+                results["predicted_label_encoded"]
+            )
+        else:
+            results["xgb_label"] = "Unknown"
+
+
+    # Scores    
+    results.rename(
+        columns={"attack_score_unsupervised": "ae_score"},
+        inplace=True
+    )
+
+
+    if "ae_score" not in results.columns:
         results["ae_score"] = results["combined_score"]
-    
+
+
+    # Normalize supervised score
     if "attack_score_supervised" in results.columns:
-        min_score = results["attack_score_supervised"].min()
-        max_score = results["attack_score_supervised"].max()
-        if max_score > min_score:
+
+        mn = results["attack_score_supervised"].min()
+        mx = results["attack_score_supervised"].max()
+        if mx > mn:
             results["xgb_confidence"] = (
-                (results["attack_score_supervised"] - min_score) / (max_score - min_score)
+                (results["attack_score_supervised"] - mn) / (mx - mn)
             )
         else:
             results["xgb_confidence"] = 0.5
     else:
         results["xgb_confidence"] = 0.5
 
-    # Run fusion / decision engine
+    # Decision Engine
     decision_df = run_decision_engine(results)
-        # Preserve explainability output from prediction stage
+
+    # Preserve explanations safely
     if "explanation" in results.columns:
-        decision_df["explanation"] = results["explanation"].values
-    print("Explanation sample:", decision_df["explanation"].head(1).values)
 
+        decision_df = decision_df.merge(
+            results[["explanation"]],
+            left_index=True,
+            right_index=True,
+            how="left",
+            validate="1:1"  
+        )
 
-    
-
-    # Save decisions
+    print("Explanation sample:")
+    print(decision_df["explanation"].head(1))
+    # Save
     decision_df.to_csv(OUTPUT_CSV, index=False)
     print(f"Fusion results saved to: {OUTPUT_CSV}")
 
-    # Optional: show summary
+    # Summary
     print("\nSummary of attacks detected:")
     print(decision_df["severity"].value_counts())
 
-    # Send alerts for detected attacks
+    # Alerts
     from datetime import datetime as _dt
     sent = 0
-    for idx, row in decision_df[decision_df['attack'] == True].iterrows():
-        pkt_id = int(idx)
-        src_ip = row.get('src_ip', 'unknown') if 'src_ip' in row.index else 'unknown'
-        dest_ip = row.get('dest_ip', 'unknown') if 'dest_ip' in row.index else 'unknown'
-        protocol = row.get('protocol', 'unknown') if 'protocol' in row.index else 'unknown'
-        length = int(row.get('packet_length', 0)) if 'packet_length' in row.index and pd.notna(row.get('packet_length')) else 0
-        ts_raw = row.get('timestamp', _dt.utcnow().isoformat())
+    attacks = decision_df[decision_df["attack"] == True]
+    for idx, row in attacks.iterrows():
         try:
-            pkt_ts = _dt.fromisoformat(str(ts_raw)).timestamp()
-        except Exception:
-            try:
-                pkt_ts = float(ts_raw)
-            except Exception:
-                pkt_ts = _dt.utcnow().timestamp()
-        conf = float(row.get('fusion_score', row.get('xgb_confidence', 0.0)))
-        attack_type = row.get('attack_type', 'Unknown')
-        severity = row.get('severity', 'Low')
-        explanation_payload = None
-        if "explanation" in row.index and pd.notna(row["explanation"]):
-            explanation_payload = {"text": str(row["explanation"])}
-        else:
-            explanation_payload = {"text": "Automated explanation unavailable."}
-        try:
-            packet = PacketData(id=pkt_id, src_ip=src_ip, dest_ip=dest_ip, length=length, protocol=protocol, timestamp=pkt_ts)
-            prediction = PredictionResult(label="attack", confidence=conf, attack_type=attack_type, explanation=explanation_payload)
-            pw = PacketWithPrediction(packet=packet, prediction=prediction)
-            alert_system.log_attack(pw, provided_severity=severity)
-            ok = send_attack_alert(pw, provided_severity=severity, use_email=True)
-            sent += 1 if ok else 0
-        except Exception:
-            continue
-
-    print(f"Sent alerts for {sent} detected attacks (logged failures if any).")
+            pkt = PacketData(
+                id=int(idx),
+                src_ip=row.get("src_ip", "unknown"),
+                dest_ip=row.get("dest_ip", "unknown"),
+                length=int(row.get("packet_length", 0)),
+                protocol=row.get("protocol", "unknown"),
+                timestamp=_dt.utcnow().timestamp()
+            )
+            pred = PredictionResult(
+                label="attack",
+                confidence=float(row.get("fusion_score", 0.0)),
+                attack_type=row.get("attack_type", "Unknown"),
+                explanation={
+                    "text": str(row.get("explanation", "No explanation"))
+                }
+            )
+            pw = PacketWithPrediction(packet=pkt, prediction=pred)
+            alert_system.log_attack(pw, provided_severity=row.get("severity"))
+            ok = send_attack_alert(
+                pw,
+                provided_severity=row.get("severity"),
+                use_email=True
+            )
+            if ok:
+                sent += 1
+        except Exception as e:
+            print("[Alert Error]", e)
+    print(f"Sent alerts for {sent} detected attacks.")
 
 if __name__ == "__main__":
     main()

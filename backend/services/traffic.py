@@ -5,16 +5,13 @@ import time
 from models.packet import PacketData, PredictionResult, PacketWithPrediction
 from models.stats import StatsResponse
 from models.charts import AttackDistribution, TimeTrends
-<<<<<<< HEAD
 from collections import deque
 from sqlalchemy.orm import Session
 from database.db_model import TrafficLog
 
 
 traffic_history = deque(maxlen=60)
-=======
 from services.email_services import send_attack_alert
->>>>>>> 221224046a2833c846780777254efd5d58ade7b6
 
 def get_basic_stats() -> StatsResponse:
     # Dummy aggregated stats (could be based on in-memory counters or random)

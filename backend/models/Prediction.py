@@ -11,11 +11,16 @@ import json
 from scipy.stats import entropy, zscore
 from sklearn.preprocessing import MinMaxScaler
 from services.explainability import ExplainabilityService
+from run_fusion import decode_labels
 
 # -----------------------------
 # 1. Load models & preprocessors
 # -----------------------------
-BASE_DIR = r"E:\Romiya\ICE\WS - 25\DS2\Team_Sharp_DS2"
+BASE_DIR = os.path.dirname(
+    os.path.dirname(
+        os.path.dirname(os.path.abspath(__file__))
+    )
+)
 BACKEND_DIR = os.path.join(BASE_DIR, "backend")
 
 # Supervised model
@@ -56,7 +61,7 @@ print("Imputer features:", imputer.statistics_.shape[0])
 # -----------------------------
 # Initialize ExplainabilityService
 # -----------------------------
-explainer = ExplainabilityService(supervised_model, autoencoder)
+explainer = ExplainabilityService(supervised_model, autoencoder, max_shap_samples=3000)
 
 # --------------------------------------------------
 # 2. Load and concatenate all 7 CSVs for prediction
@@ -415,6 +420,9 @@ supervised_proba = supervised_model.predict_proba(X_scaled)  # Get probabilities
 
 # Convert encoded predictions back to original labels
 supervised_labels = label_encoder.inverse_transform(supervised_predictions)
+supervised_label = decode_labels(
+    pd.Series(supervised_predictions)
+).values
 
 label_counts = pd.Series(supervised_labels).value_counts()
 label_percent = 100 * label_counts / len(supervised_labels)
@@ -469,12 +477,29 @@ results = pd.DataFrame({
     "combined_score": combined_score,
 })
 
-# -----------------------------------------
-# 10. Explainability
-# -----------------------------------------
-results["explanation"] = explainer.explain_batch(X_raw, attack_labels=supervised_labels)
 
-print(results.head())
+# 10. Explainability 
+results["explanation"] = None
+
+# Indices of attacks
+attack_idx = np.where(supervised_label != "Benign")[0]
+
+print(f"Found {len(attack_idx)} attacks for explanation.")
+
+MAX_EXPLAIN = 200
+attack_idx = attack_idx[:MAX_EXPLAIN]
+
+# Run batch explain
+explanations = explainer.explain_attacks(
+    X_raw,
+    supervised_label,
+    attack_idx
+)
+
+# Store results
+for i, text in explanations:
+    results.at[i, "explanation"] = text
+
 
 # If you want a hard label from supervised model:
 if hasattr(supervised_model, "predict"):
