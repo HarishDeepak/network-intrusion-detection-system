@@ -13,14 +13,12 @@ from sklearn.preprocessing import MinMaxScaler
 from services.explainability import ExplainabilityService
 from run_fusion import decode_labels
 
-# -----------------------------
-# 1. Load models & preprocessors
-# -----------------------------
 BASE_DIR = os.path.dirname(
     os.path.dirname(
         os.path.dirname(os.path.abspath(__file__))
     )
 )
+
 BACKEND_DIR = os.path.join(BASE_DIR, "backend")
 
 # Supervised model
@@ -72,6 +70,8 @@ csv_files = glob.glob(os.path.join(CSV_DIR, "*.csv"))
 if len(csv_files) == 0:
     raise FileNotFoundError(f"No CSVs found in {CSV_DIR}")
 
+
+
 dfs = []
 for f in csv_files:
     df = pd.read_csv(f)
@@ -79,6 +79,10 @@ for f in csv_files:
 
 df_all = pd.concat(dfs, ignore_index=True)
 print("Raw concatenated shape:", df_all.shape)
+
+print([col for col in df_all.columns if "ip" in col.lower()])
+print([col for col in df_all.columns if "port" in col.lower()])
+
 
 # --------------------------------
 # 3. Basic cleaning / normalization
@@ -378,18 +382,8 @@ print(f"Using {len(available_features)} existing features, "
       f"{len(missing_features)} added as zeros.")
 print("X_raw shape:", X_raw.shape)
 
-# print("\n===== IMPUTER FEATURES (FIT ORDER) =====")
-# for i, f in enumerate(imputer.feature_names_in_, 1):
-#     print(f"{i:02d}. {f}")
-# print("Total imputer features:", len(imputer.feature_names_in_))
-#
-# print("\n===== X_raw FEATURES (CURRENT ORDER) =====")
-# for i, f in enumerate(X_raw.columns, 1):
-#     print(f"{i:02d}. {f}")
-# print("Total X_raw features:", X_raw.shape[1])
 
 X_raw = X_raw[imputer.feature_names_in_]
-
 
 # -----------------------------------------
 # 6. Impute → scale
@@ -423,6 +417,8 @@ supervised_labels = label_encoder.inverse_transform(supervised_predictions)
 supervised_label = decode_labels(
     pd.Series(supervised_predictions)
 ).values
+
+
 
 label_counts = pd.Series(supervised_labels).value_counts()
 label_percent = 100 * label_counts / len(supervised_labels)
@@ -470,13 +466,37 @@ w_sup = 0.3
 w_unsup = 0.7
 combined_score = w_sup * attack_score_supervised + w_unsup * attack_score_unsupervised
 
+def extract_protocol(row):
+    if "proto_6" in row and row["proto_6"] == 1:
+        return "TCP"
+    elif "proto_17" in row and row["proto_17"] == 1:
+        return "UDP"
+    elif "proto_0" in row and row["proto_0"] == 1:
+        return "HOPOPT"
+    else:
+        return "UNKNOWN"
+
+df_all["protocol"] = df_all.apply(extract_protocol, axis=1)
+
+if "total_packets" in df_all.columns:
+    df_all["total_packets"] = df_all["total_packets"].fillna(0).round(0).astype(int)
+
+if "total_bytes" in df_all.columns:
+    df_all["total_bytes"] = df_all["total_bytes"].fillna(0).round(0).astype(int)
+
+
 # Optionally, create a result DataFrame
 results = pd.DataFrame({
     "attack_score_supervised": attack_score_supervised,
     "attack_score_unsupervised": attack_score_unsupervised,
     "combined_score": combined_score,
+    "timestamp": df_all.get("timestamp"),
+    "src_ip": df_all.get("src_ip"),
+    "dst_ip": df_all.get("dst_ip"),
+    "protocol": df_all.get("protocol"),
+    "total_packets": df_all.get("total_packets"),
+    "total_bytes": df_all.get("total_bytes"),
 })
-
 
 # 10. Explainability 
 results["explanation"] = None
@@ -499,7 +519,7 @@ explanations = explainer.explain_attacks(
 # Store results
 for i, text in explanations:
     results.at[i, "explanation"] = text
-
+print(results.head())
 
 # If you want a hard label from supervised model:
 if hasattr(supervised_model, "predict"):

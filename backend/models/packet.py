@@ -7,7 +7,6 @@ class PacketData(BaseModel):
     id: int
     src_ip: str
     dest_ip: str
-    length: int          # packet size in bytes
     protocol: str
     timestamp: float     # epoch time
 

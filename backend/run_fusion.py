@@ -80,19 +80,19 @@ def main():
     # Decision Engine
     decision_df = run_decision_engine(results)
 
-    # Preserve explanations safely
-    if "explanation" in results.columns:
+    metadata_cols = [
+    "src_ip", "dst_ip", "protocol",
+    "total_packets", "total_bytes",
+    "timestamp", "explanation", "predicted_label_encoded"
+    ]
+    decision_df = decision_df.merge(
+    results[metadata_cols],
+    left_index=True,
+    right_index=True,
+    how="left",
+    validate="1:1"
+    )
 
-        decision_df = decision_df.merge(
-            results[["explanation"]],
-            left_index=True,
-            right_index=True,
-            how="left",
-            validate="1:1"  
-        )
-
-    print("Explanation sample:")
-    print(decision_df["explanation"].head(1))
     # Save
     decision_df.to_csv(OUTPUT_CSV, index=False)
     print(f"Fusion results saved to: {OUTPUT_CSV}")
@@ -110,10 +110,10 @@ def main():
             pkt = PacketData(
                 id=int(idx),
                 src_ip=row.get("src_ip", "unknown"),
-                dest_ip=row.get("dest_ip", "unknown"),
-                length=int(row.get("packet_length", 0)),
+                dest_ip=row.get("dst_ip", "unknown"),
+                #length=(row.get("packet_size", 0)),
                 protocol=row.get("protocol", "unknown"),
-                timestamp=_dt.utcnow().timestamp()
+                timestamp=row.get("timestamp", _dt.utcnow().timestamp())
             )
             pred = PredictionResult(
                 label="attack",
