@@ -89,7 +89,7 @@ class EmailAlertSystem:
             "src_ip": getattr(packet_data.packet, 'src_ip', 'unknown'),
             "dest_ip": getattr(packet_data.packet, 'dest_ip', 'unknown'),
             "protocol": getattr(packet_data.packet, 'protocol', 'unknown'),
-            "packet_length": getattr(packet_data.packet, 'length', 0),
+            #"packet_length": getattr(packet_data.packet, 'length', 0),
             "confidence": packet_data.prediction.confidence,
             "severity": severity,
             "explanation": packet_data.prediction.explanation["text"] if packet_data.prediction.explanation else None
@@ -114,7 +114,7 @@ class EmailAlertSystem:
                 src_ip=attack_entry["src_ip"],
                 dest_ip=attack_entry["dest_ip"],
                 protocol=attack_entry["protocol"],
-                packet_length=attack_entry["packet_length"],
+                #packet_length=attack_entry["packet_length"],
                 confidence=attack_entry["confidence"],
                 severity=attack_entry["severity"],
                 explanation=json.dumps(explanation_payload) if explanation_payload else None
@@ -208,7 +208,6 @@ Severity: {severity}
 Source IP: {getattr(packet_data.packet, 'src_ip', 'unknown')}
 Destination IP: {getattr(packet_data.packet, 'dest_ip', 'unknown')}
 Protocol: {getattr(packet_data.packet, 'protocol', 'unknown')}
-Packet Size: {getattr(packet_data.packet, 'length', 0)} bytes
 Detection Time: {detected_time}
 Confidence: {packet_data.prediction.confidence:.2%}
 
