@@ -3670,5 +3670,173 @@
     "src_ip": "unknown",
     "dest_ip": "unknown",
     "method": "EMAIL"
+  },
+  {
+    "timestamp": "2026-02-11T19:52:36.120048",
+    "alert_type": "EMAIL_ALERT",
+    "recipients": [
+      "romiyaraju98@gmail.com",
+      "1ms17ec032@gmail.com"
+    ],
+    "status": "SENT",
+    "attack_type": "DDoS",
+    "severity": "HIGH",
+    "src_ip": "192.168.1.147",
+    "dest_ip": "10.0.0.138",
+    "method": "EMAIL"
+  },
+  {
+    "timestamp": "2026-02-11T19:52:37.658175",
+    "alert_type": "EMAIL_ALERT",
+    "recipients": [
+      "romiyaraju98@gmail.com",
+      "1ms17ec032@gmail.com"
+    ],
+    "status": "SENT",
+    "attack_type": "DDoS",
+    "severity": "HIGH",
+    "src_ip": "192.168.1.16",
+    "dest_ip": "10.0.0.49",
+    "method": "EMAIL"
+  },
+  {
+    "timestamp": "2026-02-11T20:04:35.056157",
+    "alert_type": "EMAIL_ALERT",
+    "recipients": [
+      "romiyaraju98@gmail.com",
+      "1ms17ec032@gmail.com"
+    ],
+    "status": "SENT",
+    "attack_type": "DDoS",
+    "severity": "HIGH",
+    "src_ip": "192.168.1.232",
+    "dest_ip": "10.0.0.144",
+    "method": "EMAIL"
+  },
+  {
+    "timestamp": "2026-02-11T20:04:36.174520",
+    "alert_type": "EMAIL_ALERT",
+    "recipients": [
+      "romiyaraju98@gmail.com",
+      "1ms17ec032@gmail.com"
+    ],
+    "status": "SENT",
+    "attack_type": "DDoS",
+    "severity": "HIGH",
+    "src_ip": "192.168.1.205",
+    "dest_ip": "10.0.0.80",
+    "method": "EMAIL"
+  },
+  {
+    "timestamp": "2026-02-11T20:04:37.359024",
+    "alert_type": "EMAIL_ALERT",
+    "recipients": [
+      "romiyaraju98@gmail.com",
+      "1ms17ec032@gmail.com"
+    ],
+    "status": "SENT",
+    "attack_type": "DDoS",
+    "severity": "HIGH",
+    "src_ip": "192.168.1.34",
+    "dest_ip": "10.0.0.42",
+    "method": "EMAIL"
+  },
+  {
+    "timestamp": "2026-02-11T20:04:38.848318",
+    "alert_type": "EMAIL_ALERT",
+    "recipients": [
+      "romiyaraju98@gmail.com",
+      "1ms17ec032@gmail.com"
+    ],
+    "status": "SENT",
+    "attack_type": "DDoS",
+    "severity": "HIGH",
+    "src_ip": "192.168.1.73",
+    "dest_ip": "10.0.0.30",
+    "method": "EMAIL"
+  },
+  {
+    "timestamp": "2026-02-11T20:04:39.887173",
+    "alert_type": "EMAIL_ALERT",
+    "recipients": [
+      "romiyaraju98@gmail.com",
+      "1ms17ec032@gmail.com"
+    ],
+    "status": "SENT",
+    "attack_type": "DDoS",
+    "severity": "HIGH",
+    "src_ip": "192.168.1.232",
+    "dest_ip": "10.0.0.238",
+    "method": "EMAIL"
+  },
+  {
+    "timestamp": "2026-02-11T20:04:41.241659",
+    "alert_type": "EMAIL_ALERT",
+    "recipients": [
+      "romiyaraju98@gmail.com",
+      "1ms17ec032@gmail.com"
+    ],
+    "status": "SENT",
+    "attack_type": "DDoS",
+    "severity": "HIGH",
+    "src_ip": "192.168.1.185",
+    "dest_ip": "10.0.0.76",
+    "method": "EMAIL"
+  },
+  {
+    "timestamp": "2026-02-11T21:19:53.356909",
+    "alert_type": "EMAIL_ALERT",
+    "recipients": [
+      "romiyaraju98@gmail.com",
+      "1ms17ec032@gmail.com"
+    ],
+    "status": "SENT",
+    "attack_type": "DDoS",
+    "severity": "HIGH",
+    "src_ip": "192.168.1.25",
+    "dest_ip": "10.0.0.132",
+    "method": "EMAIL"
+  },
+  {
+    "timestamp": "2026-02-11T21:19:54.329247",
+    "alert_type": "EMAIL_ALERT",
+    "recipients": [
+      "romiyaraju98@gmail.com",
+      "1ms17ec032@gmail.com"
+    ],
+    "status": "SENT",
+    "attack_type": "DDoS",
+    "severity": "HIGH",
+    "src_ip": "192.168.1.14",
+    "dest_ip": "10.0.0.155",
+    "method": "EMAIL"
+  },
+  {
+    "timestamp": "2026-02-11T21:19:55.155240",
+    "alert_type": "EMAIL_ALERT",
+    "recipients": [
+      "romiyaraju98@gmail.com",
+      "1ms17ec032@gmail.com"
+    ],
+    "status": "SENT",
+    "attack_type": "DDoS",
+    "severity": "HIGH",
+    "src_ip": "192.168.1.179",
+    "dest_ip": "10.0.0.134",
+    "method": "EMAIL"
+  },
+  {
+    "timestamp": "2026-02-11T21:19:56.016487",
+    "alert_type": "EMAIL_ALERT",
+    "recipients": [
+      "romiyaraju98@gmail.com",
+      "1ms17ec032@gmail.com"
+    ],
+    "status": "SENT",
+    "attack_type": "DDoS",
+    "severity": "HIGH",
+    "src_ip": "192.168.1.138",
+    "dest_ip": "10.0.0.137",
+    "method": "EMAIL"
   }
 ]

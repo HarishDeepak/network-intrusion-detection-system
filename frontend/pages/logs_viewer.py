@@ -1,6 +1,7 @@
 import streamlit as st
 import requests
 from datetime import datetime
+import pandas as pd
 
 # ==================================================
 # CONFIG
@@ -8,32 +9,52 @@ from datetime import datetime
 API_BASE = "http://localhost:8000/api"
 
 st.set_page_config(
-    page_title="Logs Viewer",
+    page_title="Security Logs",
     layout="wide",
-    page_icon="📜"
+    page_icon="🛡️"
 )
 
 # ==================================================
-# CSS
+# COMPACT PROFESSIONAL CSS
 # ==================================================
 st.markdown("""
 <style>
-.card {
-    background: #ffffff;
-    border-radius: 14px;
-    padding: 16px 18px;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
-    margin-bottom: 16px;
+.block-container {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
 }
 
-.metric-box {
-    text-align: center;
+h1, h2, h3 {
+    margin-bottom: 0.3rem !important;
+}
+
+.card {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 14px 18px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.04);
+    margin-bottom: 10px;
+}
+
+.metric-title {
+    font-size: 13px;
+    color: #777;
+}
+
+.metric-value {
+    font-size: 26px;
+    font-weight: 600;
+}
+
+.section-divider {
+    margin-top: 15px;
+    margin-bottom: 10px;
 }
 
 .badge {
-    padding: 4px 10px;
+    padding: 3px 8px;
     border-radius: 999px;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 600;
 }
 
@@ -41,12 +62,6 @@ st.markdown("""
 .badge-medium { background: #FFF8E1; color: #F9A825; }
 .badge-high { background: #FDECEA; color: #C62828; }
 .badge-critical { background: #B71C1C; color: white; }
-
-.log-row {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-}
 </style>
 """, unsafe_allow_html=True)
 
@@ -73,116 +88,149 @@ def severity_badge(sev):
     }.get(sev, "badge badge-low")
 
 
-def fmt_time(ts):
-    return datetime.fromisoformat(ts).strftime("%H:%M:%S")
+def fmt_datetime(ts):
+    dt = datetime.fromisoformat(ts)
+    return dt.strftime("%d %b %Y  |  %H:%M:%S")
 
 
 # ==================================================
 # HEADER
 # ==================================================
-st.markdown("## 📜 Logs Viewer")
-st.caption("Security alerts, email notifications, and ML explanations")
+st.markdown("# 🛡️ Security Logs Dashboard")
+st.caption("Email alerts, attack detections and explainable AI insights")
 
 # ==================================================
-# SUMMARY PANEL
+# TOP STATS (REAL API)
 # ==================================================
 stats = fetch("/alerts/stats")
 
 if stats:
-    c1, c2, c3, c4 = st.columns(4)
-    with c1:
-        st.metric("Total Attacks", stats["total_attacks_detected"])
-    with c2:
-        st.metric("Alerts Sent", stats["total_alerts_sent"])
-    with c3:
-        st.metric("Success Rate", f"{stats['alert_success_rate']:.1f}%")
-    with c4:
+    col1, col2, col3, col4 = st.columns(4)
+
+    with col1:
+        st.markdown(f"""
+        <div class="card">
+            <div class="metric-title">Total Attacks</div>
+            <div class="metric-value">{stats["total_attacks_detected"]}</div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with col2:
+        st.markdown(f"""
+        <div class="card">
+            <div class="metric-title">Alerts Sent</div>
+            <div class="metric-value">{stats["total_alerts_sent"]}</div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with col3:
+        st.markdown(f"""
+        <div class="card">
+            <div class="metric-title">Success Rate</div>
+            <div class="metric-value">{stats["alert_success_rate"]:.1f}%</div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with col4:
         high = stats["attacks_by_severity"].get("HIGH", 0)
-        st.metric("High Severity", high)
+        st.markdown(f"""
+        <div class="card">
+            <div class="metric-title">High Severity</div>
+            <div class="metric-value">{high}</div>
+        </div>
+        """, unsafe_allow_html=True)
 
-st.markdown("<hr>", unsafe_allow_html=True)
-
-# ==================================================
-# 🚨 ALERT FEED
-# ==================================================
-st.markdown("### 🚨 Attack Detection Logs")
-
-attack_logs = fetch("/alerts/attack_logs", params={"limit": 20})
-
-with st.container():
-    st.markdown('<div class="card">', unsafe_allow_html=True)
-
-    if attack_logs:
-        for log in attack_logs:
-            st.markdown(f"""
-            <div class="log-row">
-                <div>
-                    <b>{log['attack_type']}</b>  
-                    <br>
-                    <small>
-                        {log['src_ip']} → {log['dest_ip']} |
-                        {fmt_time(log['timestamp'])}
-                    </small>
-                </div>
-                <div>
-                    <span class="{severity_badge(log['severity'])}">
-                        {log['severity']}
-                    </span>
-                    <br>
-                    <small>{log['confidence']:.2f}</small>
-                </div>
-            </div>
-            """, unsafe_allow_html=True)
-    else:
-        st.info("No recent attacks")
-
-    st.markdown('</div>', unsafe_allow_html=True)
+st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
 
 # ==================================================
-# 📧 EMAIL LOGS
+# 📧 EMAIL LOGS (FIRST)
 # ==================================================
-st.markdown("### 📧 Email Notification Logs")
+st.markdown("## 📧 Email Notification Logs")
 
-email_logs = fetch("/alerts/alert_logs", params={"limit": 15})
+email_logs = fetch("/alerts/alert_logs", params={"limit": 20})
 
-with st.container():
-    st.markdown('<div class="card">', unsafe_allow_html=True)
+if email_logs:
+    df_email = pd.DataFrame(email_logs)
 
-    if email_logs:
-        st.dataframe(
-            [{
-                "Time": fmt_time(l["timestamp"]),
-                "Recipients": ", ".join(l["recipients"]),
-                "Attack": l["attack_type"],
-                "Severity": l["severity"],
-                "Status": l["status"],
-            } for l in email_logs],
-            use_container_width=True
-        )
-    else:
-        st.info("No email alerts logged")
+    df_email["timestamp"] = df_email["timestamp"].apply(fmt_datetime)
+    df_email["recipients"] = df_email["recipients"].apply(lambda x: ", ".join(x))
 
-    st.markdown('</div>', unsafe_allow_html=True)
+    df_email = df_email[[
+        "timestamp",
+        "attack_type",
+        "severity",
+        "status",
+        "recipients"
+    ]]
+
+    df_email.columns = [
+        "Date & Time",
+        "Attack Type",
+        "Severity",
+        "Status",
+        "Recipients"
+    ]
+
+    st.dataframe(df_email, use_container_width=True)
+else:
+    st.info("No email logs available")
+
+st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
 
 # ==================================================
-# 🧠 EXPLANATIONS
+# 🚨 LATEST ATTACKS (TABLE FORMAT)
 # ==================================================
-st.markdown("### 🧠 Alert Explanations")
+st.markdown("## 🚨 Latest Attacks")
+
+attack_logs = fetch("/alerts/attack_logs", params={"limit": 50})
 
 if attack_logs:
-    for log in attack_logs[:5]:
-        with st.expander(f"{log['attack_type']} — {log['severity']}"):
-            st.markdown(f"""
-            **Confidence:** {log['confidence']:.2f}  
-            **Protocol:** {log['protocol']}  
-            **Packet Length:** {log['packet_length']} bytes  
+    df_attacks = pd.DataFrame(attack_logs)
 
-            **Why this alert?**  
-            This traffic pattern deviated significantly from normal behavior
-            based on learned statistical and ML-based baselines.
+    df_attacks["timestamp"] = df_attacks["timestamp"].apply(fmt_datetime)
 
-            **Recommended Action:**  
-            - Inspect source IP  
-            - Apply rate limiting or blocking  
-            - Monitor recurrence
-            """)
+    df_attacks = df_attacks[[
+        "timestamp",
+        "attack_type",
+        "severity",
+        "confidence",
+        "src_ip",
+        "dest_ip"
+    ]]
+
+    df_attacks.columns = [
+        "Date & Time",
+        "Attack Type",
+        "Severity",
+        "Confidence",
+        "Source IP",
+        "Destination IP"
+    ]
+
+    st.dataframe(df_attacks, use_container_width=True)
+
+else:
+    st.info("No recent attacks detected")
+
+st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
+
+# ==================================================
+# 🧠 UNIQUE EXPLANATIONS PER ATTACK TYPE
+# ==================================================
+st.markdown("## 🧠 Attack Explanations")
+
+if attack_logs:
+    unique_explanations = {}
+
+    for log in attack_logs:
+        attack_type = log["attack_type"]
+        explanation = log.get("explanation")
+
+        if attack_type not in unique_explanations and explanation:
+            unique_explanations[attack_type] = explanation
+
+    for attack_type, explanation in unique_explanations.items():
+        with st.expander(f"{attack_type} Explanation"):
+            st.write(explanation)
+else:
+    st.info("No explanations available.")
