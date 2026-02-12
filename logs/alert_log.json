@@ -3838,5 +3838,509 @@
     "src_ip": "192.168.1.138",
     "dest_ip": "10.0.0.137",
     "method": "EMAIL"
+  },
+  {
+    "timestamp": "2026-02-12T13:55:21.259413",
+    "alert_type": "EMAIL_ALERT",
+    "recipients": [
+      "romiyaraju98@gmail.com",
+      "1ms17ec032@gmail.com"
+    ],
+    "status": "SENT",
+    "attack_type": "DDoS",
+    "severity": "HIGH",
+    "src_ip": "192.168.1.47",
+    "dest_ip": "10.0.0.37",
+    "method": "EMAIL"
+  },
+  {
+    "timestamp": "2026-02-12T13:55:22.278051",
+    "alert_type": "EMAIL_ALERT",
+    "recipients": [
+      "romiyaraju98@gmail.com",
+      "1ms17ec032@gmail.com"
+    ],
+    "status": "SENT",
+    "attack_type": "DDoS",
+    "severity": "HIGH",
+    "src_ip": "192.168.1.118",
+    "dest_ip": "10.0.0.94",
+    "method": "EMAIL"
+  },
+  {
+    "timestamp": "2026-02-12T13:55:23.282754",
+    "alert_type": "EMAIL_ALERT",
+    "recipients": [
+      "romiyaraju98@gmail.com",
+      "1ms17ec032@gmail.com"
+    ],
+    "status": "SENT",
+    "attack_type": "DDoS",
+    "severity": "HIGH",
+    "src_ip": "192.168.1.215",
+    "dest_ip": "10.0.0.148",
+    "method": "EMAIL"
+  },
+  {
+    "timestamp": "2026-02-12T13:55:24.251784",
+    "alert_type": "EMAIL_ALERT",
+    "recipients": [
+      "romiyaraju98@gmail.com",
+      "1ms17ec032@gmail.com"
+    ],
+    "status": "SENT",
+    "attack_type": "DDoS",
+    "severity": "HIGH",
+    "src_ip": "192.168.1.208",
+    "dest_ip": "10.0.0.161",
+    "method": "EMAIL"
+  },
+  {
+    "timestamp": "2026-02-12T13:59:18.878512",
+    "alert_type": "EMAIL_ALERT",
+    "recipients": [
+      "romiyaraju98@gmail.com",
+      "1ms17ec032@gmail.com"
+    ],
+    "status": "SENT",
+    "attack_type": "Scan",
+    "severity": "MEDIUM",
+    "src_ip": "unknown",
+    "dest_ip": "unknown",
+    "method": "EMAIL"
+  },
+  {
+    "timestamp": "2026-02-12T13:59:19.906527",
+    "alert_type": "EMAIL_ALERT",
+    "recipients": [
+      "romiyaraju98@gmail.com",
+      "1ms17ec032@gmail.com"
+    ],
+    "status": "SENT",
+    "attack_type": "Scan",
+    "severity": "MEDIUM",
+    "src_ip": "unknown",
+    "dest_ip": "unknown",
+    "method": "EMAIL"
+  },
+  {
+    "timestamp": "2026-02-12T13:59:21.018213",
+    "alert_type": "EMAIL_ALERT",
+    "recipients": [
+      "romiyaraju98@gmail.com",
+      "1ms17ec032@gmail.com"
+    ],
+    "status": "SENT",
+    "attack_type": "Scan",
+    "severity": "MEDIUM",
+    "src_ip": "unknown",
+    "dest_ip": "unknown",
+    "method": "EMAIL"
+  },
+  {
+    "timestamp": "2026-02-12T13:59:22.039542",
+    "alert_type": "EMAIL_ALERT",
+    "recipients": [
+      "romiyaraju98@gmail.com",
+      "1ms17ec032@gmail.com"
+    ],
+    "status": "SENT",
+    "attack_type": "Scan",
+    "severity": "MEDIUM",
+    "src_ip": "unknown",
+    "dest_ip": "unknown",
+    "method": "EMAIL"
+  },
+  {
+    "timestamp": "2026-02-12T13:59:23.166601",
+    "alert_type": "EMAIL_ALERT",
+    "recipients": [
+      "romiyaraju98@gmail.com",
+      "1ms17ec032@gmail.com"
+    ],
+    "status": "SENT",
+    "attack_type": "Scan",
+    "severity": "MEDIUM",
+    "src_ip": "unknown",
+    "dest_ip": "unknown",
+    "method": "EMAIL"
+  },
+  {
+    "timestamp": "2026-02-12T13:59:24.204246",
+    "alert_type": "EMAIL_ALERT",
+    "recipients": [
+      "romiyaraju98@gmail.com",
+      "1ms17ec032@gmail.com"
+    ],
+    "status": "SENT",
+    "attack_type": "Scan",
+    "severity": "MEDIUM",
+    "src_ip": "unknown",
+    "dest_ip": "unknown",
+    "method": "EMAIL"
+  },
+  {
+    "timestamp": "2026-02-12T13:59:25.297133",
+    "alert_type": "EMAIL_ALERT",
+    "recipients": [
+      "romiyaraju98@gmail.com",
+      "1ms17ec032@gmail.com"
+    ],
+    "status": "SENT",
+    "attack_type": "Scan",
+    "severity": "MEDIUM",
+    "src_ip": "unknown",
+    "dest_ip": "unknown",
+    "method": "EMAIL"
+  },
+  {
+    "timestamp": "2026-02-12T13:59:26.348038",
+    "alert_type": "EMAIL_ALERT",
+    "recipients": [
+      "romiyaraju98@gmail.com",
+      "1ms17ec032@gmail.com"
+    ],
+    "status": "SENT",
+    "attack_type": "Scan",
+    "severity": "MEDIUM",
+    "src_ip": "unknown",
+    "dest_ip": "unknown",
+    "method": "EMAIL"
+  },
+  {
+    "timestamp": "2026-02-12T13:59:27.739506",
+    "alert_type": "EMAIL_ALERT",
+    "recipients": [
+      "romiyaraju98@gmail.com",
+      "1ms17ec032@gmail.com"
+    ],
+    "status": "SENT",
+    "attack_type": "BruteForce",
+    "severity": "HIGH",
+    "src_ip": "unknown",
+    "dest_ip": "unknown",
+    "method": "EMAIL"
+  },
+  {
+    "timestamp": "2026-02-12T13:59:28.807271",
+    "alert_type": "EMAIL_ALERT",
+    "recipients": [
+      "romiyaraju98@gmail.com",
+      "1ms17ec032@gmail.com"
+    ],
+    "status": "SENT",
+    "attack_type": "Scan",
+    "severity": "MEDIUM",
+    "src_ip": "unknown",
+    "dest_ip": "unknown",
+    "method": "EMAIL"
+  },
+  {
+    "timestamp": "2026-02-12T13:59:29.808211",
+    "alert_type": "EMAIL_ALERT",
+    "recipients": [
+      "romiyaraju98@gmail.com",
+      "1ms17ec032@gmail.com"
+    ],
+    "status": "SENT",
+    "attack_type": "Scan",
+    "severity": "MEDIUM",
+    "src_ip": "unknown",
+    "dest_ip": "unknown",
+    "method": "EMAIL"
+  },
+  {
+    "timestamp": "2026-02-12T13:59:30.945834",
+    "alert_type": "EMAIL_ALERT",
+    "recipients": [
+      "romiyaraju98@gmail.com",
+      "1ms17ec032@gmail.com"
+    ],
+    "status": "SENT",
+    "attack_type": "Scan",
+    "severity": "MEDIUM",
+    "src_ip": "unknown",
+    "dest_ip": "unknown",
+    "method": "EMAIL"
+  },
+  {
+    "timestamp": "2026-02-12T13:59:31.876607",
+    "alert_type": "EMAIL_ALERT",
+    "recipients": [
+      "romiyaraju98@gmail.com",
+      "1ms17ec032@gmail.com"
+    ],
+    "status": "SENT",
+    "attack_type": "Scan",
+    "severity": "MEDIUM",
+    "src_ip": "unknown",
+    "dest_ip": "unknown",
+    "method": "EMAIL"
+  },
+  {
+    "timestamp": "2026-02-12T13:59:32.855029",
+    "alert_type": "EMAIL_ALERT",
+    "recipients": [
+      "romiyaraju98@gmail.com",
+      "1ms17ec032@gmail.com"
+    ],
+    "status": "SENT",
+    "attack_type": "Scan",
+    "severity": "MEDIUM",
+    "src_ip": "unknown",
+    "dest_ip": "unknown",
+    "method": "EMAIL"
+  },
+  {
+    "timestamp": "2026-02-12T13:59:33.946520",
+    "alert_type": "EMAIL_ALERT",
+    "recipients": [
+      "romiyaraju98@gmail.com",
+      "1ms17ec032@gmail.com"
+    ],
+    "status": "SENT",
+    "attack_type": "Scan",
+    "severity": "MEDIUM",
+    "src_ip": "unknown",
+    "dest_ip": "unknown",
+    "method": "EMAIL"
+  },
+  {
+    "timestamp": "2026-02-12T13:59:34.997590",
+    "alert_type": "EMAIL_ALERT",
+    "recipients": [
+      "romiyaraju98@gmail.com",
+      "1ms17ec032@gmail.com"
+    ],
+    "status": "SENT",
+    "attack_type": "Scan",
+    "severity": "MEDIUM",
+    "src_ip": "unknown",
+    "dest_ip": "unknown",
+    "method": "EMAIL"
+  },
+  {
+    "timestamp": "2026-02-12T13:59:35.977728",
+    "alert_type": "EMAIL_ALERT",
+    "recipients": [
+      "romiyaraju98@gmail.com",
+      "1ms17ec032@gmail.com"
+    ],
+    "status": "SENT",
+    "attack_type": "Scan",
+    "severity": "MEDIUM",
+    "src_ip": "unknown",
+    "dest_ip": "unknown",
+    "method": "EMAIL"
+  },
+  {
+    "timestamp": "2026-02-12T13:59:37.019931",
+    "alert_type": "EMAIL_ALERT",
+    "recipients": [
+      "romiyaraju98@gmail.com",
+      "1ms17ec032@gmail.com"
+    ],
+    "status": "SENT",
+    "attack_type": "Scan",
+    "severity": "MEDIUM",
+    "src_ip": "unknown",
+    "dest_ip": "unknown",
+    "method": "EMAIL"
+  },
+  {
+    "timestamp": "2026-02-12T13:59:38.061464",
+    "alert_type": "EMAIL_ALERT",
+    "recipients": [
+      "romiyaraju98@gmail.com",
+      "1ms17ec032@gmail.com"
+    ],
+    "status": "SENT",
+    "attack_type": "Scan",
+    "severity": "MEDIUM",
+    "src_ip": "unknown",
+    "dest_ip": "unknown",
+    "method": "EMAIL"
+  },
+  {
+    "timestamp": "2026-02-12T13:59:39.009294",
+    "alert_type": "EMAIL_ALERT",
+    "recipients": [
+      "romiyaraju98@gmail.com",
+      "1ms17ec032@gmail.com"
+    ],
+    "status": "SENT",
+    "attack_type": "Scan",
+    "severity": "MEDIUM",
+    "src_ip": "unknown",
+    "dest_ip": "unknown",
+    "method": "EMAIL"
+  },
+  {
+    "timestamp": "2026-02-12T13:59:39.997765",
+    "alert_type": "EMAIL_ALERT",
+    "recipients": [
+      "romiyaraju98@gmail.com",
+      "1ms17ec032@gmail.com"
+    ],
+    "status": "SENT",
+    "attack_type": "Scan",
+    "severity": "MEDIUM",
+    "src_ip": "unknown",
+    "dest_ip": "unknown",
+    "method": "EMAIL"
+  },
+  {
+    "timestamp": "2026-02-12T13:59:40.991177",
+    "alert_type": "EMAIL_ALERT",
+    "recipients": [
+      "romiyaraju98@gmail.com",
+      "1ms17ec032@gmail.com"
+    ],
+    "status": "SENT",
+    "attack_type": "Scan",
+    "severity": "MEDIUM",
+    "src_ip": "unknown",
+    "dest_ip": "unknown",
+    "method": "EMAIL"
+  },
+  {
+    "timestamp": "2026-02-12T13:59:42.324300",
+    "alert_type": "EMAIL_ALERT",
+    "recipients": [
+      "romiyaraju98@gmail.com",
+      "1ms17ec032@gmail.com"
+    ],
+    "status": "SENT",
+    "attack_type": "Scan",
+    "severity": "MEDIUM",
+    "src_ip": "unknown",
+    "dest_ip": "unknown",
+    "method": "EMAIL"
+  },
+  {
+    "timestamp": "2026-02-12T13:59:43.278763",
+    "alert_type": "EMAIL_ALERT",
+    "recipients": [
+      "romiyaraju98@gmail.com",
+      "1ms17ec032@gmail.com"
+    ],
+    "status": "SENT",
+    "attack_type": "Scan",
+    "severity": "MEDIUM",
+    "src_ip": "unknown",
+    "dest_ip": "unknown",
+    "method": "EMAIL"
+  },
+  {
+    "timestamp": "2026-02-12T13:59:44.334352",
+    "alert_type": "EMAIL_ALERT",
+    "recipients": [
+      "romiyaraju98@gmail.com",
+      "1ms17ec032@gmail.com"
+    ],
+    "status": "SENT",
+    "attack_type": "Scan",
+    "severity": "MEDIUM",
+    "src_ip": "unknown",
+    "dest_ip": "unknown",
+    "method": "EMAIL"
+  },
+  {
+    "timestamp": "2026-02-12T13:59:45.361360",
+    "alert_type": "EMAIL_ALERT",
+    "recipients": [
+      "romiyaraju98@gmail.com",
+      "1ms17ec032@gmail.com"
+    ],
+    "status": "SENT",
+    "attack_type": "Scan",
+    "severity": "MEDIUM",
+    "src_ip": "unknown",
+    "dest_ip": "unknown",
+    "method": "EMAIL"
+  },
+  {
+    "timestamp": "2026-02-12T13:59:46.517216",
+    "alert_type": "EMAIL_ALERT",
+    "recipients": [
+      "romiyaraju98@gmail.com",
+      "1ms17ec032@gmail.com"
+    ],
+    "status": "SENT",
+    "attack_type": "Scan",
+    "severity": "MEDIUM",
+    "src_ip": "unknown",
+    "dest_ip": "unknown",
+    "method": "EMAIL"
+  },
+  {
+    "timestamp": "2026-02-12T17:28:58.779005",
+    "alert_type": "EMAIL_ALERT",
+    "recipients": [
+      "romiyaraju98@gmail.com",
+      "1ms17ec032@gmail.com"
+    ],
+    "status": "SENT",
+    "attack_type": "DDoS",
+    "severity": "HIGH",
+    "src_ip": "192.168.1.105",
+    "dest_ip": "10.0.0.140",
+    "method": "EMAIL"
+  },
+  {
+    "timestamp": "2026-02-12T17:28:59.988879",
+    "alert_type": "EMAIL_ALERT",
+    "recipients": [
+      "romiyaraju98@gmail.com",
+      "1ms17ec032@gmail.com"
+    ],
+    "status": "SENT",
+    "attack_type": "DDoS",
+    "severity": "HIGH",
+    "src_ip": "192.168.1.200",
+    "dest_ip": "10.0.0.153",
+    "method": "EMAIL"
+  },
+  {
+    "timestamp": "2026-02-12T17:29:00.940337",
+    "alert_type": "EMAIL_ALERT",
+    "recipients": [
+      "romiyaraju98@gmail.com",
+      "1ms17ec032@gmail.com"
+    ],
+    "status": "SENT",
+    "attack_type": "DDoS",
+    "severity": "HIGH",
+    "src_ip": "192.168.1.85",
+    "dest_ip": "10.0.0.35",
+    "method": "EMAIL"
+  },
+  {
+    "timestamp": "2026-02-12T17:29:01.970713",
+    "alert_type": "EMAIL_ALERT",
+    "recipients": [
+      "romiyaraju98@gmail.com",
+      "1ms17ec032@gmail.com"
+    ],
+    "status": "SENT",
+    "attack_type": "DDoS",
+    "severity": "HIGH",
+    "src_ip": "192.168.1.223",
+    "dest_ip": "10.0.0.236",
+    "method": "EMAIL"
+  },
+  {
+    "timestamp": "2026-02-12T17:29:02.982127",
+    "alert_type": "EMAIL_ALERT",
+    "recipients": [
+      "romiyaraju98@gmail.com",
+      "1ms17ec032@gmail.com"
+    ],
+    "status": "SENT",
+    "attack_type": "DDoS",
+    "severity": "HIGH",
+    "src_ip": "192.168.1.4",
+    "dest_ip": "10.0.0.43",
+    "method": "EMAIL"
   }
 ]
