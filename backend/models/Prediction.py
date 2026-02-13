@@ -504,6 +504,7 @@ results["explanation"] = None
 # Indices of attacks
 attack_idx = np.where(supervised_label != "Benign")[0]
 
+
 print(f"Found {len(attack_idx)} attacks for explanation.")
 
 MAX_EXPLAIN = 200

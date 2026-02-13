@@ -20,8 +20,8 @@ st.set_page_config(
 st.markdown("""
 <style>
 .block-container {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+    padding: 1.5rem 2rem !important;
+    max-width: 100% !important;
 }
 
 h1, h2, h3 {
@@ -29,7 +29,7 @@ h1, h2, h3 {
 }
 
 .card {
-    background: #ffffff;
+    background: #f6f6f6;
     border-radius: 10px;
     padding: 14px 18px;
     box-shadow: 0 3px 10px rgba(0,0,0,0.04);
@@ -177,47 +177,9 @@ else:
 
 st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
 
-# ==================================================
-# 🚨 LATEST ATTACKS (TABLE FORMAT)
-# ==================================================
-st.markdown("## 🚨 Latest Attacks")
 
-attack_logs = fetch("/alerts/attack_logs", params={"limit": 50})
-
-if attack_logs:
-    df_attacks = pd.DataFrame(attack_logs)
-
-    df_attacks["timestamp"] = df_attacks["timestamp"].apply(fmt_datetime)
-
-    df_attacks = df_attacks[[
-        "timestamp",
-        "attack_type",
-        "severity",
-        "confidence",
-        "src_ip",
-        "dest_ip"
-    ]]
-
-    df_attacks.columns = [
-        "Date & Time",
-        "Attack Type",
-        "Severity",
-        "Confidence",
-        "Source IP",
-        "Destination IP"
-    ]
-
-    st.dataframe(df_attacks, use_container_width=True)
-
-else:
-    st.info("No recent attacks detected")
-
-st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
-
-# ==================================================
-# 🧠 UNIQUE EXPLANATIONS PER ATTACK TYPE
-# ==================================================
 st.markdown("## 🧠 Attack Explanations")
+attack_logs = fetch("/alerts/attack_logs", params={"limit": 50})
 
 if attack_logs:
     unique_explanations = {}

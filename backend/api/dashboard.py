@@ -27,6 +27,7 @@ CSV_PATH = os.path.abspath(CSV_PATH)
 if os.path.exists(CSV_PATH):
     flows_df = pd.read_csv(CSV_PATH)
     flows_df['timestamp'] = pd.to_datetime(flows_df['timestamp'])
+    
 else:
     flows_df = pd.DataFrame(columns=[
         'timestamp', 'src_ip', 'dst_ip', 'protocol',
@@ -62,6 +63,14 @@ def overview(db: Session = Depends(get_db)):
     total_attacks = db.query(AttackLog).count()
     detection_rate = total_attacks / total_flows if total_flows > 0 else 0.0
 
+    if "explanation" in flows_df.columns:
+        current_attacks = flows_df[
+            flows_df["explanation"].notna() &
+            (flows_df["explanation"].astype(str).str.strip() != "")
+        ].shape[0]
+    else:
+        current_attacks = 0
+    
     # Combined anomaly index (0-1)
     if total_flows == 0:
         avg_anomaly_index = 0.0
@@ -77,6 +86,7 @@ def overview(db: Session = Depends(get_db)):
 
     return {
         "total_flows": total_flows,
+        "current_attacks": current_attacks,
         "total_attacks": total_attacks,
         "detection_rate": round(detection_rate, 4),
         "average_anomaly_index": round(avg_anomaly_index, 4)

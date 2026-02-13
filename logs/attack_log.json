@@ -3966,55 +3966,7 @@
     "explanation": null
   },
   {
-<<<<<<< HEAD
-    "timestamp": "2026-02-12T13:55:19.974879",
-    "attack_type": "DDoS",
-    "src_ip": "192.168.1.47",
-    "dest_ip": "10.0.0.37",
-    "protocol": "TCP",
-    "packet_length": 1080,
-    "confidence": 0.9,
-    "severity": "HIGH",
-    "explanation": null
-  },
-  {
-    "timestamp": "2026-02-12T13:55:21.381573",
-    "attack_type": "DDoS",
-    "src_ip": "192.168.1.118",
-    "dest_ip": "10.0.0.94",
-    "protocol": "ICMP",
-    "packet_length": 1290,
-    "confidence": 0.9,
-    "severity": "HIGH",
-    "explanation": null
-  },
-  {
-    "timestamp": "2026-02-12T13:55:22.341452",
-    "attack_type": "DDoS",
-    "src_ip": "192.168.1.215",
-    "dest_ip": "10.0.0.148",
-    "protocol": "ICMP",
-    "packet_length": 1459,
-    "confidence": 0.9,
-    "severity": "HIGH",
-    "explanation": null
-  },
-  {
-    "timestamp": "2026-02-12T13:55:23.381973",
-    "attack_type": "DDoS",
-    "src_ip": "192.168.1.208",
-    "dest_ip": "10.0.0.161",
-    "protocol": "ICMP",
-    "packet_length": 1368,
-    "confidence": 0.9,
-    "severity": "HIGH",
-    "explanation": null
-  },
-  {
-    "timestamp": "2026-02-12T13:59:17.150401",
-=======
     "timestamp": "2026-02-12T14:16:42.462454",
->>>>>>> 28fc89a5f0a79ca6ef844b208f4fa027ff7ce271
     "attack_type": "Scan",
     "src_ip": "unknown",
     "dest_ip": "unknown",
@@ -4022,17 +3974,10 @@
     "packet_length": 0,
     "confidence": 0.0023614503153261877,
     "severity": "MEDIUM",
-<<<<<<< HEAD
-    "explanation": "Flow classified as Scan due to strong influence from init_bwd_win_bytes, init_fwd_win_bytes. Abnormal behavior detected in flow_iat_mean, flow_iat_std."
-  },
-  {
-    "timestamp": "2026-02-12T13:59:17.213495",
-=======
     "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_mean, flow_iat_std, which deviated significantly from normal traffic patterns."
   },
   {
     "timestamp": "2026-02-12T14:16:42.492008",
->>>>>>> 28fc89a5f0a79ca6ef844b208f4fa027ff7ce271
     "attack_type": "Scan",
     "src_ip": "unknown",
     "dest_ip": "unknown",
@@ -4040,17 +3985,10 @@
     "packet_length": 0,
     "confidence": 0.0023614503153261877,
     "severity": "MEDIUM",
-<<<<<<< HEAD
-    "explanation": "Flow classified as Scan due to strong influence from init_bwd_win_bytes, init_fwd_win_bytes. Abnormal behavior detected in flow_iat_mean, flow_iat_std."
-  },
-  {
-    "timestamp": "2026-02-12T13:59:18.947331",
-=======
     "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_mean, flow_iat_std, which deviated significantly from normal traffic patterns."
   },
   {
     "timestamp": "2026-02-12T14:16:44.062780",
->>>>>>> 28fc89a5f0a79ca6ef844b208f4fa027ff7ce271
     "attack_type": "Scan",
     "src_ip": "unknown",
     "dest_ip": "unknown",
@@ -4058,17 +3996,10 @@
     "packet_length": 0,
     "confidence": 5.921162950287314e-05,
     "severity": "MEDIUM",
-<<<<<<< HEAD
-    "explanation": "Flow classified as Scan due to strong influence from init_bwd_win_bytes, init_fwd_win_bytes. Abnormal behavior detected in flow_iat_mean, flow_iat_min."
-  },
-  {
-    "timestamp": "2026-02-12T13:59:19.001351",
-=======
     "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_mean, flow_iat_min, which deviated significantly from normal traffic patterns."
   },
   {
     "timestamp": "2026-02-12T14:16:44.089414",
->>>>>>> 28fc89a5f0a79ca6ef844b208f4fa027ff7ce271
     "attack_type": "Scan",
     "src_ip": "unknown",
     "dest_ip": "unknown",
@@ -4076,17 +4007,10 @@
     "packet_length": 0,
     "confidence": 5.921162950287314e-05,
     "severity": "MEDIUM",
-<<<<<<< HEAD
-    "explanation": "Flow classified as Scan due to strong influence from init_bwd_win_bytes, init_fwd_win_bytes. Abnormal behavior detected in flow_iat_mean, flow_iat_min."
-  },
-  {
-    "timestamp": "2026-02-12T13:59:19.958481",
-=======
     "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_mean, flow_iat_min, which deviated significantly from normal traffic patterns."
   },
   {
     "timestamp": "2026-02-12T14:16:49.153356",
->>>>>>> 28fc89a5f0a79ca6ef844b208f4fa027ff7ce271
     "attack_type": "Scan",
     "src_ip": "unknown",
     "dest_ip": "unknown",
@@ -4094,17 +4018,10 @@
     "packet_length": 0,
     "confidence": 5.7753484956660164e-05,
     "severity": "MEDIUM",
-<<<<<<< HEAD
-    "explanation": "Flow classified as Scan due to strong influence from init_bwd_win_bytes, init_fwd_win_bytes. Abnormal behavior detected in flow_iat_mean, fwd_iat_cv."
-  },
-  {
-    "timestamp": "2026-02-12T13:59:20.017499",
-=======
     "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_mean, fwd_iat_cv, which deviated significantly from normal traffic patterns."
   },
   {
     "timestamp": "2026-02-12T14:16:49.180988",
->>>>>>> 28fc89a5f0a79ca6ef844b208f4fa027ff7ce271
     "attack_type": "Scan",
     "src_ip": "unknown",
     "dest_ip": "unknown",
@@ -4112,17 +4029,10 @@
     "packet_length": 0,
     "confidence": 5.7753484956660164e-05,
     "severity": "MEDIUM",
-<<<<<<< HEAD
-    "explanation": "Flow classified as Scan due to strong influence from init_bwd_win_bytes, init_fwd_win_bytes. Abnormal behavior detected in flow_iat_mean, fwd_iat_cv."
-  },
-  {
-    "timestamp": "2026-02-12T13:59:21.077405",
-=======
     "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_mean, fwd_iat_cv, which deviated significantly from normal traffic patterns."
   },
   {
     "timestamp": "2026-02-12T14:16:50.274792",
->>>>>>> 28fc89a5f0a79ca6ef844b208f4fa027ff7ce271
     "attack_type": "Scan",
     "src_ip": "unknown",
     "dest_ip": "unknown",
@@ -4130,17 +4040,10 @@
     "packet_length": 0,
     "confidence": 0.001054548967079178,
     "severity": "MEDIUM",
-<<<<<<< HEAD
-    "explanation": "Flow classified as Scan due to strong influence from init_bwd_win_bytes, init_fwd_win_bytes. Abnormal behavior detected in flow_iat_mean, flow_iat_std."
-  },
-  {
-    "timestamp": "2026-02-12T13:59:21.140821",
-=======
     "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_mean, flow_iat_std, which deviated significantly from normal traffic patterns."
   },
   {
     "timestamp": "2026-02-12T14:16:50.299629",
->>>>>>> 28fc89a5f0a79ca6ef844b208f4fa027ff7ce271
     "attack_type": "Scan",
     "src_ip": "unknown",
     "dest_ip": "unknown",
@@ -4148,17 +4051,10 @@
     "packet_length": 0,
     "confidence": 0.001054548967079178,
     "severity": "MEDIUM",
-<<<<<<< HEAD
-    "explanation": "Flow classified as Scan due to strong influence from init_bwd_win_bytes, init_fwd_win_bytes. Abnormal behavior detected in flow_iat_mean, flow_iat_std."
-  },
-  {
-    "timestamp": "2026-02-12T13:59:22.097540",
-=======
     "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_mean, flow_iat_std, which deviated significantly from normal traffic patterns."
   },
   {
     "timestamp": "2026-02-12T14:16:51.494030",
->>>>>>> 28fc89a5f0a79ca6ef844b208f4fa027ff7ce271
     "attack_type": "Scan",
     "src_ip": "unknown",
     "dest_ip": "unknown",
@@ -4166,17 +4062,10 @@
     "packet_length": 0,
     "confidence": 0.01430319043167227,
     "severity": "MEDIUM",
-<<<<<<< HEAD
-    "explanation": "Flow classified as Scan due to strong influence from init_bwd_win_bytes, init_fwd_win_bytes. Abnormal behavior detected in flow_duration, proto_0."
-  },
-  {
-    "timestamp": "2026-02-12T13:59:22.158830",
-=======
     "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_duration, proto_0, which deviated significantly from normal traffic patterns."
   },
   {
     "timestamp": "2026-02-12T14:16:51.517930",
->>>>>>> 28fc89a5f0a79ca6ef844b208f4fa027ff7ce271
     "attack_type": "Scan",
     "src_ip": "unknown",
     "dest_ip": "unknown",
@@ -4184,17 +4073,10 @@
     "packet_length": 0,
     "confidence": 0.01430319043167227,
     "severity": "MEDIUM",
-<<<<<<< HEAD
-    "explanation": "Flow classified as Scan due to strong influence from init_bwd_win_bytes, init_fwd_win_bytes. Abnormal behavior detected in flow_duration, proto_0."
-  },
-  {
-    "timestamp": "2026-02-12T13:59:23.229885",
-=======
     "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_duration, proto_0, which deviated significantly from normal traffic patterns."
   },
   {
     "timestamp": "2026-02-12T14:16:52.374178",
->>>>>>> 28fc89a5f0a79ca6ef844b208f4fa027ff7ce271
     "attack_type": "Scan",
     "src_ip": "unknown",
     "dest_ip": "unknown",
@@ -4202,17 +4084,10 @@
     "packet_length": 0,
     "confidence": 0.000750108408122263,
     "severity": "MEDIUM",
-<<<<<<< HEAD
-    "explanation": "Flow classified as Scan due to strong influence from init_bwd_win_bytes, init_fwd_win_bytes. Abnormal behavior detected in flow_iat_min, flow_iat_mean."
-  },
-  {
-    "timestamp": "2026-02-12T13:59:23.295063",
-=======
     "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_min, flow_iat_mean, which deviated significantly from normal traffic patterns."
   },
   {
     "timestamp": "2026-02-12T14:16:52.398917",
->>>>>>> 28fc89a5f0a79ca6ef844b208f4fa027ff7ce271
     "attack_type": "Scan",
     "src_ip": "unknown",
     "dest_ip": "unknown",
@@ -4220,17 +4095,10 @@
     "packet_length": 0,
     "confidence": 0.000750108408122263,
     "severity": "MEDIUM",
-<<<<<<< HEAD
-    "explanation": "Flow classified as Scan due to strong influence from init_bwd_win_bytes, init_fwd_win_bytes. Abnormal behavior detected in flow_iat_min, flow_iat_mean."
-  },
-  {
-    "timestamp": "2026-02-12T13:59:24.266168",
-=======
     "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_min, flow_iat_mean, which deviated significantly from normal traffic patterns."
   },
   {
     "timestamp": "2026-02-12T14:16:53.427153",
->>>>>>> 28fc89a5f0a79ca6ef844b208f4fa027ff7ce271
     "attack_type": "Scan",
     "src_ip": "unknown",
     "dest_ip": "unknown",
@@ -4238,17 +4106,10 @@
     "packet_length": 0,
     "confidence": 5.58590680647397e-05,
     "severity": "MEDIUM",
-<<<<<<< HEAD
-    "explanation": "Flow classified as Scan due to strong influence from init_bwd_win_bytes, init_fwd_win_bytes. Abnormal behavior detected in flow_iat_mean, fwd_iat_mean."
-  },
-  {
-    "timestamp": "2026-02-12T13:59:24.322897",
-=======
     "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_mean, fwd_iat_mean, which deviated significantly from normal traffic patterns."
   },
   {
     "timestamp": "2026-02-12T14:16:53.452903",
->>>>>>> 28fc89a5f0a79ca6ef844b208f4fa027ff7ce271
     "attack_type": "Scan",
     "src_ip": "unknown",
     "dest_ip": "unknown",
@@ -4256,17 +4117,10 @@
     "packet_length": 0,
     "confidence": 5.58590680647397e-05,
     "severity": "MEDIUM",
-<<<<<<< HEAD
-    "explanation": "Flow classified as Scan due to strong influence from init_bwd_win_bytes, init_fwd_win_bytes. Abnormal behavior detected in flow_iat_mean, fwd_iat_mean."
-  },
-  {
-    "timestamp": "2026-02-12T13:59:25.351563",
-=======
     "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_mean, fwd_iat_mean, which deviated significantly from normal traffic patterns."
   },
   {
     "timestamp": "2026-02-12T14:16:54.618077",
->>>>>>> 28fc89a5f0a79ca6ef844b208f4fa027ff7ce271
     "attack_type": "Scan",
     "src_ip": "unknown",
     "dest_ip": "unknown",
@@ -4274,17 +4128,10 @@
     "packet_length": 0,
     "confidence": 0.000750108408122263,
     "severity": "MEDIUM",
-<<<<<<< HEAD
-    "explanation": "Flow classified as Scan due to strong influence from init_bwd_win_bytes, init_fwd_win_bytes. Abnormal behavior detected in flow_iat_min, flow_iat_mean."
-  },
-  {
-    "timestamp": "2026-02-12T13:59:25.404737",
-=======
     "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_min, flow_iat_mean, which deviated significantly from normal traffic patterns."
   },
   {
     "timestamp": "2026-02-12T14:16:54.642910",
->>>>>>> 28fc89a5f0a79ca6ef844b208f4fa027ff7ce271
     "attack_type": "Scan",
     "src_ip": "unknown",
     "dest_ip": "unknown",
@@ -4292,17 +4139,10 @@
     "packet_length": 0,
     "confidence": 0.000750108408122263,
     "severity": "MEDIUM",
-<<<<<<< HEAD
-    "explanation": "Flow classified as Scan due to strong influence from init_bwd_win_bytes, init_fwd_win_bytes. Abnormal behavior detected in flow_iat_min, flow_iat_mean."
-  },
-  {
-    "timestamp": "2026-02-12T13:59:26.401841",
-=======
     "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_min, flow_iat_mean, which deviated significantly from normal traffic patterns."
   },
   {
     "timestamp": "2026-02-12T14:16:55.799788",
->>>>>>> 28fc89a5f0a79ca6ef844b208f4fa027ff7ce271
     "attack_type": "BruteForce",
     "src_ip": "unknown",
     "dest_ip": "unknown",
@@ -4310,17 +4150,10 @@
     "packet_length": 0,
     "confidence": 1.0,
     "severity": "HIGH",
-<<<<<<< HEAD
-    "explanation": "Flow classified as BruteForce due to strong influence from init_bwd_win_bytes, init_fwd_win_bytes. Abnormal behavior detected in flow_duration, proto_0."
-  },
-  {
-    "timestamp": "2026-02-12T13:59:26.458497",
-=======
     "explanation": "The network flow was classified as BruteForce due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_duration, proto_0, which deviated significantly from normal traffic patterns."
   },
   {
     "timestamp": "2026-02-12T14:16:55.822488",
->>>>>>> 28fc89a5f0a79ca6ef844b208f4fa027ff7ce271
     "attack_type": "BruteForce",
     "src_ip": "unknown",
     "dest_ip": "unknown",
@@ -4328,17 +4161,10 @@
     "packet_length": 0,
     "confidence": 1.0,
     "severity": "HIGH",
-<<<<<<< HEAD
-    "explanation": "Flow classified as BruteForce due to strong influence from init_bwd_win_bytes, init_fwd_win_bytes. Abnormal behavior detected in flow_duration, proto_0."
-  },
-  {
-    "timestamp": "2026-02-12T13:59:27.797993",
-=======
     "explanation": "The network flow was classified as BruteForce due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_duration, proto_0, which deviated significantly from normal traffic patterns."
   },
   {
     "timestamp": "2026-02-12T14:16:56.746129",
->>>>>>> 28fc89a5f0a79ca6ef844b208f4fa027ff7ce271
     "attack_type": "Scan",
     "src_ip": "unknown",
     "dest_ip": "unknown",
@@ -4346,17 +4172,10 @@
     "packet_length": 0,
     "confidence": 0.0007809501063809911,
     "severity": "MEDIUM",
-<<<<<<< HEAD
-    "explanation": "Flow classified as Scan due to strong influence from init_bwd_win_bytes, init_fwd_win_bytes. Abnormal behavior detected in flow_iat_std, fwd_iat_min."
-  },
-  {
-    "timestamp": "2026-02-12T13:59:27.849736",
-=======
     "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_std, fwd_iat_min, which deviated significantly from normal traffic patterns."
   },
   {
     "timestamp": "2026-02-12T14:16:56.771141",
->>>>>>> 28fc89a5f0a79ca6ef844b208f4fa027ff7ce271
     "attack_type": "Scan",
     "src_ip": "unknown",
     "dest_ip": "unknown",
@@ -4364,17 +4183,10 @@
     "packet_length": 0,
     "confidence": 0.0007809501063809911,
     "severity": "MEDIUM",
-<<<<<<< HEAD
-    "explanation": "Flow classified as Scan due to strong influence from init_bwd_win_bytes, init_fwd_win_bytes. Abnormal behavior detected in flow_iat_std, fwd_iat_min."
-  },
-  {
-    "timestamp": "2026-02-12T13:59:28.869780",
-=======
     "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_std, fwd_iat_min, which deviated significantly from normal traffic patterns."
   },
   {
     "timestamp": "2026-02-12T14:16:57.601081",
->>>>>>> 28fc89a5f0a79ca6ef844b208f4fa027ff7ce271
     "attack_type": "Scan",
     "src_ip": "unknown",
     "dest_ip": "unknown",
@@ -4382,17 +4194,10 @@
     "packet_length": 0,
     "confidence": 0.0004114601394020648,
     "severity": "MEDIUM",
-<<<<<<< HEAD
-    "explanation": "Flow classified as Scan due to strong influence from init_bwd_win_bytes, init_fwd_win_bytes. Abnormal behavior detected in flow_iat_min, flow_iat_mean."
-  },
-  {
-    "timestamp": "2026-02-12T13:59:28.928471",
-=======
     "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_min, flow_iat_mean, which deviated significantly from normal traffic patterns."
   },
   {
     "timestamp": "2026-02-12T14:16:57.626676",
->>>>>>> 28fc89a5f0a79ca6ef844b208f4fa027ff7ce271
     "attack_type": "Scan",
     "src_ip": "unknown",
     "dest_ip": "unknown",
@@ -4400,17 +4205,10 @@
     "packet_length": 0,
     "confidence": 0.0004114601394020648,
     "severity": "MEDIUM",
-<<<<<<< HEAD
-    "explanation": "Flow classified as Scan due to strong influence from init_bwd_win_bytes, init_fwd_win_bytes. Abnormal behavior detected in flow_iat_min, flow_iat_mean."
-  },
-  {
-    "timestamp": "2026-02-12T13:59:29.871858",
-=======
     "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_min, flow_iat_mean, which deviated significantly from normal traffic patterns."
   },
   {
     "timestamp": "2026-02-12T14:17:04.365003",
->>>>>>> 28fc89a5f0a79ca6ef844b208f4fa027ff7ce271
     "attack_type": "Scan",
     "src_ip": "unknown",
     "dest_ip": "unknown",
@@ -4418,17 +4216,10 @@
     "packet_length": 0,
     "confidence": 0.008715456862594364,
     "severity": "MEDIUM",
-<<<<<<< HEAD
-    "explanation": "Flow classified as Scan due to strong influence from init_bwd_win_bytes, init_fwd_win_bytes. Abnormal behavior detected in burst_ratio, flow_duration."
-  },
-  {
-    "timestamp": "2026-02-12T13:59:29.928927",
-=======
     "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in burst_ratio, flow_duration, which deviated significantly from normal traffic patterns."
   },
   {
     "timestamp": "2026-02-12T14:17:04.390509",
->>>>>>> 28fc89a5f0a79ca6ef844b208f4fa027ff7ce271
     "attack_type": "Scan",
     "src_ip": "unknown",
     "dest_ip": "unknown",
@@ -4436,17 +4227,10 @@
     "packet_length": 0,
     "confidence": 0.008715456862594364,
     "severity": "MEDIUM",
-<<<<<<< HEAD
-    "explanation": "Flow classified as Scan due to strong influence from init_bwd_win_bytes, init_fwd_win_bytes. Abnormal behavior detected in burst_ratio, flow_duration."
-  },
-  {
-    "timestamp": "2026-02-12T13:59:31.000900",
-=======
     "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in burst_ratio, flow_duration, which deviated significantly from normal traffic patterns."
   },
   {
     "timestamp": "2026-02-12T14:17:08.389004",
->>>>>>> 28fc89a5f0a79ca6ef844b208f4fa027ff7ce271
     "attack_type": "Scan",
     "src_ip": "unknown",
     "dest_ip": "unknown",
@@ -4454,17 +4238,10 @@
     "packet_length": 0,
     "confidence": 0.0008001043323555366,
     "severity": "MEDIUM",
-<<<<<<< HEAD
-    "explanation": "Flow classified as Scan due to strong influence from init_bwd_win_bytes, init_fwd_win_bytes. Abnormal behavior detected in flow_iat_std, fwd_iat_min."
-  },
-  {
-    "timestamp": "2026-02-12T13:59:31.052693",
-=======
     "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_std, fwd_iat_min, which deviated significantly from normal traffic patterns."
   },
   {
     "timestamp": "2026-02-12T14:17:08.413170",
->>>>>>> 28fc89a5f0a79ca6ef844b208f4fa027ff7ce271
     "attack_type": "Scan",
     "src_ip": "unknown",
     "dest_ip": "unknown",
@@ -4472,17 +4249,10 @@
     "packet_length": 0,
     "confidence": 0.0008001043323555366,
     "severity": "MEDIUM",
-<<<<<<< HEAD
-    "explanation": "Flow classified as Scan due to strong influence from init_bwd_win_bytes, init_fwd_win_bytes. Abnormal behavior detected in flow_iat_std, fwd_iat_min."
-  },
-  {
-    "timestamp": "2026-02-12T13:59:31.936215",
-=======
     "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_std, fwd_iat_min, which deviated significantly from normal traffic patterns."
   },
   {
     "timestamp": "2026-02-12T14:17:10.188961",
->>>>>>> 28fc89a5f0a79ca6ef844b208f4fa027ff7ce271
     "attack_type": "Scan",
     "src_ip": "unknown",
     "dest_ip": "unknown",
@@ -4490,17 +4260,10 @@
     "packet_length": 0,
     "confidence": 6.116199201415681e-05,
     "severity": "MEDIUM",
-<<<<<<< HEAD
-    "explanation": "Flow classified as Scan due to strong influence from init_bwd_win_bytes, init_fwd_win_bytes. Abnormal behavior detected in flow_iat_mean, flow_iat_min."
-  },
-  {
-    "timestamp": "2026-02-12T13:59:31.992656",
-=======
     "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_mean, flow_iat_min, which deviated significantly from normal traffic patterns."
   },
   {
     "timestamp": "2026-02-12T14:17:10.214207",
->>>>>>> 28fc89a5f0a79ca6ef844b208f4fa027ff7ce271
     "attack_type": "Scan",
     "src_ip": "unknown",
     "dest_ip": "unknown",
@@ -4508,17 +4271,10 @@
     "packet_length": 0,
     "confidence": 6.116199201415681e-05,
     "severity": "MEDIUM",
-<<<<<<< HEAD
-    "explanation": "Flow classified as Scan due to strong influence from init_bwd_win_bytes, init_fwd_win_bytes. Abnormal behavior detected in flow_iat_mean, flow_iat_min."
-  },
-  {
-    "timestamp": "2026-02-12T13:59:32.915672",
-=======
     "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_mean, flow_iat_min, which deviated significantly from normal traffic patterns."
   },
   {
     "timestamp": "2026-02-12T14:17:13.333053",
->>>>>>> 28fc89a5f0a79ca6ef844b208f4fa027ff7ce271
     "attack_type": "Scan",
     "src_ip": "unknown",
     "dest_ip": "unknown",
@@ -4526,17 +4282,10 @@
     "packet_length": 0,
     "confidence": 0.008352621728254598,
     "severity": "MEDIUM",
-<<<<<<< HEAD
-    "explanation": "Flow classified as Scan due to strong influence from init_bwd_win_bytes, init_fwd_win_bytes. Abnormal behavior detected in flow_iat_mean, flow_iat_std."
-  },
-  {
-    "timestamp": "2026-02-12T13:59:32.977176",
-=======
     "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_mean, flow_iat_std, which deviated significantly from normal traffic patterns."
   },
   {
     "timestamp": "2026-02-12T14:17:13.355768",
->>>>>>> 28fc89a5f0a79ca6ef844b208f4fa027ff7ce271
     "attack_type": "Scan",
     "src_ip": "unknown",
     "dest_ip": "unknown",
@@ -4544,17 +4293,10 @@
     "packet_length": 0,
     "confidence": 0.008352621728254598,
     "severity": "MEDIUM",
-<<<<<<< HEAD
-    "explanation": "Flow classified as Scan due to strong influence from init_bwd_win_bytes, init_fwd_win_bytes. Abnormal behavior detected in flow_iat_mean, flow_iat_std."
-  },
-  {
-    "timestamp": "2026-02-12T13:59:34.006113",
-=======
     "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_mean, flow_iat_std, which deviated significantly from normal traffic patterns."
   },
   {
     "timestamp": "2026-02-12T14:17:14.206833",
->>>>>>> 28fc89a5f0a79ca6ef844b208f4fa027ff7ce271
     "attack_type": "Scan",
     "src_ip": "unknown",
     "dest_ip": "unknown",
@@ -4562,17 +4304,10 @@
     "packet_length": 0,
     "confidence": 0.0010570112823886486,
     "severity": "MEDIUM",
-<<<<<<< HEAD
-    "explanation": "Flow classified as Scan due to strong influence from init_bwd_win_bytes, init_fwd_win_bytes. Abnormal behavior detected in flow_iat_std, flow_iat_mean."
-  },
-  {
-    "timestamp": "2026-02-12T13:59:34.066051",
-=======
     "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_std, flow_iat_mean, which deviated significantly from normal traffic patterns."
   },
   {
     "timestamp": "2026-02-12T14:17:14.231859",
->>>>>>> 28fc89a5f0a79ca6ef844b208f4fa027ff7ce271
     "attack_type": "Scan",
     "src_ip": "unknown",
     "dest_ip": "unknown",
@@ -4580,17 +4315,10 @@
     "packet_length": 0,
     "confidence": 0.0010570112823886486,
     "severity": "MEDIUM",
-<<<<<<< HEAD
-    "explanation": "Flow classified as Scan due to strong influence from init_bwd_win_bytes, init_fwd_win_bytes. Abnormal behavior detected in flow_iat_std, flow_iat_mean."
-  },
-  {
-    "timestamp": "2026-02-12T13:59:35.060339",
-=======
     "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_std, flow_iat_mean, which deviated significantly from normal traffic patterns."
   },
   {
     "timestamp": "2026-02-12T14:17:15.066469",
->>>>>>> 28fc89a5f0a79ca6ef844b208f4fa027ff7ce271
     "attack_type": "Scan",
     "src_ip": "unknown",
     "dest_ip": "unknown",
@@ -4598,17 +4326,10 @@
     "packet_length": 0,
     "confidence": 0.0005751707470808953,
     "severity": "MEDIUM",
-<<<<<<< HEAD
-    "explanation": "Flow classified as Scan due to strong influence from init_bwd_win_bytes, init_fwd_win_bytes. Abnormal behavior detected in flow_iat_min, flow_iat_mean."
-  },
-  {
-    "timestamp": "2026-02-12T13:59:35.113089",
-=======
     "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_min, flow_iat_mean, which deviated significantly from normal traffic patterns."
   },
   {
     "timestamp": "2026-02-12T14:17:15.092719",
->>>>>>> 28fc89a5f0a79ca6ef844b208f4fa027ff7ce271
     "attack_type": "Scan",
     "src_ip": "unknown",
     "dest_ip": "unknown",
@@ -4616,17 +4337,10 @@
     "packet_length": 0,
     "confidence": 0.0005751707470808953,
     "severity": "MEDIUM",
-<<<<<<< HEAD
-    "explanation": "Flow classified as Scan due to strong influence from init_bwd_win_bytes, init_fwd_win_bytes. Abnormal behavior detected in flow_iat_min, flow_iat_mean."
-  },
-  {
-    "timestamp": "2026-02-12T13:59:36.034063",
-=======
     "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_min, flow_iat_mean, which deviated significantly from normal traffic patterns."
   },
   {
     "timestamp": "2026-02-12T14:17:16.145858",
->>>>>>> 28fc89a5f0a79ca6ef844b208f4fa027ff7ce271
     "attack_type": "Scan",
     "src_ip": "unknown",
     "dest_ip": "unknown",
@@ -4634,17 +4348,10 @@
     "packet_length": 0,
     "confidence": 0.01106332890048821,
     "severity": "MEDIUM",
-<<<<<<< HEAD
-    "explanation": "Flow classified as Scan due to strong influence from init_bwd_win_bytes, init_fwd_win_bytes. Abnormal behavior detected in flow_duration, proto_0."
-  },
-  {
-    "timestamp": "2026-02-12T13:59:36.095104",
-=======
     "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_duration, proto_0, which deviated significantly from normal traffic patterns."
   },
   {
     "timestamp": "2026-02-12T14:17:16.170762",
->>>>>>> 28fc89a5f0a79ca6ef844b208f4fa027ff7ce271
     "attack_type": "Scan",
     "src_ip": "unknown",
     "dest_ip": "unknown",
@@ -4652,17 +4359,10 @@
     "packet_length": 0,
     "confidence": 0.01106332890048821,
     "severity": "MEDIUM",
-<<<<<<< HEAD
-    "explanation": "Flow classified as Scan due to strong influence from init_bwd_win_bytes, init_fwd_win_bytes. Abnormal behavior detected in flow_duration, proto_0."
-  },
-  {
-    "timestamp": "2026-02-12T13:59:37.079944",
-=======
     "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_duration, proto_0, which deviated significantly from normal traffic patterns."
   },
   {
     "timestamp": "2026-02-12T14:17:17.098616",
->>>>>>> 28fc89a5f0a79ca6ef844b208f4fa027ff7ce271
     "attack_type": "Scan",
     "src_ip": "unknown",
     "dest_ip": "unknown",
@@ -4670,17 +4370,10 @@
     "packet_length": 0,
     "confidence": 0.00042762282248173073,
     "severity": "MEDIUM",
-<<<<<<< HEAD
-    "explanation": "Flow classified as Scan due to strong influence from init_bwd_win_bytes, init_fwd_win_bytes. Abnormal behavior detected in flow_iat_mean, active_cv."
-  },
-  {
-    "timestamp": "2026-02-12T13:59:37.142771",
-=======
     "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_mean, active_cv, which deviated significantly from normal traffic patterns."
   },
   {
     "timestamp": "2026-02-12T14:17:17.124580",
->>>>>>> 28fc89a5f0a79ca6ef844b208f4fa027ff7ce271
     "attack_type": "Scan",
     "src_ip": "unknown",
     "dest_ip": "unknown",
@@ -4688,17 +4381,10 @@
     "packet_length": 0,
     "confidence": 0.00042762282248173073,
     "severity": "MEDIUM",
-<<<<<<< HEAD
-    "explanation": "Flow classified as Scan due to strong influence from init_bwd_win_bytes, init_fwd_win_bytes. Abnormal behavior detected in flow_iat_mean, active_cv."
-  },
-  {
-    "timestamp": "2026-02-12T13:59:38.125681",
-=======
     "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_mean, active_cv, which deviated significantly from normal traffic patterns."
   },
   {
     "timestamp": "2026-02-12T14:17:18.266758",
->>>>>>> 28fc89a5f0a79ca6ef844b208f4fa027ff7ce271
     "attack_type": "Scan",
     "src_ip": "unknown",
     "dest_ip": "unknown",
@@ -4706,17 +4392,10 @@
     "packet_length": 0,
     "confidence": 0.006302959298018137,
     "severity": "MEDIUM",
-<<<<<<< HEAD
-    "explanation": "Flow classified as Scan due to strong influence from init_bwd_win_bytes, init_fwd_win_bytes. Abnormal behavior detected in flow_duration, active_cv."
-  },
-  {
-    "timestamp": "2026-02-12T13:59:38.194365",
-=======
     "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_duration, active_cv, which deviated significantly from normal traffic patterns."
   },
   {
     "timestamp": "2026-02-12T14:17:18.292982",
->>>>>>> 28fc89a5f0a79ca6ef844b208f4fa027ff7ce271
     "attack_type": "Scan",
     "src_ip": "unknown",
     "dest_ip": "unknown",
@@ -4724,17 +4403,10 @@
     "packet_length": 0,
     "confidence": 0.006302959298018137,
     "severity": "MEDIUM",
-<<<<<<< HEAD
-    "explanation": "Flow classified as Scan due to strong influence from init_bwd_win_bytes, init_fwd_win_bytes. Abnormal behavior detected in flow_duration, active_cv."
-  },
-  {
-    "timestamp": "2026-02-12T13:59:39.071355",
-=======
     "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_duration, active_cv, which deviated significantly from normal traffic patterns."
   },
   {
     "timestamp": "2026-02-12T14:17:19.308479",
->>>>>>> 28fc89a5f0a79ca6ef844b208f4fa027ff7ce271
     "attack_type": "Scan",
     "src_ip": "unknown",
     "dest_ip": "unknown",
@@ -4742,17 +4414,10 @@
     "packet_length": 0,
     "confidence": 0.0008077758477994988,
     "severity": "MEDIUM",
-<<<<<<< HEAD
-    "explanation": "Flow classified as Scan due to strong influence from init_bwd_win_bytes, init_fwd_win_bytes. Abnormal behavior detected in flow_iat_std, fwd_iat_min."
-  },
-  {
-    "timestamp": "2026-02-12T13:59:39.136747",
-=======
     "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_std, fwd_iat_min, which deviated significantly from normal traffic patterns."
   },
   {
     "timestamp": "2026-02-12T14:17:19.334427",
->>>>>>> 28fc89a5f0a79ca6ef844b208f4fa027ff7ce271
     "attack_type": "Scan",
     "src_ip": "unknown",
     "dest_ip": "unknown",
@@ -4760,17 +4425,10 @@
     "packet_length": 0,
     "confidence": 0.0008077758477994988,
     "severity": "MEDIUM",
-<<<<<<< HEAD
-    "explanation": "Flow classified as Scan due to strong influence from init_bwd_win_bytes, init_fwd_win_bytes. Abnormal behavior detected in flow_iat_std, fwd_iat_min."
-  },
-  {
-    "timestamp": "2026-02-12T13:59:40.062728",
-=======
     "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_std, fwd_iat_min, which deviated significantly from normal traffic patterns."
   },
   {
     "timestamp": "2026-02-12T14:17:22.742372",
->>>>>>> 28fc89a5f0a79ca6ef844b208f4fa027ff7ce271
     "attack_type": "Scan",
     "src_ip": "unknown",
     "dest_ip": "unknown",
@@ -4778,17 +4436,10 @@
     "packet_length": 0,
     "confidence": 0.12343151469820676,
     "severity": "MEDIUM",
-<<<<<<< HEAD
-    "explanation": "Flow classified as Scan due to strong influence from init_bwd_win_bytes, init_fwd_win_bytes. Abnormal behavior detected in flow_iat_std, flow_iat_mean."
-  },
-  {
-    "timestamp": "2026-02-12T13:59:40.125384",
-=======
     "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_std, flow_iat_mean, which deviated significantly from normal traffic patterns."
   },
   {
     "timestamp": "2026-02-12T14:17:22.768367",
->>>>>>> 28fc89a5f0a79ca6ef844b208f4fa027ff7ce271
     "attack_type": "Scan",
     "src_ip": "unknown",
     "dest_ip": "unknown",
@@ -4796,17 +4447,10 @@
     "packet_length": 0,
     "confidence": 0.12343151469820676,
     "severity": "MEDIUM",
-<<<<<<< HEAD
-    "explanation": "Flow classified as Scan due to strong influence from init_bwd_win_bytes, init_fwd_win_bytes. Abnormal behavior detected in flow_iat_std, flow_iat_mean."
-  },
-  {
-    "timestamp": "2026-02-12T13:59:41.051648",
-=======
     "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_std, flow_iat_mean, which deviated significantly from normal traffic patterns."
   },
   {
     "timestamp": "2026-02-12T14:17:32.457508",
->>>>>>> 28fc89a5f0a79ca6ef844b208f4fa027ff7ce271
     "attack_type": "Scan",
     "src_ip": "unknown",
     "dest_ip": "unknown",
@@ -4814,17 +4458,10 @@
     "packet_length": 0,
     "confidence": 5.2375845812623756e-05,
     "severity": "MEDIUM",
-<<<<<<< HEAD
-    "explanation": "Flow classified as Scan due to strong influence from init_bwd_win_bytes, init_fwd_win_bytes. Abnormal behavior detected in flow_iat_mean, flow_iat_min."
-  },
-  {
-    "timestamp": "2026-02-12T13:59:41.105247",
-=======
     "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_mean, flow_iat_min, which deviated significantly from normal traffic patterns."
   },
   {
     "timestamp": "2026-02-12T14:17:32.481351",
->>>>>>> 28fc89a5f0a79ca6ef844b208f4fa027ff7ce271
     "attack_type": "Scan",
     "src_ip": "unknown",
     "dest_ip": "unknown",
@@ -4832,17 +4469,10 @@
     "packet_length": 0,
     "confidence": 5.2375845812623756e-05,
     "severity": "MEDIUM",
-<<<<<<< HEAD
-    "explanation": "Flow classified as Scan due to strong influence from init_bwd_win_bytes, init_fwd_win_bytes. Abnormal behavior detected in flow_iat_mean, flow_iat_min."
-  },
-  {
-    "timestamp": "2026-02-12T13:59:42.384022",
-=======
     "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_mean, flow_iat_min, which deviated significantly from normal traffic patterns."
   },
   {
     "timestamp": "2026-02-12T14:17:34.939602",
->>>>>>> 28fc89a5f0a79ca6ef844b208f4fa027ff7ce271
     "attack_type": "Scan",
     "src_ip": "unknown",
     "dest_ip": "unknown",
@@ -4850,17 +4480,10 @@
     "packet_length": 0,
     "confidence": 0.000750108408122263,
     "severity": "MEDIUM",
-<<<<<<< HEAD
-    "explanation": "Flow classified as Scan due to strong influence from init_bwd_win_bytes, init_fwd_win_bytes. Abnormal behavior detected in flow_iat_min, flow_iat_mean."
-  },
-  {
-    "timestamp": "2026-02-12T13:59:42.445354",
-=======
     "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_min, flow_iat_mean, which deviated significantly from normal traffic patterns."
   },
   {
     "timestamp": "2026-02-12T14:17:34.965404",
->>>>>>> 28fc89a5f0a79ca6ef844b208f4fa027ff7ce271
     "attack_type": "Scan",
     "src_ip": "unknown",
     "dest_ip": "unknown",
@@ -4868,17 +4491,10 @@
     "packet_length": 0,
     "confidence": 0.000750108408122263,
     "severity": "MEDIUM",
-<<<<<<< HEAD
-    "explanation": "Flow classified as Scan due to strong influence from init_bwd_win_bytes, init_fwd_win_bytes. Abnormal behavior detected in flow_iat_min, flow_iat_mean."
-  },
-  {
-    "timestamp": "2026-02-12T13:59:43.341161",
-=======
     "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_min, flow_iat_mean, which deviated significantly from normal traffic patterns."
   },
   {
     "timestamp": "2026-02-12T14:17:36.243864",
->>>>>>> 28fc89a5f0a79ca6ef844b208f4fa027ff7ce271
     "attack_type": "Scan",
     "src_ip": "unknown",
     "dest_ip": "unknown",
@@ -4890,7 +4506,6 @@
   },
   {
     "timestamp": "2026-02-12T14:17:36.268867",
->>>>>>> 28fc89a5f0a79ca6ef844b208f4fa027ff7ce271
     "attack_type": "Scan",
     "src_ip": "unknown",
     "dest_ip": "unknown",
@@ -4898,17 +4513,10 @@
     "packet_length": 0,
     "confidence": 0.0017227344991209601,
     "severity": "MEDIUM",
-<<<<<<< HEAD
-    "explanation": "Flow classified as Scan due to strong influence from init_bwd_win_bytes, init_fwd_win_bytes. Abnormal behavior detected in flow_iat_min, flow_iat_mean."
-  },
-  {
-    "timestamp": "2026-02-12T13:59:44.396442",
-=======
     "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_min, flow_iat_mean, which deviated significantly from normal traffic patterns."
   },
   {
     "timestamp": "2026-02-12T14:17:37.978477",
->>>>>>> 28fc89a5f0a79ca6ef844b208f4fa027ff7ce271
     "attack_type": "Scan",
     "src_ip": "unknown",
     "dest_ip": "unknown",
@@ -4916,17 +4524,10 @@
     "packet_length": 0,
     "confidence": 0.0008192450628753596,
     "severity": "MEDIUM",
-<<<<<<< HEAD
-    "explanation": "Flow classified as Scan due to strong influence from init_bwd_win_bytes, init_fwd_win_bytes. Abnormal behavior detected in flow_duration, fwd_iat_min."
-  },
-  {
-    "timestamp": "2026-02-12T13:59:44.455840",
-=======
     "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_duration, fwd_iat_min, which deviated significantly from normal traffic patterns."
   },
   {
     "timestamp": "2026-02-12T14:17:38.004728",
->>>>>>> 28fc89a5f0a79ca6ef844b208f4fa027ff7ce271
     "attack_type": "Scan",
     "src_ip": "unknown",
     "dest_ip": "unknown",
@@ -4934,17 +4535,10 @@
     "packet_length": 0,
     "confidence": 0.0008192450628753596,
     "severity": "MEDIUM",
-<<<<<<< HEAD
-    "explanation": "Flow classified as Scan due to strong influence from init_bwd_win_bytes, init_fwd_win_bytes. Abnormal behavior detected in flow_duration, fwd_iat_min."
-  },
-  {
-    "timestamp": "2026-02-12T13:59:45.420095",
-=======
     "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_duration, fwd_iat_min, which deviated significantly from normal traffic patterns."
   },
   {
     "timestamp": "2026-02-12T14:17:38.972233",
->>>>>>> 28fc89a5f0a79ca6ef844b208f4fa027ff7ce271
     "attack_type": "Scan",
     "src_ip": "unknown",
     "dest_ip": "unknown",
@@ -4952,17 +4546,10 @@
     "packet_length": 0,
     "confidence": 0.0006503027878532229,
     "severity": "MEDIUM",
-<<<<<<< HEAD
-    "explanation": "Flow classified as Scan due to strong influence from init_bwd_win_bytes, init_fwd_win_bytes. Abnormal behavior detected in fwd_iat_min, flow_iat_std."
-  },
-  {
-    "timestamp": "2026-02-12T13:59:45.480937",
-=======
     "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in fwd_iat_min, flow_iat_std, which deviated significantly from normal traffic patterns."
   },
   {
     "timestamp": "2026-02-12T14:17:38.999687",
->>>>>>> 28fc89a5f0a79ca6ef844b208f4fa027ff7ce271
     "attack_type": "Scan",
     "src_ip": "unknown",
     "dest_ip": "unknown",
@@ -4970,64 +4557,6 @@
     "packet_length": 0,
     "confidence": 0.0006503027878532229,
     "severity": "MEDIUM",
-<<<<<<< HEAD
-    "explanation": "Flow classified as Scan due to strong influence from init_bwd_win_bytes, init_fwd_win_bytes. Abnormal behavior detected in fwd_iat_min, flow_iat_std."
-  },
-  {
-    "timestamp": "2026-02-12T17:28:57.493518",
-    "attack_type": "DDoS",
-    "src_ip": "192.168.1.105",
-    "dest_ip": "10.0.0.140",
-    "protocol": "ICMP",
-    "packet_length": 1254,
-    "confidence": 0.9,
-    "severity": "HIGH",
-    "explanation": null
-  },
-  {
-    "timestamp": "2026-02-12T17:28:58.852923",
-    "attack_type": "DDoS",
-    "src_ip": "192.168.1.200",
-    "dest_ip": "10.0.0.153",
-    "protocol": "TCP",
-    "packet_length": 1094,
-    "confidence": 0.9,
-    "severity": "HIGH",
-    "explanation": null
-  },
-  {
-    "timestamp": "2026-02-12T17:29:00.060009",
-    "attack_type": "DDoS",
-    "src_ip": "192.168.1.85",
-    "dest_ip": "10.0.0.35",
-    "protocol": "TCP",
-    "packet_length": 1493,
-    "confidence": 0.9,
-    "severity": "HIGH",
-    "explanation": null
-  },
-  {
-    "timestamp": "2026-02-12T17:29:01.027455",
-    "attack_type": "DDoS",
-    "src_ip": "192.168.1.223",
-    "dest_ip": "10.0.0.236",
-    "protocol": "UDP",
-    "packet_length": 1478,
-    "confidence": 0.9,
-    "severity": "HIGH",
-    "explanation": null
-  },
-  {
-    "timestamp": "2026-02-12T17:29:02.074565",
-    "attack_type": "DDoS",
-    "src_ip": "192.168.1.4",
-    "dest_ip": "10.0.0.43",
-    "protocol": "TCP",
-    "packet_length": 1194,
-    "confidence": 0.9,
-    "severity": "HIGH",
-    "explanation": null
-=======
     "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in fwd_iat_min, flow_iat_std, which deviated significantly from normal traffic patterns."
   },
   {
@@ -8539,6 +8068,545 @@
     "confidence": 0.0006503027878532229,
     "severity": "MEDIUM",
     "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in fwd_iat_min, flow_iat_std, which deviated significantly from normal traffic patterns."
->>>>>>> 28fc89a5f0a79ca6ef844b208f4fa027ff7ce271
+  },
+  {
+    "timestamp": "2026-02-13T11:54:09.679681",
+    "attack_type": "Scan",
+    "src_ip": "134.221.96.0",
+    "dest_ip": "0.0.0.128",
+    "protocol": "HOPOPT",
+    "confidence": 0.0023614503153261877,
+    "severity": "MEDIUM",
+    "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_mean, flow_iat_std, which deviated significantly from normal traffic patterns."
+  },
+  {
+    "timestamp": "2026-02-13T11:54:09.795065",
+    "attack_type": "Scan",
+    "src_ip": "134.221.96.0",
+    "dest_ip": "0.0.0.128",
+    "protocol": "HOPOPT",
+    "confidence": 0.0023614503153261877,
+    "severity": "MEDIUM",
+    "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_mean, flow_iat_std, which deviated significantly from normal traffic patterns."
+  },
+  {
+    "timestamp": "2026-02-13T11:54:11.114744",
+    "attack_type": "Scan",
+    "src_ip": "134.221.96.0",
+    "dest_ip": "0.0.0.36",
+    "protocol": "HOPOPT",
+    "confidence": 5.921162950287314e-05,
+    "severity": "MEDIUM",
+    "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_mean, flow_iat_min, which deviated significantly from normal traffic patterns."
+  },
+  {
+    "timestamp": "2026-02-13T11:54:11.173261",
+    "attack_type": "Scan",
+    "src_ip": "134.221.96.0",
+    "dest_ip": "0.0.0.36",
+    "protocol": "HOPOPT",
+    "confidence": 5.921162950287314e-05,
+    "severity": "MEDIUM",
+    "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_mean, flow_iat_min, which deviated significantly from normal traffic patterns."
+  },
+  {
+    "timestamp": "2026-02-13T11:54:12.036714",
+    "attack_type": "Scan",
+    "src_ip": "134.221.96.0",
+    "dest_ip": "0.0.0.35",
+    "protocol": "HOPOPT",
+    "confidence": 5.7753484956660164e-05,
+    "severity": "MEDIUM",
+    "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_mean, fwd_iat_cv, which deviated significantly from normal traffic patterns."
+  },
+  {
+    "timestamp": "2026-02-13T11:54:12.102252",
+    "attack_type": "Scan",
+    "src_ip": "134.221.96.0",
+    "dest_ip": "0.0.0.35",
+    "protocol": "HOPOPT",
+    "confidence": 5.7753484956660164e-05,
+    "severity": "MEDIUM",
+    "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_mean, fwd_iat_cv, which deviated significantly from normal traffic patterns."
+  },
+  {
+    "timestamp": "2026-02-13T11:54:13.285576",
+    "attack_type": "Scan",
+    "src_ip": "134.221.96.0",
+    "dest_ip": "0.0.0.82",
+    "protocol": "HOPOPT",
+    "confidence": 0.001054548967079178,
+    "severity": "MEDIUM",
+    "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_mean, flow_iat_std, which deviated significantly from normal traffic patterns."
+  },
+  {
+    "timestamp": "2026-02-13T11:54:13.346674",
+    "attack_type": "Scan",
+    "src_ip": "134.221.96.0",
+    "dest_ip": "0.0.0.82",
+    "protocol": "HOPOPT",
+    "confidence": 0.001054548967079178,
+    "severity": "MEDIUM",
+    "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_mean, flow_iat_std, which deviated significantly from normal traffic patterns."
+  },
+  {
+    "timestamp": "2026-02-13T11:54:14.150632",
+    "attack_type": "Scan",
+    "src_ip": "134.221.96.9",
+    "dest_ip": "146.135.0.37",
+    "protocol": "HOPOPT",
+    "confidence": 0.01430319043167227,
+    "severity": "MEDIUM",
+    "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_duration, proto_0, which deviated significantly from normal traffic patterns."
+  },
+  {
+    "timestamp": "2026-02-13T11:54:14.228475",
+    "attack_type": "Scan",
+    "src_ip": "134.221.96.9",
+    "dest_ip": "146.135.0.37",
+    "protocol": "HOPOPT",
+    "confidence": 0.01430319043167227,
+    "severity": "MEDIUM",
+    "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_duration, proto_0, which deviated significantly from normal traffic patterns."
+  },
+  {
+    "timestamp": "2026-02-13T11:54:15.185482",
+    "attack_type": "Scan",
+    "src_ip": "134.221.96.2",
+    "dest_ip": "35.205.0.44",
+    "protocol": "HOPOPT",
+    "confidence": 0.000750108408122263,
+    "severity": "MEDIUM",
+    "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_min, flow_iat_mean, which deviated significantly from normal traffic patterns."
+  },
+  {
+    "timestamp": "2026-02-13T11:54:15.251044",
+    "attack_type": "Scan",
+    "src_ip": "134.221.96.2",
+    "dest_ip": "35.205.0.44",
+    "protocol": "HOPOPT",
+    "confidence": 0.000750108408122263,
+    "severity": "MEDIUM",
+    "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_min, flow_iat_mean, which deviated significantly from normal traffic patterns."
+  },
+  {
+    "timestamp": "2026-02-13T11:54:16.257133",
+    "attack_type": "Scan",
+    "src_ip": "134.221.96.0",
+    "dest_ip": "0.0.0.129",
+    "protocol": "HOPOPT",
+    "confidence": 5.58590680647397e-05,
+    "severity": "MEDIUM",
+    "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_mean, fwd_iat_mean, which deviated significantly from normal traffic patterns."
+  },
+  {
+    "timestamp": "2026-02-13T11:54:16.329004",
+    "attack_type": "Scan",
+    "src_ip": "134.221.96.0",
+    "dest_ip": "0.0.0.129",
+    "protocol": "HOPOPT",
+    "confidence": 5.58590680647397e-05,
+    "severity": "MEDIUM",
+    "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_mean, fwd_iat_mean, which deviated significantly from normal traffic patterns."
+  },
+  {
+    "timestamp": "2026-02-13T11:54:17.252326",
+    "attack_type": "Scan",
+    "src_ip": "134.221.96.2",
+    "dest_ip": "35.205.0.20",
+    "protocol": "HOPOPT",
+    "confidence": 0.000750108408122263,
+    "severity": "MEDIUM",
+    "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_min, flow_iat_mean, which deviated significantly from normal traffic patterns."
+  },
+  {
+    "timestamp": "2026-02-13T11:54:17.325280",
+    "attack_type": "Scan",
+    "src_ip": "134.221.96.2",
+    "dest_ip": "35.205.0.20",
+    "protocol": "HOPOPT",
+    "confidence": 0.000750108408122263,
+    "severity": "MEDIUM",
+    "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_min, flow_iat_mean, which deviated significantly from normal traffic patterns."
+  },
+  {
+    "timestamp": "2026-02-13T11:54:18.229303",
+    "attack_type": "BruteForce",
+    "src_ip": "134.221.96.7",
+    "dest_ip": "112.238.0.20",
+    "protocol": "HOPOPT",
+    "confidence": 1.0,
+    "severity": "HIGH",
+    "explanation": "The network flow was classified as BruteForce due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_duration, proto_0, which deviated significantly from normal traffic patterns."
+  },
+  {
+    "timestamp": "2026-02-13T11:54:18.299325",
+    "attack_type": "BruteForce",
+    "src_ip": "134.221.96.7",
+    "dest_ip": "112.238.0.20",
+    "protocol": "HOPOPT",
+    "confidence": 1.0,
+    "severity": "HIGH",
+    "explanation": "The network flow was classified as BruteForce due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_duration, proto_0, which deviated significantly from normal traffic patterns."
+  },
+  {
+    "timestamp": "2026-02-13T11:54:19.150681",
+    "attack_type": "Scan",
+    "src_ip": "134.221.96.0",
+    "dest_ip": "0.0.0.111",
+    "protocol": "HOPOPT",
+    "confidence": 0.0007809501063809911,
+    "severity": "MEDIUM",
+    "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_std, fwd_iat_min, which deviated significantly from normal traffic patterns."
+  },
+  {
+    "timestamp": "2026-02-13T11:54:19.218070",
+    "attack_type": "Scan",
+    "src_ip": "134.221.96.0",
+    "dest_ip": "0.0.0.111",
+    "protocol": "HOPOPT",
+    "confidence": 0.0007809501063809911,
+    "severity": "MEDIUM",
+    "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_std, fwd_iat_min, which deviated significantly from normal traffic patterns."
+  },
+  {
+    "timestamp": "2026-02-13T11:54:20.024740",
+    "attack_type": "Scan",
+    "src_ip": "134.221.96.4",
+    "dest_ip": "234.59.0.90",
+    "protocol": "HOPOPT",
+    "confidence": 0.0004114601394020648,
+    "severity": "MEDIUM",
+    "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_min, flow_iat_mean, which deviated significantly from normal traffic patterns."
+  },
+  {
+    "timestamp": "2026-02-13T11:54:20.094379",
+    "attack_type": "Scan",
+    "src_ip": "134.221.96.4",
+    "dest_ip": "234.59.0.90",
+    "protocol": "HOPOPT",
+    "confidence": 0.0004114601394020648,
+    "severity": "MEDIUM",
+    "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_min, flow_iat_mean, which deviated significantly from normal traffic patterns."
+  },
+  {
+    "timestamp": "2026-02-13T11:54:20.904179",
+    "attack_type": "Scan",
+    "src_ip": "134.221.96.3",
+    "dest_ip": "216.2.4.214",
+    "protocol": "HOPOPT",
+    "confidence": 0.008715456862594364,
+    "severity": "MEDIUM",
+    "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in burst_ratio, flow_duration, which deviated significantly from normal traffic patterns."
+  },
+  {
+    "timestamp": "2026-02-13T11:54:20.969818",
+    "attack_type": "Scan",
+    "src_ip": "134.221.96.3",
+    "dest_ip": "216.2.4.214",
+    "protocol": "HOPOPT",
+    "confidence": 0.008715456862594364,
+    "severity": "MEDIUM",
+    "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in burst_ratio, flow_duration, which deviated significantly from normal traffic patterns."
+  },
+  {
+    "timestamp": "2026-02-13T11:54:21.863930",
+    "attack_type": "Scan",
+    "src_ip": "134.221.96.8",
+    "dest_ip": "193.201.0.20",
+    "protocol": "HOPOPT",
+    "confidence": 0.0008001043323555366,
+    "severity": "MEDIUM",
+    "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_std, fwd_iat_min, which deviated significantly from normal traffic patterns."
+  },
+  {
+    "timestamp": "2026-02-13T11:54:21.935678",
+    "attack_type": "Scan",
+    "src_ip": "134.221.96.8",
+    "dest_ip": "193.201.0.20",
+    "protocol": "HOPOPT",
+    "confidence": 0.0008001043323555366,
+    "severity": "MEDIUM",
+    "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_std, fwd_iat_min, which deviated significantly from normal traffic patterns."
+  },
+  {
+    "timestamp": "2026-02-13T11:54:22.926246",
+    "attack_type": "Scan",
+    "src_ip": "134.221.96.4",
+    "dest_ip": "234.59.0.20",
+    "protocol": "HOPOPT",
+    "confidence": 6.116199201415681e-05,
+    "severity": "MEDIUM",
+    "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_mean, flow_iat_min, which deviated significantly from normal traffic patterns."
+  },
+  {
+    "timestamp": "2026-02-13T11:54:22.988838",
+    "attack_type": "Scan",
+    "src_ip": "134.221.96.4",
+    "dest_ip": "234.59.0.20",
+    "protocol": "HOPOPT",
+    "confidence": 6.116199201415681e-05,
+    "severity": "MEDIUM",
+    "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_mean, flow_iat_min, which deviated significantly from normal traffic patterns."
+  },
+  {
+    "timestamp": "2026-02-13T11:54:23.945074",
+    "attack_type": "Scan",
+    "src_ip": "134.221.96.0",
+    "dest_ip": "0.0.0.134",
+    "protocol": "HOPOPT",
+    "confidence": 0.008352621728254598,
+    "severity": "MEDIUM",
+    "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_mean, flow_iat_std, which deviated significantly from normal traffic patterns."
+  },
+  {
+    "timestamp": "2026-02-13T11:54:24.017819",
+    "attack_type": "Scan",
+    "src_ip": "134.221.96.0",
+    "dest_ip": "0.0.0.134",
+    "protocol": "HOPOPT",
+    "confidence": 0.008352621728254598,
+    "severity": "MEDIUM",
+    "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_mean, flow_iat_std, which deviated significantly from normal traffic patterns."
+  },
+  {
+    "timestamp": "2026-02-13T11:54:24.899824",
+    "attack_type": "Scan",
+    "src_ip": "192.168.2.31",
+    "dest_ip": "224.0.0.22",
+    "protocol": "HOPOPT",
+    "confidence": 0.0010570112823886486,
+    "severity": "MEDIUM",
+    "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_std, flow_iat_mean, which deviated significantly from normal traffic patterns."
+  },
+  {
+    "timestamp": "2026-02-13T11:54:24.967851",
+    "attack_type": "Scan",
+    "src_ip": "192.168.2.31",
+    "dest_ip": "224.0.0.22",
+    "protocol": "HOPOPT",
+    "confidence": 0.0010570112823886486,
+    "severity": "MEDIUM",
+    "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_std, flow_iat_mean, which deviated significantly from normal traffic patterns."
+  },
+  {
+    "timestamp": "2026-02-13T11:54:26.077943",
+    "attack_type": "Scan",
+    "src_ip": "134.221.96.0",
+    "dest_ip": "0.0.0.109",
+    "protocol": "HOPOPT",
+    "confidence": 0.0005751707470808953,
+    "severity": "MEDIUM",
+    "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_min, flow_iat_mean, which deviated significantly from normal traffic patterns."
+  },
+  {
+    "timestamp": "2026-02-13T11:54:26.150169",
+    "attack_type": "Scan",
+    "src_ip": "134.221.96.0",
+    "dest_ip": "0.0.0.109",
+    "protocol": "HOPOPT",
+    "confidence": 0.0005751707470808953,
+    "severity": "MEDIUM",
+    "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_min, flow_iat_mean, which deviated significantly from normal traffic patterns."
+  },
+  {
+    "timestamp": "2026-02-13T11:54:27.070144",
+    "attack_type": "Scan",
+    "src_ip": "134.221.96.12",
+    "dest_ip": "178.15.0.37",
+    "protocol": "HOPOPT",
+    "confidence": 0.01106332890048821,
+    "severity": "MEDIUM",
+    "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_duration, proto_0, which deviated significantly from normal traffic patterns."
+  },
+  {
+    "timestamp": "2026-02-13T11:54:27.141568",
+    "attack_type": "Scan",
+    "src_ip": "134.221.96.12",
+    "dest_ip": "178.15.0.37",
+    "protocol": "HOPOPT",
+    "confidence": 0.01106332890048821,
+    "severity": "MEDIUM",
+    "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_duration, proto_0, which deviated significantly from normal traffic patterns."
+  },
+  {
+    "timestamp": "2026-02-13T11:54:27.970913",
+    "attack_type": "Scan",
+    "src_ip": "134.221.96.10",
+    "dest_ip": "146.139.0.20",
+    "protocol": "HOPOPT",
+    "confidence": 0.00042762282248173073,
+    "severity": "MEDIUM",
+    "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_mean, active_cv, which deviated significantly from normal traffic patterns."
+  },
+  {
+    "timestamp": "2026-02-13T11:54:28.037742",
+    "attack_type": "Scan",
+    "src_ip": "134.221.96.10",
+    "dest_ip": "146.139.0.20",
+    "protocol": "HOPOPT",
+    "confidence": 0.00042762282248173073,
+    "severity": "MEDIUM",
+    "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_mean, active_cv, which deviated significantly from normal traffic patterns."
+  },
+  {
+    "timestamp": "2026-02-13T11:54:30.171591",
+    "attack_type": "Scan",
+    "src_ip": "134.221.96.0",
+    "dest_ip": "0.0.4.210",
+    "protocol": "HOPOPT",
+    "confidence": 0.006302959298018137,
+    "severity": "MEDIUM",
+    "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_duration, active_cv, which deviated significantly from normal traffic patterns."
+  },
+  {
+    "timestamp": "2026-02-13T11:54:30.238434",
+    "attack_type": "Scan",
+    "src_ip": "134.221.96.0",
+    "dest_ip": "0.0.4.210",
+    "protocol": "HOPOPT",
+    "confidence": 0.006302959298018137,
+    "severity": "MEDIUM",
+    "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_duration, active_cv, which deviated significantly from normal traffic patterns."
+  },
+  {
+    "timestamp": "2026-02-13T11:54:31.343976",
+    "attack_type": "Scan",
+    "src_ip": "134.221.96.0",
+    "dest_ip": "0.0.0.85",
+    "protocol": "HOPOPT",
+    "confidence": 0.0008077758477994988,
+    "severity": "MEDIUM",
+    "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_std, fwd_iat_min, which deviated significantly from normal traffic patterns."
+  },
+  {
+    "timestamp": "2026-02-13T11:54:31.406247",
+    "attack_type": "Scan",
+    "src_ip": "134.221.96.0",
+    "dest_ip": "0.0.0.85",
+    "protocol": "HOPOPT",
+    "confidence": 0.0008077758477994988,
+    "severity": "MEDIUM",
+    "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_std, fwd_iat_min, which deviated significantly from normal traffic patterns."
+  },
+  {
+    "timestamp": "2026-02-13T11:54:32.258799",
+    "attack_type": "Scan",
+    "src_ip": "134.221.96.0",
+    "dest_ip": "0.0.0.37",
+    "protocol": "HOPOPT",
+    "confidence": 0.12343151469820676,
+    "severity": "MEDIUM",
+    "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_std, flow_iat_mean, which deviated significantly from normal traffic patterns."
+  },
+  {
+    "timestamp": "2026-02-13T11:54:32.324269",
+    "attack_type": "Scan",
+    "src_ip": "134.221.96.0",
+    "dest_ip": "0.0.0.37",
+    "protocol": "HOPOPT",
+    "confidence": 0.12343151469820676,
+    "severity": "MEDIUM",
+    "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_std, flow_iat_mean, which deviated significantly from normal traffic patterns."
+  },
+  {
+    "timestamp": "2026-02-13T11:54:33.247691",
+    "attack_type": "Scan",
+    "src_ip": "134.221.96.13",
+    "dest_ip": "141.182.0.20",
+    "protocol": "HOPOPT",
+    "confidence": 5.2375845812623756e-05,
+    "severity": "MEDIUM",
+    "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_mean, flow_iat_min, which deviated significantly from normal traffic patterns."
+  },
+  {
+    "timestamp": "2026-02-13T11:54:33.317083",
+    "attack_type": "Scan",
+    "src_ip": "134.221.96.13",
+    "dest_ip": "141.182.0.20",
+    "protocol": "HOPOPT",
+    "confidence": 5.2375845812623756e-05,
+    "severity": "MEDIUM",
+    "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_mean, flow_iat_min, which deviated significantly from normal traffic patterns."
+  },
+  {
+    "timestamp": "2026-02-13T11:54:34.269480",
+    "attack_type": "Scan",
+    "src_ip": "134.221.96.12",
+    "dest_ip": "241.130.0.48",
+    "protocol": "HOPOPT",
+    "confidence": 0.000750108408122263,
+    "severity": "MEDIUM",
+    "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_min, flow_iat_mean, which deviated significantly from normal traffic patterns."
+  },
+  {
+    "timestamp": "2026-02-13T11:54:34.343439",
+    "attack_type": "Scan",
+    "src_ip": "134.221.96.12",
+    "dest_ip": "241.130.0.48",
+    "protocol": "HOPOPT",
+    "confidence": 0.000750108408122263,
+    "severity": "MEDIUM",
+    "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_min, flow_iat_mean, which deviated significantly from normal traffic patterns."
+  },
+  {
+    "timestamp": "2026-02-13T11:54:35.274458",
+    "attack_type": "Scan",
+    "src_ip": "134.221.96.10",
+    "dest_ip": "146.139.0.44",
+    "protocol": "HOPOPT",
+    "confidence": 0.0017227344991209601,
+    "severity": "MEDIUM",
+    "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_min, flow_iat_mean, which deviated significantly from normal traffic patterns."
+  },
+  {
+    "timestamp": "2026-02-13T11:54:35.346701",
+    "attack_type": "Scan",
+    "src_ip": "134.221.96.10",
+    "dest_ip": "146.139.0.44",
+    "protocol": "HOPOPT",
+    "confidence": 0.0017227344991209601,
+    "severity": "MEDIUM",
+    "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_min, flow_iat_mean, which deviated significantly from normal traffic patterns."
+  },
+  {
+    "timestamp": "2026-02-13T11:54:36.169187",
+    "attack_type": "Scan",
+    "src_ip": "134.221.96.0",
+    "dest_ip": "0.0.0.104",
+    "protocol": "HOPOPT",
+    "confidence": 0.0008192450628753596,
+    "severity": "MEDIUM",
+    "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_duration, fwd_iat_min, which deviated significantly from normal traffic patterns."
+  },
+  {
+    "timestamp": "2026-02-13T11:54:36.231482",
+    "attack_type": "Scan",
+    "src_ip": "134.221.96.0",
+    "dest_ip": "0.0.0.104",
+    "protocol": "HOPOPT",
+    "confidence": 0.0008192450628753596,
+    "severity": "MEDIUM",
+    "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_duration, fwd_iat_min, which deviated significantly from normal traffic patterns."
+  },
+  {
+    "timestamp": "2026-02-13T11:54:37.167373",
+    "attack_type": "Scan",
+    "src_ip": "134.221.96.2",
+    "dest_ip": "160.107.0.20",
+    "protocol": "HOPOPT",
+    "confidence": 0.0006503027878532229,
+    "severity": "MEDIUM",
+    "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in fwd_iat_min, flow_iat_std, which deviated significantly from normal traffic patterns."
+  },
+  {
+    "timestamp": "2026-02-13T11:54:37.236925",
+    "attack_type": "Scan",
+    "src_ip": "134.221.96.2",
+    "dest_ip": "160.107.0.20",
+    "protocol": "HOPOPT",
+    "confidence": 0.0006503027878532229,
+    "severity": "MEDIUM",
+    "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in fwd_iat_min, flow_iat_std, which deviated significantly from normal traffic patterns."
   }
 ]
