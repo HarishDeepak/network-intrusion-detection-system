@@ -4886,12 +4886,6 @@
     "packet_length": 0,
     "confidence": 0.0017227344991209601,
     "severity": "MEDIUM",
-<<<<<<< HEAD
-    "explanation": "Flow classified as Scan due to strong influence from init_bwd_win_bytes, init_fwd_win_bytes. Abnormal behavior detected in flow_iat_min, flow_iat_mean."
-  },
-  {
-    "timestamp": "2026-02-12T13:59:43.402343",
-=======
     "explanation": "The network flow was classified as Scan due to high influence from features such as init_bwd_win_bytes, init_fwd_win_bytes. Additionally, abnormal behavior was detected in flow_iat_min, flow_iat_mean, which deviated significantly from normal traffic patterns."
   },
   {
