@@ -4,7 +4,8 @@ import plotly.graph_objects as go
 import requests
 from datetime import datetime
 from streamlit_autorefresh import st_autorefresh
-
+import requests
+import time
 # =====================================================
 # PAGE CONFIG
 # =====================================================
@@ -95,7 +96,8 @@ st.markdown("""
 # =====================================================
 # API HELPERS
 # =====================================================
-API = st.secrets.get("API_URL", "http://localhost:8000")
+API = "http://127.0.0.1:8000"
+
 
 @st.cache_data(ttl=REFRESH_SECONDS)
 def fetch(endpoint, params=None):
@@ -123,6 +125,47 @@ total_attacks = attack_stats.get("total_attacks", 0)
 # HEADER
 # =====================================================
 st.markdown("## 🔒 Network Security Monitor")
+
+
+
+# =====================================================
+# CSV UPLOAD SECTION
+# =====================================================
+st.markdown('<div class="section-title">📂 Upload CSV for Analysis</div>', unsafe_allow_html=True)
+
+if "pipeline_started" not in st.session_state:
+    st.session_state.pipeline_started = False
+
+uploaded_file = st.file_uploader("Upload Network Flow CSV", type=["csv"])
+
+# Placeholder for pipeline completion message
+status_placeholder = st.empty()
+
+
+
+if uploaded_file is not None:
+    if st.button("Run Detection Pipeline"):
+        files = {"file": (uploaded_file.name, uploaded_file, "text/csv")}
+        response = requests.post(f"{API}/upload-and-run/", files=files)
+
+        if response.status_code == 200:
+            st.success("CSV uploaded. Pipeline started ✅")
+            st.session_state.pipeline_started = True   # ✅ mark started
+        else:
+            st.error("Failed to upload CSV ❌")
+
+if st.session_state.pipeline_started:
+
+    status_placeholder = st.empty()
+    status = fetch("/pipeline-status/")
+
+    if status.get("prediction") == "completed" and status.get("fusion") == "completed":
+        status_placeholder.success("✅ Pipeline completed! You can now view results below.")
+    elif status.get("prediction") == "failed" or status.get("fusion") == "failed":
+        status_placeholder.error("❌ Pipeline failed. Check logs.")
+    elif status.get("prediction") == "running" or status.get("fusion") == "running":
+        status_placeholder.info("Pipeline running... please wait ⏳")
+
 
 # =====================================================
 # OVERVIEW KPI BOXES (ONLY HERE)
@@ -187,7 +230,7 @@ if attacks:
         "Source IP": df["src_ip"],
         "Destination IP": df["dest_ip"],
         "Protocol": df["protocol"],
-        "Confidence (%)": (df["confidence"] * 100).round(2),
+        # "Confidence (%)": (df["confidence"] * 100).round(2),
         "Severity": df["severity"]
     }), width="stretch", height=420, hide_index=True)
 else:
