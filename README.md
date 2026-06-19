@@ -274,3 +274,19 @@ Reference: [https://www.kaggle.com/datasets/dhoogla/cicids2017](https://www.kagg
 ## Team
 
 Built as a team data science project. Contributions span: data preprocessing, feature engineering, supervised and unsupervised model training, fusion engine design, SHAP explainability, FastAPI backend, Streamlit dashboard, and email alerting.
+
+---
+
+## License
+
+[MIT License](LICENSE)
+
+---
+
+## References
+
+- CICIDS2017 Dataset: [https://www.kaggle.com/datasets/dhoogla/cicids2017](https://www.kaggle.com/datasets/dhoogla/cicids2017)
+- Scikit-learn Documentation: [https://scikit-learn.org/stable/](https://scikit-learn.org/stable/)
+- BorutaPy Documentation: [https://github.com/scikit-learn-contrib/boruta_py](https://github.com/scikit-learn-contrib/boruta_py)
+- SHAP Documentation: [https://shap.readthedocs.io/](https://shap.readthedocs.io/)
+- XGBoost Documentation: [https://xgboost.readthedocs.io/](https://xgboost.readthedocs.io/)
