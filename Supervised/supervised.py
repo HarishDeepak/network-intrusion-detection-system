@@ -5,6 +5,7 @@ import pickle
 from sklearn.metrics import classification_report, confusion_matrix, f1_score
 import matplotlib.pyplot as plt
 import seaborn as sns
+import wandb
 
 # Load datasets
 X_train_selected = pd.read_parquet("../Data_cleaning/X_train_selected.parquet")
@@ -76,7 +77,7 @@ y_test_xgb = le_xgb.transform(y_test)
 with open("labelencoder_xgb.pkl", "wb") as f:
     pickle.dump(le_xgb, f)
 
-print("✅ XGB classes (no Rare):", le_xgb.classes_)
+print("XGB classes (no Rare):", le_xgb.classes_)
 
 
 print("After filtering Rare:")
@@ -110,12 +111,30 @@ def evaluate_model(model, X_test, y_test, model_name):
     plt.ylabel("Actual")
     plt.show()
 
+wandb.init(
+    project="nids-attack-classification",
+    config={
+        "dataset": "CICIDS2017",
+        "attack_classes": 8,
+        "rare_class_removed": True,
+        "xgb_n_estimators": 300,
+        "xgb_max_depth": 6,
+        "xgb_learning_rate": 0.1,
+        "xgb_subsample": 0.8,
+        "xgb_colsample_bytree": 0.8,
+        "xgb_objective": "multi:softprob",
+        "rf_n_estimators": 300,
+        "rf_max_depth": 20,
+        "class_weighting": "balanced",
+        "feature_selection": "5-method ensemble (ANOVA, MI, Boruta, RF, correlation)",
+    }
+)
+
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report, confusion_matrix
 
 lr = LogisticRegression(
     solver="saga",
-    multi_class="multinomial",
     max_iter=200,
     n_jobs=-1,
     class_weight="balanced",
@@ -320,14 +339,46 @@ for name, y_pred in predictions.items():
         print(classification_report(y_test, y_pred))
 
     f1_scores[name] = f1
-    # f1 = f1_score(y_test, y_pred, average="macro")
-    # f1_scores[name] = f1
-    # print(f"--- {name} ---")
-    # print(classification_report(y_test, y_pred))
+    wandb.log({f"{name.lower().replace(' ', '_')}_macro_f1": f1})
+
+# Log all model F1 scores together for easy comparison
+wandb.log({
+    "lr_macro_f1":  f1_scores.get("Logistic Regression", 0),
+    "rf_macro_f1":  f1_scores.get("Random Forest", 0),
+    "xgb_macro_f1": f1_scores.get("XGBoost", 0),
+})
+
+# Log per-class XGBoost F1 scores
+xgb_report = classification_report(
+    y_test_xgb, predictions["XGBoost"],
+    target_names=[str(c) for c in le_xgb.classes_],
+    output_dict=True
+)
+for cls, metrics in xgb_report.items():
+    if isinstance(metrics, dict):
+        wandb.log({f"xgb_f1_{cls.replace(' ', '_')}": metrics["f1-score"]})
+
+# Log XGBoost confusion matrix
+cm_xgb = confusion_matrix(y_test_xgb, predictions["XGBoost"])
+class_labels = [str(c) for c in le_xgb.classes_]
+wandb.log({
+    "xgb_confusion_matrix": wandb.plot.confusion_matrix(
+        probs=None,
+        y_true=y_test_xgb.tolist(),
+        preds=predictions["XGBoost"].tolist(),
+        class_names=class_labels,
+    )
+})
+
+# Log overall FPR
+wandb.log({"overall_fpr_macro": overall_fpr})
+for cls, fpr in fpr_per_class.items():
+    wandb.log({f"fpr_{str(cls).replace(' ', '_')}": fpr})
 
 # Select best model
 best_model_name = max(f1_scores, key=f1_scores.get)
 print(f"\n Best model based on F1-score: {best_model_name}")
+wandb.log({"best_model": best_model_name, "best_model_macro_f1": f1_scores[best_model_name]})
 
 # Map model name to trained object
 models = {
@@ -343,4 +394,6 @@ with open("final_model.pkl", "wb") as f:
     pickle.dump(best_model, f)
 
 print(f"Final model saved: {best_model_name}")
+
+wandb.finish()
 

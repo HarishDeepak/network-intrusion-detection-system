@@ -13,6 +13,11 @@ frontend/venv/
 
 # Streamlit secrets
 frontend/.streamlit/secrets.toml
+.streamlit/secrets.toml
+
+# wandb local run cache
+wandb/
+Supervised/wandb/
 
 # Python
 __pycache__/
