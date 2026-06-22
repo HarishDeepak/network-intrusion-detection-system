@@ -52,13 +52,28 @@ An end-to-end machine learning pipeline for detecting and classifying network at
 
 ## Key Results
 
-| Model | ROC-AUC | FPR | Notes |
-|---|---|---|---|
-| Keras Autoencoder | **0.964** | **2.0%** | ROC-optimised threshold |
-| Isolation Forest | 0.839 | — | comparison only |
-| XGBoost (supervised) | — | — | selected by macro F1 across 8 classes |
+| Model | Macro F1 | Accuracy | FPR (macro) | Notes |
+|---|---|---|---|---|
+| **XGBoost (supervised)** | **0.897** | **99.9%** | **0.04%** | best model, selected by macro F1 |
+| Random Forest | 0.830 | 99.4% | — | strong baseline |
+| Logistic Regression | 0.500 | 90.1% | — | did not converge (saga) |
+| Keras Autoencoder | — | — | **2.0%** | ROC-AUC 0.964, unsupervised |
+| Isolation Forest | — | — | — | ROC-AUC 0.839, comparison only |
 
-Dataset: **585k flows** from CICIDS2017 (467k train / 116k test), 8 attack classes: DDoS, DoS, BruteForce, PortScan, WebAttacks, Botnet, Infiltration, Benign.
+**XGBoost per-class F1 (8-class, Rare removed):**
+
+| Class | Precision | Recall | F1 |
+|---|---|---|---|
+| Benign | 1.00 | 1.00 | 1.00 |
+| DoS | 1.00 | 1.00 | 1.00 |
+| BruteForce | 0.97 | 0.95 | 0.96 |
+| Scan | 0.96 | 0.99 | 0.98 |
+| Malware | 0.88 | 0.99 | 0.93 |
+| Web | 0.44 | 0.60 | 0.51 |
+
+Dataset: **585k flows** from CICIDS2017 (467k train / 116k test), 8 attack classes.
+
+**Experiment tracking:** [![W&B](https://img.shields.io/badge/Weights_&_Biases-FFBE00?logo=weightsandbiases&logoColor=black)](https://wandb.ai/harishdeepak77718-tu-darmstadt/nids-attack-classification)
 
 ---
 
