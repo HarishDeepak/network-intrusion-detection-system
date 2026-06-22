@@ -109,7 +109,8 @@ def evaluate_model(model, X_test, y_test, model_name):
     plt.title(f"{model_name} Confusion Matrix")
     plt.xlabel("Predicted")
     plt.ylabel("Actual")
-    plt.show()
+    plt.savefig(f"{model_name.replace(' ', '_')}_confusion_matrix.png", bbox_inches="tight")
+    plt.close()
 
 wandb.init(
     project="nids-attack-classification",
@@ -307,7 +308,8 @@ def plot_confusion(y_true, y_pred, title):
     plt.title(title)
     plt.xlabel("Predicted")
     plt.ylabel("Actual")
-    plt.show()
+    plt.savefig(f"{title.replace(' ', '_')}.png", bbox_inches="tight")
+    plt.close()
 
 plot_confusion(y_test_xgb, y_pred_xgb, "XGBoost Confusion Matrix")
 
